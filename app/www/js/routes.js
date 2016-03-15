@@ -206,6 +206,18 @@ angular.module('app.routes', [])
     abstract:true
   })
 
+  .state('login', {
+    url: '/page22',
+    templateUrl: 'templates/login.html',
+    controller: 'loginCtrl'
+  })
+
+  .state('signup', {
+    url: '/page23',
+    templateUrl: 'templates/signup.html',
+    controller: 'signupCtrl'
+  })
+
 $urlRouterProvider.otherwise('/side-menu21/page1')
 
   

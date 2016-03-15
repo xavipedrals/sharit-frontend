@@ -75,4 +75,12 @@ angular.module('app.controllers', [])
 .controller('editarPeticiCtrl', function($scope) {
 
 })
-    
+      
+.controller('loginCtrl', function($scope) {
+
+})
+   
+.controller('signupCtrl', function($scope) {
+
+})
+ 
