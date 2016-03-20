@@ -1,0 +1,29 @@
+<ion-view title="Configuració">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list">
+            <label class="item item-select" name="language">
+                <span class="input-label">Idioma</span>
+                <select>
+                    <option>Català</option>
+                    <option>Castellà</option>
+                </select>
+            </label>
+            <ion-item class="range range-positive">Radi
+                <input type="range" value="100" min="0" max="1000" name="distance">
+            </ion-item>
+        </form>
+        <div class="spacer" style="width: 300px; height: 13px;"></div>
+        <form class="list">
+            <label class="item item-input" name="location">
+                <span class="input-label">Ubicació</span>
+                <input type="text" placeholder="Carrer, localitat, codi postal, ...">
+            </label>
+        </form>
+        <div>
+            <p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.3653116132123!2d2.111207016324169!3d41.38787227926425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49850dadd0cbb%3A0x5c2e12d6c52a99f4!2sCampus+Nord+UPC!5e0!3m2!1sca!2ses!4v1457528399148"
+                width="300" height="150" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+            </p>
+        </div>
+    </ion-content>
+</ion-view>
