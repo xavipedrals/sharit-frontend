@@ -6,30 +6,16 @@
                 <input type="search" placeholder="Cerca el que necessitis">
             </label>
         </form>
-        <div class="list card">
-            <div class="item item-divider">Martell de fusta</div>
+        <div class="list card" ng-repeat="item in items | orderBy:'stars':true">
+            <div class="item item-divider">{{ item.name }}</div>
             <div class="item item-body">
-                <a style="display:inline-block;" ui-sref="menu.martellDeFusta">
+                <a style="display:inline-block;" ui-sref="">
                     <div style="text-align:;">
-                        <img src="assets/img/s3H3Hyn0Rn0tv96qQEsc_martillo.jpg" width="100%" height="auto">
+                        <img ng-src="{{ item.imgUrl }}" width="100%" height="auto">
                     </div>
                 </a>
                 <div>
-                    <p style="text-align:center;">⭐⭐⭐⭐⭐</p>
-                    <p></p>
-                </div>
-            </div>
-        </div>
-        <div class="list card">
-            <div class="item item-divider">🔒 Escala mitjana</div>
-            <div class="item item-body">
-                <a style="display:inline-block;" ui-sref="menu.EscalaMitjana">
-                    <div style="text-align:center;">
-                        <img src="assets/img/SCoBGo4hTsChNUhEKt1B_escalera-madera.jpg" width="50%" height="auto">
-                    </div>
-                </a>
-                <div>
-                    <p style="text-align:center;">⭐⭐⭐</p>
+                    <p style="text-align:center;">{{ item.stars }}/5</p>
                 </div>
             </div>
         </div>
