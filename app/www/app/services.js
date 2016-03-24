@@ -13,7 +13,7 @@ angular.module('app.services', [])
             stars: 5
         }
     ]
-}])
+}]);
 
 // .service('BlankService', [function(){
 

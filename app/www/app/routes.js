@@ -11,7 +11,13 @@ angular.module('app.routes', [])
       url: '/',
       templateUrl: 'app/dashboard/dashboard.html',
       controller: 'DashboardCtrl'
-    });
+    })
+
+    .state('productDetail', {
+      url: '/product-detail',
+      templateUrl: 'app/productDetail/productDetail.html',
+      controller: 'ProductDetailCtrl'
+    })
   
   // .state('menu', {
   //   url: '/side-menu',
@@ -49,15 +55,7 @@ angular.module('app.routes', [])
   //   }
   // })
 
-  // .state('menu.martellDeFusta', {
-  //   url: '/page7',
-  //   views: {
-  //     'side-menu21': {
-  //       templateUrl: 'assets/templates/martellDeFusta.html',
-  //       controller: 'martellDeFustaCtrl'
-  //     }
-  //   }
-  // })
+
 
   // .state('menu.EscalaMitjana', {
   //   url: '/page11',
