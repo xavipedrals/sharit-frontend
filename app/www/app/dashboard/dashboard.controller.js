@@ -6,9 +6,9 @@ angular.module('app.controllers')
 
       $scope.$state = $state;
       $scope.items = StubsFactory;
-      $scope.goToDetail = function ($index) {
+      $scope.goToDetail = function (item) {
         // console.log($index);
-        $rootScope.actualProductIndex = $index;
+        $rootScope.actualProduct = item;
         $state.go('productDetail');
       }
 

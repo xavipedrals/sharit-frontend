@@ -6,7 +6,7 @@
                 <input type="search" placeholder="Cerca el que necessitis">
             </label>
         </form>
-        <div class="list card" ng-repeat="item in items | orderBy:'stars':true track by $index" ng-click="goToDetail($index)">
+        <div class="list card" ng-repeat="item in items | orderBy:'stars':true track by $index" ng-click="goToDetail(item)">
             <div class="item item-divider">{{ item.name }}</div>
             <div class="item item-body">
                 <a style="display:inline-block;" ui-sref="">

@@ -1,10 +1,10 @@
-<ion-view title="Martell de fusta">
+<ion-view title={{actualProduct.name}}>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
         <div style="text-align:right;">
-            <img src="img/dcCCPkrbQVmgHbe1RAOC_favorite.png" width="10%" height="auto">
+            <img ng-src={{favoriteImgUrl}} ng-click="toggleFavorite()" width="10%" height="auto">
         </div>
         <div style="text-align:;">
-            <img src="img/s3H3Hyn0Rn0tv96qQEsc_martillo.jpg" width="100%" height="auto">
+            <img ng-src={{actualProduct.imgUrl}} width="100%" height="auto">
         </div>
         <form class="list"></form>
         <div>
@@ -12,9 +12,9 @@
             <p></p>
         </div>
         <div>
-            <p>Deixo el meu martell de fusta. és nou de fa poc i es troba en perfectes condicions. També serveix per treure claus.</p>
+            <p>{{actualProduct.description}}</p>
         </div>
-        <a ui-sref="menu.xat" id="martellDeFusta-button7" class="button button-calm  button-block">Ho necessito! 😊</a>
+        <a ui-sref="menu.xat" id="martellDeFusta-button7" class="button button-calm  button-block">Ho necessito! </a>
         <div>
             <p style="text-align:center; color: #777; font-size: 14px;">
                 <b>3</b>&nbsp;sharits
@@ -23,7 +23,7 @@
         <div>
             <p style="text-align:center; color: #777; font-size: 14px;">
                 Últim sharit:
-                <b>fa una setmana</b>
+                <b>{{actualProduct.lastSharit}}</b>
             </p>
         </div>
         <a ui-sref="menu.valoracions" id="martellDeFusta-button3" class="button button-balanced button-small button-block">Valoracions (6)</a>
@@ -33,7 +33,7 @@
                 width="300" height="150" frameborder="0" style="border:0" allowfullscreen=""></iframe>
             </p>
         </div>
-        <a ui-sref="menu.perfil" id="martellDeFusta-button5" class="button button-light  button-block">Dani G.</a>
+        <a ui-sref="menu.perfil" id="martellDeFusta-button5" class="button button-light  button-block">{{actualProduct.ownerName}}</a>
         <div>
             <p style="text-align:center;">⭐⭐⭐⭐⭐</p>
             <p></p>
