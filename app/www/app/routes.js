@@ -18,12 +18,18 @@ angular.module('app.routes', [])
       templateUrl: 'app/productDetail/productDetail.html',
       controller: 'ProductDetailCtrl'
     })
-  
-  // .state('menu', {
-  //   url: '/side-menu',
-  //   templateUrl: 'assets/templates/menu.html',
-  //   abstract:true
-  // })
+
+    .state('userProfile', {
+      url: '/user-profile',
+      templateUrl: 'app/userProfile/userProfile.html',
+      controller: 'UserProfileCtrl'
+    })
+
+    .state('menu', {
+      url: '/side-menu',
+      templateUrl: 'app/common/menu/menu.html',
+      abstract: true
+    })
 
   // .state('menu.dashboard', {
   //   url: '/',
