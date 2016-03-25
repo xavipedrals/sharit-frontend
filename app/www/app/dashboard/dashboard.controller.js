@@ -9,7 +9,7 @@ angular.module('app.controllers')
       $scope.goToDetail = function (item) {
         // console.log($index);
         $rootScope.actualProduct = item;
-        $state.go('productDetail');
+        $state.go('app.productDetail');
       }
 
 		}

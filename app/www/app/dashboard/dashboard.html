@@ -9,7 +9,7 @@
         <div class="list card" ng-repeat="item in items | orderBy:'stars':true track by $index" ng-click="goToDetail(item)">
             <div class="item item-divider">{{ item.name }}</div>
             <div class="item item-body">
-                <a style="display:inline-block;" ui-sref="">
+                <a style="display:inline-block;" ui-sref="app.productDetail">
                     <div style="text-align:;">
                         <img ng-src="{{ item.imgUrl }}" width="100%" height="auto">
                     </div>
