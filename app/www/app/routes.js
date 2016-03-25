@@ -42,7 +42,18 @@ angular.module('app.routes', [])
           controller: 'UserProfileCtrl'
         }
       }      
-    });
+    })
 
-    $urlRouterProvider.otherwise('/app/dashboard');
+  .state('app.requestsDashboard', {
+    url: '/requests-dashboard',
+    views: {
+      'menuContent': {
+        templateUrl: 'app/requestsDashboard/requestsDashboard.html',
+        controller: 'RequestsDashboardCtrl'
+      }
+    }
+  });
+
+
+  $urlRouterProvider.otherwise('/app/dashboard');
 });
