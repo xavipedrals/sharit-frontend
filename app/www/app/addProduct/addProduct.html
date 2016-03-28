@@ -8,12 +8,13 @@
         <form class="list">
             <label class="item item-input">
                 <span class="input-label">Títol</span>
-                <input type="text" placeholder="">
+                <input type="text" placeholder="" ng-model="product.title">
             </label>
             <label class="item item-input">
-                <span class="input-label">Descripció</span><textarea placeholder=""> </textarea>
+                <span class="input-label">Descripció</span>
+                <textarea placeholder="" ng-model="product.description"> </textarea>
             </label>
         </form>
-        <button id="afegirProducte-button19" class="button button-balanced  button-block">Enviar</button>
+        <button id="afegirProducte-button19" class="button button-balanced  button-block" ng-click="submitProduct(product)">Enviar</button>
     </ion-content>
 </ion-view>

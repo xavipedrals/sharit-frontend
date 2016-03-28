@@ -8,5 +8,13 @@ angular.module('app.controllers')
       $translate.refresh();
 
       $scope.$state = $state;
+      // $scope.product = null;
+
+      $scope.submitProduct = function (product) {
+
+        this.submittedProduct = product;
+        console.log(this.submittedProduct);
+        // TODO: Enviar peticio al servidor
+      };
     }
   ]);
