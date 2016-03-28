@@ -62,7 +62,17 @@ angular.module('app.routes', [])
         controller: 'ChatListCtrl'
       }
     }
-  });
+  })
+
+    .state('app.addProduct', {
+      url: '/add-product',
+      views: {
+        'menuContent': {
+          templateUrl: 'app/addProduct/addProduct.html',
+          controller: 'AddProductCtrl'
+        }
+      }
+    });
 
   $urlRouterProvider.otherwise('/app/dashboard');
 });
