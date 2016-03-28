@@ -52,8 +52,17 @@ angular.module('app.routes', [])
         controller: 'RequestsDashboardCtrl'
       }
     }
-  });
+  })
 
+  .state('app.chatList', {
+    url: '/chat-list',
+    views: {
+      'menuContent': {
+        templateUrl: 'app/chatList/chatList.html',
+        controller: 'ChatListCtrl'
+      }
+    }
+  });
 
   $urlRouterProvider.otherwise('/app/dashboard');
 });
