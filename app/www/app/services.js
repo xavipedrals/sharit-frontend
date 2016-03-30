@@ -42,12 +42,12 @@ angular.module('app.services', [])
         images = [];
       }
       return images;
-    };
+    }
 
     function addImage(img) {
       images.push(img);
       window.localStorage.setItem(IMAGE_STORAGE_KEY, JSON.stringify(images));
-    };
+    }
 
     return {
       storeImage: addImage,
@@ -55,8 +55,7 @@ angular.module('app.services', [])
     }
   })
 
-  .factory('ImageService', function ($cordovaCamera, FileService, $q, $cordovaFile) {
-
+  .factory('ImageService', ['$cordovaCamera', 'FileService', '$q', '$cordovaFile', function ($cordovaCamera, FileService, $q, $cordovaFile) {
     function makeid() {
       var text = '';
       var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -65,7 +64,7 @@ angular.module('app.services', [])
         text += possible.charAt(Math.floor(Math.random() * possible.length));
       }
       return text;
-    };
+    }
 
     function optionsForType(type) {
       var source;
@@ -109,9 +108,5 @@ angular.module('app.services', [])
     return {
       handleMediaDialog: saveMedia
     }
-  });
-
-// .service('BlankService', [function(){
-
-// }]);
+  }]);
 

@@ -17,7 +17,6 @@ angular.module('app.controllers')
       $scope.$state = $state;
       // $scope.product = null;
 
-
       $ionicPlatform.ready(function() {
         $scope.images = FileService.images();
         $scope.$apply();
@@ -49,9 +48,7 @@ angular.module('app.controllers')
         });
       };
 
-
-
-
+      
       $scope.submitProduct = function (product) {
         this.submittedProduct = product;
         console.log(this.submittedProduct);
