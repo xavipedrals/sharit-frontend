@@ -1,7 +1,7 @@
 <ion-view title="Afegir producte">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
         <div class="button-bar">
-            <button id="afegirProducte-button16" class="button button-positive  button-block">Image 1</button>
+            <button id="afegirProducte-button16" class="button button-positive  button-block" ng-click="addMedia()">Image 1</button>
             <button id="afegirProducte-button17" class="button button-positive  button-block">Image 2</button>
             <button id="afegirProducte-button18" class="button button-positive  button-block">Image 3</button>
         </div>
@@ -16,5 +16,8 @@
             </label>
         </form>
         <button id="afegirProducte-button19" class="button button-balanced  button-block" ng-click="submitProduct(product)">Enviar</button>
+      <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
+        <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" style="height:200px; padding: 5px 5px 5px 5px;"/>
+      </ion-scroll>
     </ion-content>
 </ion-view>
