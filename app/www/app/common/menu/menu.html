@@ -14,13 +14,13 @@
         </ion-header-bar>
         <ion-content padding="false" class="side-menu-left has-header">
             <ion-list>
-                <ion-item ui-sref="app.dashboard" menu-close="">Dashboard</ion-item>
-                <ion-item ui-sref="app.requestsDashboard" menu-close="">Taulell de peticions</ion-item>
-              <ion-item ui-sref="app.addProduct" menu-close="">Afegir producte</ion-item>
-              <ion-item ui-sref="app.userProfile" menu-close="">El meu perfil</ion-item>
+                <ion-item ui-sref="app.dashboard" menu-close="">{{ 'Dashboard_Title' | translate }}</ion-item>
+                <ion-item ui-sref="app.requestsDashboard" menu-close="">{{ 'Request_Title' | translate }}</ion-item>
+              <ion-item ui-sref="app.addProduct" menu-close="">{{ 'Add_Product_Title' | translate }}</ion-item>
+              <ion-item ui-sref="app.userProfile" menu-close="">{{ 'Profile_Title' | translate }}</ion-item>
               <!--<ion-item ui-sref="menu.preferits" menu-close="">Preferits</ion-item>-->
-              <ion-item ui-sref="app.chatList" menu-close="">Xats</ion-item>
-              <!--<ion-item ui-sref="menu.configuraci" menu-close="">Configuració</ion-item>-->
+              <ion-item ui-sref="app.chatList" menu-close="">{{ 'Chat_Title' | translate }}</ion-item>
+              <ion-item ui-sref="app.settings" menu-close="">{{ 'Settings_Title' | translate }} </ion-item>
             </ion-list>
         </ion-content>
     </ion-side-menu>

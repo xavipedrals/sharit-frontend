@@ -1,21 +1,21 @@
-<ion-view title="Afegir producte">
+<ion-view title="{{ 'Add_Product_Title' | translate }}">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
         <div class="button-bar">
-            <button id="afegirProducte-button16" class="button button-positive  button-block" ng-click="addMedia()">Afegir imatge</button>
+            <button id="afegirProducte-button16" class="button button-positive  button-block" ng-click="addMedia()">{{ 'Add_Image' | translate }}</button>
             <!--<button id="afegirProducte-button17" class="button button-positive  button-block">Image 2</button>-->
             <!--<button id="afegirProducte-button18" class="button button-positive  button-block">Image 3</button>-->
         </div>
         <form class="list">
             <label class="item item-input">
-                <span class="input-label">Títol</span>
+                <span class="input-label">{{ 'Title' | translate }}</span>
                 <input type="text" placeholder="" ng-model="product.title">
             </label>
             <label class="item item-input">
-                <span class="input-label">Descripció</span>
+                <span class="input-label">{{ 'Description' | translate }}</span>
                 <textarea placeholder="" ng-model="product.description"> </textarea>
             </label>
         </form>
-        <button id="afegirProducte-button19" class="button button-balanced  button-block" ng-click="submitProduct(product)">Enviar</button>
+        <button id="afegirProducte-button19" class="button button-balanced  button-block" ng-click="submitProduct(product)">{{ 'Send' | translate }}</button>
       <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
         <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" style="height:200px; padding: 5px 5px 5px 5px;"/>
       </ion-scroll>

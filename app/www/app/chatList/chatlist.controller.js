@@ -4,7 +4,7 @@
 angular.module('app.controllers')
   .controller('ChatListCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'StubsFactory',
     function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory) {
-      $translatePartialLoader.addPart('dashboard');
+      $translatePartialLoader.addPart('chats');
       $translate.refresh();
 
       $scope.$state = $state;

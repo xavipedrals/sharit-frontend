@@ -21,7 +21,7 @@ angular.module('app.routes', [])
           templateUrl: 'app/dashboard/dashboard.html',
           controller: 'DashboardCtrl'
         }
-      }      
+      }
     })
 
     .state('app.productDetail', {
@@ -41,7 +41,7 @@ angular.module('app.routes', [])
           templateUrl: 'app/userProfile/userProfile.html',
           controller: 'UserProfileCtrl'
         }
-      }      
+      }
     })
 
   .state('app.requestsDashboard', {

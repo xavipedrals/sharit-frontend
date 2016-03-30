@@ -1,4 +1,4 @@
-<ion-view title="Perfil">
+<ion-view title="{{ 'Profile_Title' | translate }}">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
         <div>
             <p>
@@ -22,18 +22,18 @@
         </div>
         <div>
             <p>
-                Nº Productes deixats:
+              {{ 'Number_Of_Lent_Products' | translate }}:
                 <b>10</b>
             </p>
             <p>
-                Nº Productes que m'han deixat:
+              {{ 'Number_Of_Requested_Products' | translate }}:
                 <b>3</b>
             </p>
         </div>
         <div class="button-bar">
-            <a ui-sref="menu.actuals" id="perfil-button1" class="button button-stable button-small button-block">Actuals</a>
-            <a ui-sref="menu.peticions" id="perfil-button22" class="button button-stable button-small button-block">Peticions</a>
-            <a ui-sref="menu.valoracions" id="perfil-button2" class="button button-stable button-small button-block">Valoracions</a>
+            <a ui-sref="menu.actuals" id="perfil-button1" class="button button-stable button-small button-block">{{ 'Actual_Products' | translate }}</a>
+            <a ui-sref="menu.peticions" id="perfil-button22" class="button button-stable button-small button-block">{{ 'Requested_Products' | translate }}</a>
+            <a ui-sref="menu.valoracions" id="perfil-button2" class="button button-stable button-small button-block">{{ 'Ratings' | translate }}</a>
         </div>
     </ion-content>
 </ion-view>
