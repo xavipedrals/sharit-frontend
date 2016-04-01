@@ -1,5 +1,37 @@
 .add-product{
+  .title-label{
+    font-size: 20px;
+  }
   textarea.description{
     min-height: 100px;
+  }
+  .previews-container{
+    min-height: 85px;
+    display: flex;
+    align-content: space-between;
+    .image-preview{
+      flex: 1;
+      margin: 0 3px;
+      background: #3c454f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: .7em;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      .ion-camera{
+        &:before{
+          color: white;
+          font-size: 50px;
+        }
+      }
+      &:last-child {
+        margin-right: 0px;
+        margin-left: 6px;
+      }
+      &:first-child {
+        margin-left: 0px;
+        margin-right: 6px;
+      }
+    }
   }
 }
