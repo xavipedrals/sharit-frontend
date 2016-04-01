@@ -7,5 +7,9 @@ angular.module('app.controllers')
       $translatePartialLoader.addPart('request');
       $translate.refresh();
       $scope.$state = $state;
+
+      $scope.requestProduct = function () {
+        $state.go('app.requestProduct');
+      }
     }
   ]);

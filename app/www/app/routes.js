@@ -64,6 +64,16 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('app.requestProduct', {
+      url: '/request-product',
+      views: {
+        'menuContent': {
+          templateUrl: 'app/requestProduct/requestProduct.html',
+          controller: 'RequestProductCtrl'
+        }
+      }
+    })
+
     .state('app.addProduct', {
       url: '/add-product',
       views: {
