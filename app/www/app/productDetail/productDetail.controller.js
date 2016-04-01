@@ -21,5 +21,9 @@ angular.module('app.controllers')
       // $scope.goToUserProfile = function () {
       //   $state.go('userProfile');
       // }
+
+      $scope.showValoracions = function () {
+        $state.go('app.valoracions');
+      }
     }
   ]);

@@ -74,6 +74,16 @@ angular.module('app.routes', [])
       }
     })
 
+  .state('app.valoracions', {
+        url: '/valoracions',
+        views: {
+          'menuContent': {
+            templateUrl: 'app/valoracions/valoracions.html',
+            controller: 'ValoracionsCtrl'
+          }
+        }
+      })
+
     .state('app.addProduct', {
       url: '/add-product',
       views: {
