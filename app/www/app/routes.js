@@ -11,6 +11,7 @@ angular.module('app.routes', [])
     .state('app', {
       url: '/app',
       templateUrl: 'app/common/menu/menu.html',
+      controller: 'MenuCtrl',
       abstract: true
     })
 

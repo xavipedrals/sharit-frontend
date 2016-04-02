@@ -1,8 +1,8 @@
 {
-  "Dashboard_Title" : "Taulell d'anuncis",
-  "Request_Title" : "Taulell de peticions",
-  "Add_Product_Title" : "Afegir Producte",
-  "Profile_Title" : "El meu perfil",
-  "Chat_Title" : "Xats",
-  "Settings_Title" : "Configuració"
+  "Menu_Dashboard" : "Dashboard",
+  "Menu_Request" : "Requests",
+  "Menu_AddProduct" : "Product",
+  "Menu_Profile" : "Profile",
+  "Menu_Chat" : "Chats",
+  "Menu_Settings" : "Settings"
 }
