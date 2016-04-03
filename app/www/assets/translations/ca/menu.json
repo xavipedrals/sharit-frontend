@@ -4,5 +4,12 @@
   "Menu_AddProduct" : "Afegir Producte",
   "Menu_Profile" : "El meu perfil",
   "Menu_Chat" : "Xats",
-  "Menu_Settings" : "Configuració"
+  "Menu_Settings" : "Configuració",
+  "Dashboard_Title" : "Taulell d'anuncis",
+  "Request_Title" : "Taulell de peticions",
+  "Add_Product_Title" : "Afegir Producte",
+  "Profile_Title" : "El meu perfil",
+  "Chat_Title" : "Xats",
+  "Settings_Title" : "Configuració"
+
 }

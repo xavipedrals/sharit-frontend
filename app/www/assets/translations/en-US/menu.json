@@ -4,5 +4,11 @@
   "Menu_AddProduct" : "Product",
   "Menu_Profile" : "Profile",
   "Menu_Chat" : "Chats",
-  "Menu_Settings" : "Settings"
+  "Menu_Settings" : "Settings",
+  "Dashboard_Title" : "Dashboard",
+  "Request_Title" : "Request Dashboard",
+  "Add_Product_Title" : "Add product",
+  "Profile_Title" : "Profile",
+  "Chat_Title" : "Chats"
+
 }
