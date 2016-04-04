@@ -10,14 +10,24 @@
             <div class="item item-divider">{{ item.name }}</div>
             <div class="item item-body">
                 <a style="display:inline-block;" ui-sref="app.productDetail">
-                    <div style="text-align:;">
+                    <div>
                         <img ng-src="{{ item.imgUrl }}" width="100%" height="auto">
                     </div>
                 </a>
                 <div>
-                    <p style="text-align:center;">{{ item.stars }}/5</p>
+                    <p style="text-align:center;">Estrelles: <span id="stars"></span></p>
                 </div>
             </div>
         </div>
     </ion-content>
 </ion-view>
+
+<script>
+    alert ('Hola');
+    for (var i = 0; i < {{ item.stars }}; i++){
+
+        var span = document.createElement('span');
+        span.innerHTML = 's';
+        document.getElementById('stars').appendChild(span);
+    }
+</script>
