@@ -8,7 +8,8 @@ angular.module('app.services', [])
         stars: 3,
         description: "Deixo el meu martell de fusta. és nou de fa poc i es troba en perfectes condicions. També serveix per treure claus.",
         lastSharit: "Fa una setmana",
-        ownerName: "Dani Gil"
+        ownerName: "Dani Gil",
+        location: "51.503333, -0.127500"
 
       },
       {
@@ -17,7 +18,8 @@ angular.module('app.services', [])
         stars: 5,
         description: "Deixo la meva escala. És de mida mitjana i pesa poc.",
         lastSharit: "Fa un mes",
-        ownerName: "Xavi Pedrals"
+        ownerName: "Xavi Pedrals",
+        location: "38.897778,-77.036667"
       },
       {
         name: 'Taladro (Trepant)',
@@ -25,7 +27,8 @@ angular.module('app.services', [])
         stars: 4,
         description: "Deixo la meu taladro. És gran i fa uns bons forats.",
         lastSharit: "Fa 3 dies",
-        ownerName: "Marçal Peiró"
+        ownerName: "Marçal Peiró",
+        location: "44.419246, 38.205275"
       }
     ]
   }])
