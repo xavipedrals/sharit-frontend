@@ -15,19 +15,9 @@
                     </div>
                 </a>
                 <div>
-                    <p style="text-align:center;">Estrelles: <span id="stars"></span></p>
+                    <p style="text-align:center;">{{ item.htmlestrellitas }}</p>
                 </div>
             </div>
         </div>
     </ion-content>
 </ion-view>
-
-<script>
-    alert ('Hola');
-    for (var i = 0; i < {{ item.stars }}; i++){
-
-        var span = document.createElement('span');
-        span.innerHTML = 's';
-        document.getElementById('stars').appendChild(span);
-    }
-</script>
