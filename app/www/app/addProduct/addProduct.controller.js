@@ -52,7 +52,7 @@ angular.module('app.controllers')
       $scope.submitProduct = function (product) {
         this.submittedProduct = product;
         console.log(this.submittedProduct);
-        // TODO: Enviar peticio al servidor
+        // TODO: Enviar o al servidor
       };
     }
   ]);
