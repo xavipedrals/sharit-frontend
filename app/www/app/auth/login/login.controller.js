@@ -1,8 +1,8 @@
 angular.module('app.controllers')
 	.controller('LoginCtrl', ['$scope', '$state', 'AuthService',
 		function($scope, $state, AuthService) {
-			if (AuthService.isAuthenticated()) $state.go('app.dashboard');
-
+			if (AuthService.isAuthenticated()) 
+				$state.go('app.dashboard');
 			$scope.login = function() {
 				var promise = AuthService.login($scope.username, $scope.password);
 				promise
