@@ -28,12 +28,25 @@ angular.module('app.services')
 					$cookies.put('auth_token', response.data);
 					currentUser = getCurrentUser();
 					//return getCurrentUser();
-				}, 1000);
+				}, Math.random() * 3 * 1000);
 				return promise;
 			};
 
+			var signup = function(name, username, password) {
+				// TODO: Replace this code with $http call
+				var promise = $timeout(function() {
+					var response = { success: true, message: '', data: 
+						'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM' 
+					};
+					$cookies.put('auth_token', response.data);
+					currentUser = getCurrentUser();
+				}, Math.random() * 3 * 1000);
+				return promise;
+			}
+
 			return {
 				login: login,
+				signup: signup,
 				isAuthenticated: isAuthenticated,
 				getCurrentUser: function () { return currentUser; }
 			}

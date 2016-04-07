@@ -14,6 +14,12 @@ angular.module('app.routes', [])
       controller: 'LoginCtrl'
     })
 
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'app/auth/signup/signup.html',
+      controller: 'SignupCtrl'
+    })
+
     .state('app', {
       url: '/app',
       templateUrl: 'app/common/menu/menu.html',
