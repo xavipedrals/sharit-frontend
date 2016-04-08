@@ -81,11 +81,11 @@ angular.module('app.services', [])
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: source,
         targetWidth: 200,
-        targetHeight: 200
-        //allowEdit: false,
-        //encodingType: Camera.EncodingType.JPEG,
+        targetHeight: 200,
+        allowEdit: false,
+        encodingType: Camera.EncodingType.JPEG,
         //popoverOptions: CameraPopoverOptions,
-        //saveToPhotoAlbum: false
+        saveToPhotoAlbum: false
       };
     }
 
