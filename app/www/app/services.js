@@ -95,14 +95,21 @@ angular.module('app.services', [])
 
         // if(type = 1) {
           $cordovaCamera.getPicture(options).then(function (imageUrl) {
-            console.log("imageUrl-> " + imageUrl);
+            //console.log("imageUrl-> " + imageUrl);
+            console.log(imageUrl.indexOf('?'));
+            var realUri = null;
+            if(imageUrl.indexOf('?') != -1){
+              realUri = imageUrl.substr(0, imageUrl.indexOf('?'));
+              //console.log("realUri-> " + realUri);
+            } else {
+              realUri = imageUrl;
+              //console.log("realUri-> " + realUri);
+            }
+            var name = realUri.substr(realUri.lastIndexOf('/') + 1);
+            //console.log("name-> " + name);
+            var namePath = realUri.substr(0, realUri.lastIndexOf('/') + 1);
+            //console.log("namePath-> " + namePath);
 
-            var name = imageUrl.substr(imageUrl.lastIndexOf('/') + 1);
-
-            console.log("name-> " + name);
-            var namePath = imageUrl.substr(0, imageUrl.lastIndexOf('/') + 1);
-
-            console.log("namePath-> " + namePath);
             var newName = makeid() + name;
             $cordovaFile.copyFile(namePath, name, cordova.file.dataDirectory, newName)
               .then(function (info) {
