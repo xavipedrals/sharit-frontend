@@ -1,0 +1,23 @@
+<ion-view title="{{ 'Request_Product_Title' | translate }}">
+  <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <div class="button-bar">
+      <button id="ferPetici-button34" class="button button-positive  button-block" ng-click="addMedia()">{{ 'Image 1' | translate }}</button>
+      <button id="ferPetici-button35" class="button button-positive  button-block" ng-click="addMedia()">{{ 'Image 2' | translate }}</button>
+      <button id="ferPetici-button36" class="button button-positive  button-block" ng-click="addMedia()">{{ 'Image 3' | translate }}</button>
+    </div>
+    <form class="list">
+      <label class="item item-input">
+        <span class="input-label">{{ 'Title' | translate }}</span>
+        <input type="text" placeholder="" ng-model="product.title">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">{{ 'Description' | translate }}</span>
+        <textarea placeholder="" ng-model="product.description"> </textarea>
+      </label>
+    </form>
+    <button id="demanarProducte-button19" class="button button-balanced  button-block" ng-click="submitProduct(product)">{{ 'Send Request' | translate }}</button>
+    <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
+      <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" style="height:200px; padding: 5px 5px 5px 5px;"/>
+    </ion-scroll>
+  </ion-content>
+</ion-view>

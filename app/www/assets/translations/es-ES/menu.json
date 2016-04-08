@@ -1,0 +1,14 @@
+{
+  "Menu_Dashboard" : "Tablón de anuncios",
+  "Menu_Request" : "Tablón de peticiones",
+  "Menu_AddProduct" : "Añadir producto",
+  "Menu_Profile" : "Mi perfil",
+  "Menu_Chat" : "Chats",
+  "Menu_Settings" : "Configuración",
+  "Dashboard_Title" : "Tablón de anuncios",
+  "Request_Title" : "Tablón de peticiones",
+  "Request_Product_Title" : "Petición nueva",
+  "Add_Product_Title" : "Añadir producto",
+  "Profile_Title" : "Mi perfil",
+  "Chat_Title" : "Chats"
+}
