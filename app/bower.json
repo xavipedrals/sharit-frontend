@@ -8,6 +8,9 @@
   "dependencies": {
     "angular-translate": "^2.11.0",
     "angular-translate-loader-partial": "^2.11.0",
-    "ngCordova": "^0.1.24-alpha"
+    "ngCordova": "^0.1.24-alpha",
+    "angular-jwt": "^0.0.9",
+    "angular-cookies": "^1.5.3",
+    "lodash": "^4.8.2"
   }
 }
