@@ -9,8 +9,11 @@ ehthumbs.db
 Thumbs.db
 # Created by https://www.gitignore.io/api/webstorm
 
+app/.idea/misc.xml
 .idea/
 .idea/misc.xml
+app/.idea/misc.xml
+../.idea/misc.xml
 
 ### WebStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm

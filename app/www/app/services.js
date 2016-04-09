@@ -58,7 +58,7 @@ angular.module('app.services', [])
     }
   })
 
-  .factory('ImageService', ['$cordovaCamera', 'FileService', '$q', '$cordovaFile', function ($cordovaCamera, FileService, $q, $cordovaFile) {
+  .factory('ImageService', ['$cordovaCamera', 'FileService', '$q', '$cordovaFile', '$cordovaImagePicker', function ($cordovaCamera, FileService, $q, $cordovaFile, $cordovaImagePicker) {
     function makeid() {
       var text = '';
       var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -80,11 +80,14 @@ angular.module('app.services', [])
           break;
       }
       return {
+        quality: 50,
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: source,
+        targetWidth: 200,
+        targetHeight: 200,
         allowEdit: false,
         encodingType: Camera.EncodingType.JPEG,
-        popoverOptions: CameraPopoverOptions,
+        //popoverOptions: CameraPopoverOptions,
         saveToPhotoAlbum: false
       };
     }
@@ -93,19 +96,51 @@ angular.module('app.services', [])
       return $q(function (resolve, reject) {
         var options = optionsForType(type);
 
-        $cordovaCamera.getPicture(options).then(function (imageUrl) {
-          var name = imageUrl.substr(imageUrl.lastIndexOf('/') + 1);
-          var namePath = imageUrl.substr(0, imageUrl.lastIndexOf('/') + 1);
-          var newName = makeid() + name;
-          $cordovaFile.copyFile(namePath, name, cordova.file.dataDirectory, newName)
-            .then(function (info) {
-              FileService.storeImage(newName);
-              resolve();
-            }, function (e) {
-              reject();
-            });
-        });
+        // if(type = 1) {
+          $cordovaCamera.getPicture(options).then(function (imageUrl) {
+            //console.log("imageUrl-> " + imageUrl);
+            console.log(imageUrl.indexOf('?'));
+            var realUri = null;
+            if(imageUrl.indexOf('?') != -1){
+              realUri = imageUrl.substr(0, imageUrl.indexOf('?'));
+              //console.log("realUri-> " + realUri);
+            } else {
+              realUri = imageUrl;
+              //console.log("realUri-> " + realUri);
+            }
+            var name = realUri.substr(realUri.lastIndexOf('/') + 1);
+            //console.log("name-> " + name);
+            var namePath = realUri.substr(0, realUri.lastIndexOf('/') + 1);
+            //console.log("namePath-> " + namePath);
+
+            var newName = makeid() + name;
+            $cordovaFile.copyFile(namePath, name, cordova.file.dataDirectory, newName)
+              .then(function (info) {
+                FileService.storeImage(newName);
+                resolve();
+              }, function (e) {
+                reject();
+              });
+          });
+        // } else if (type = 0){
+        //   var options1 = {
+        //     maximumImagesCount: 2,
+        //     width: 800,
+        //     height: 800,
+        //     quality: 80
+        //   };
+        //
+        //   $cordovaImagePicker.getPictures(options1)
+        //     .then(function (results) {
+        //       for (var i = 0; i < results.length; i++) {
+        //         console.log('Image URI: ' + results[i]);
+        //       }
+        //     }, function(error) {
+        //       // error getting photos
+        //     });
+        // }
       })
+
     }
 
     return {
