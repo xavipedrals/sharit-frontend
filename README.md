@@ -9,7 +9,7 @@ Si vols provar aquesta app segueix els següents passos:
 
 <code>$ npm install</code>
 
-<code>$ npm bower install</code>
+<code>$ bower install</code>
 
 <code>$ ionic state reset</code>
 
