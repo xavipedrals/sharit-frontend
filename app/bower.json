@@ -12,5 +12,8 @@
     "angular-jwt": "^0.0.9",
     "angular-cookies": "^1.5.3",
     "lodash": "^4.8.2"
+  },
+  "resolutions": {
+    "angular": "1.5.3"
   }
 }
