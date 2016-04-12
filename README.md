@@ -1,4 +1,4 @@
-####SHARIT
+##SHARIT
 Si vols provar aquesta app segueix els següents passos:
 
 - Si no tens Ionic instal·lat instal·la:
@@ -27,4 +27,5 @@ Si vols provar aquesta app segueix els següents passos:
 	
 	<code>$ ionic serve --lab</code>
 
-			
+####NOTES: 
+Ionic està fet sobre la versió de Node 4 (Node 5 no funciona de moment amb Ionic). Totes les comandes aquí explicades s'ha de fer des dins la carpeta app/. 			
