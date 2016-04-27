@@ -14,7 +14,8 @@ angular.module('app', [
   'pascalprecht.translate',
   'app.translation',
   'ngCookies',
-  'ngCordova'
+  'ngCordova',
+  'ngMap'
 ])
 
 .run(['$ionicPlatform', 'AuthService', 
