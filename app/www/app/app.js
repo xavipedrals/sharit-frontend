@@ -14,9 +14,13 @@ angular.module('app', [
   'pascalprecht.translate',
   'app.translation',
   'ngCookies',
-  'ngCordova'
+  'ngCordova',
+  'ngCordovaOauth'
 ])
-
+.constant('myConfig', {
+  'url': 'http://52.34.79.154',
+  'port': '8080'
+})
 .run(['$ionicPlatform', 'AuthService', 
   function($ionicPlatform, AuthService) {
     $ionicPlatform.ready(function() {

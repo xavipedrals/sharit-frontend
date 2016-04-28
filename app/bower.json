@@ -11,7 +11,8 @@
     "ngCordova": "^0.1.24-alpha",
     "angular-jwt": "^0.0.9",
     "angular-cookies": "^1.5.3",
-    "lodash": "^4.8.2"
+    "lodash": "^4.8.2",
+    "ng-cordova-oauth": "^0.2.5"
   },
   "resolutions": {
     "angular": "1.5.3"

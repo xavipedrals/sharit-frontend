@@ -25,7 +25,5 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       $scope.showValoracions = function () {
         $state.go('app.valoracions');
       }
-
-
     }
   ]);
