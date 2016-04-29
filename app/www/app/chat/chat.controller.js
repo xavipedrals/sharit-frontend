@@ -1,62 +1,139 @@
+
 angular.module('app.controllers')
-  .controller('ChatCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'socket'
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, socket) {
+  .controller('ChatCtrl',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, socket, $sanitize, $ionicScrollDelegate, $timeout) {
       $translatePartialLoader.addPart('chats');
       $translate.refresh();
 
       $scope.$state = $state;
 
-      //--chat stuff
+     var self=this;
+       	var typing = false;
+       	var lastTypingTime;
+       	var TYPING_TIMER_LENGTH = 400;
 
+       	//Add colors
+       	var COLORS = [
+     	    '#e21400', '#91580f', '#f8a700', '#f78b00',
+     	    '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
+     	    '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+     	  ];
 
-      socket.forward('message', $scope);
-      $scope.$on('socket:message', function (ev, data) {
-          if ($scope.messages.length > 100) {
-              $scope.messages.splice(0, 1);
-          }
-          var msg = JSON.parse(data);
-          $scope.messages.push(msg);
+     	 //initializing messages array
+     	self.messages=[]
 
-          /*var hidden = false;
-          if (typeof document.hidden !== "undefined") {
-              hidden = "hidden";
-          } else if (typeof document.mozHidden !== "undefined") {
-              hidden = "mozHidden";
-          } else if (typeof document.msHidden !== "undefined") {
-              hidden = "msHidden";
-          } else if (typeof document.webkitHidden !== "undefined") {
-              hidden = "webkitHidden";
-          }
+       	socket.on('connect',function(){
 
-          // $scope.username is not set if the user didn't provide a name and thus didn't display the chat window
-          // document[hidden] is true if the page is minimized or tabbed-out — details vary by browser
-          if ($scope.username && document[hidden] && msg.type == 'message') {
-              var instance = new Notification(
-                  msg.username + " says:", {
-                       body: msg.message
-                   }
-              );*/
-          }
-      });
+       	  connected = true
 
-      $scope.sendMessage = function () {
-          socket.emit('send_message', $scope.newMessage);
-          $scope.messages.push($scope.newMessage);
-          $scope.newMessage = '';
-      };
+       	  //Add user
+       	  socket.emit('add user', 'abc');
 
-      $scope.newRoom = function () {
-                socket.emit('new_room', $scope.selfUsername, $scope.);
-                $scope.messages.push($scope.newMessage);
-                $scope.newMessage = '';
-            };
+       	  // On login display welcome message
+       	  socket.on('login', function (data) {
+     	    //Set the value of connected flag
+     	    self.connected = true
+     	    self.number_message= message_string(data.numUsers)
+     	  });
 
-      $scope.setUsername = function () {
-          $scope.username = $scope.inputUsername;
-          socket.emit('joined_message', $scope.username);
-          // setUsername is called once and can be regarded as "login"
-          Notification.requestPermission(function (permission) {
-          });
-      };
-    }
-  ]);
+     	  // Whenever the server emits 'new message', update the chat body
+     	  socket.on('new message', function (data) {
+     	  	if(data.message&&data.username)
+     	  	{
+     	   		addMessageToList(data.username,true,data.message)
+     	  	}
+     	  });
+
+     	  // Whenever the server emits 'user joined', log it in the chat body
+     	  socket.on('user joined', function (data) {
+     	  	addMessageToList("",false,data.username + " joined")
+     	  	addMessageToList("",false,message_string(data.numUsers))
+     	  });
+
+     	  // Whenever the server emits 'user left', log it in the chat body
+     	  socket.on('user left', function (data) {
+     	    addMessageToList("",false,data.username+" left")
+     	    addMessageToList("",false,message_string(data.numUsers))
+     	  });
+
+     	  //Whenever the server emits 'typing', show the typing message
+     	  socket.on('typing', function (data) {
+     	    addChatTyping(data);
+     	  });
+
+     	  // Whenever the server emits 'stop typing', kill the typing message
+     	  socket.on('stop typing', function (data) {
+     	    removeChatTyping(data.username);
+     	  });
+       	})
+
+       	//function called when user hits the send button
+       	self.sendMessage=function(){
+       	  console.log('send')
+       		socket.emit('new message', self.message)
+       		addMessageToList('abc',true,self.message)
+       		socket.emit('stop typing');
+       		self.message = ""
+       	}
+
+       	//function called on Input Change
+       	self.updateTyping=function(){
+       		sendUpdateTyping()
+       	}
+
+       	// Display message by adding it to the message list
+       	function addMessageToList(username,style_type,message){
+       		username = $sanitize(username)
+       		removeChatTyping(username)
+       		var color = style_type ? getUsernameColor(username) : null
+       		self.messages.push({content:$sanitize(message),style:style_type,username:username,color:color})
+       		$ionicScrollDelegate.scrollBottom();
+       	}
+
+       	//Generate color for the same user.
+       	function getUsernameColor (username) {
+     	    // Compute hash code
+     	    var hash = 7;
+     	    for (var i = 0; i < username.length; i++) {
+     	       hash = username.charCodeAt(i) + (hash << 5) - hash;
+     	    }
+     	    // Calculate color
+     	    var index = Math.abs(hash % COLORS.length);
+     	    return COLORS[index];
+       	}
+
+       	// Updates the typing event
+       	function sendUpdateTyping(){
+       		if(connected){
+       			if (!typing) {
+     		        typing = true;
+     		        socket.emit('typing');
+     		    }
+       		}
+       		lastTypingTime = (new Date()).getTime();
+       		$timeout(function () {
+     	        var typingTimer = (new Date()).getTime();
+     	        var timeDiff = typingTimer - lastTypingTime;
+     	        if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
+     	          socket.emit('stop typing');
+     	          typing = false;
+     	        }
+           	}, TYPING_TIMER_LENGTH)
+       	}
+
+     	// Adds the visual chat typing message
+     	function addChatTyping (data) {
+     	    addMessageToList(data.username,true," is typing");
+     	}
+
+     	// Removes the visual chat typing message
+     	function removeChatTyping (username) {
+     	  	self.messages = self.messages.filter(function(element){return element.username != username || element.content != " is typing"})
+     	}
+
+       	// Return message string depending on the number of users
+       	function message_string(number_of_users)
+       	{
+       		return number_of_users === 1 ? "there's 1 participant":"there are " + number_of_users + " participants"
+       	}
+  });

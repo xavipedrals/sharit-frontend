@@ -66,12 +66,12 @@ angular.module('app.routes', [])
         }
       }
     })
-    .state('app.chatList', {
+    .state('app.chat', {
       url: '/chat-list',
       views: {
         'menuContent': {
-          templateUrl: 'app/chatList/chatList.html',
-          controller: 'ChatListCtrl'
+          templateUrl: 'app/chat/chat.html',
+          controller: 'ChatCtrl'
         }
       }
     })
@@ -106,7 +106,7 @@ angular.module('app.routes', [])
   }
 ])
 
-.run(['$rootScope', '$state', 
+.run(['$rootScope', '$state',
   function($rootScope, $state) {
     $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
       if (error === 'Not authorized')

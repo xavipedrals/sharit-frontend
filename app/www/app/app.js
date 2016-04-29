@@ -14,10 +14,12 @@ angular.module('app', [
   'pascalprecht.translate',
   'app.translation',
   'ngCookies',
-  'ngCordova'
+  'ngCordova',
+  'ngSanitize',
+  'btford.socket-io'
 ])
 
-.run(['$ionicPlatform', 'AuthService', 
+.run(['$ionicPlatform', 'AuthService',
   function($ionicPlatform, AuthService) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
