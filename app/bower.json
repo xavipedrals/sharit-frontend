@@ -1,5 +1,5 @@
 {
-  "name": "HelloIonic",
+  "name": "helloionic",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.2.4",
@@ -11,9 +11,17 @@
     "ngCordova": "^0.1.24-alpha",
     "angular-jwt": "^0.0.9",
     "angular-cookies": "^1.5.3",
-    "lodash": "^4.8.2"
+    "lodash": "^4.8.2",
+    "angular": "1.5.5",
+    "angular-socket-io": "0.7.0",
+    "angular-animate": "1.5.6-build.4778+sha.b9d76bf",
+    "angular-sanitize": "1.5.5",
+    "angular-ui-router": "1.0.0-alpha.4"
   },
   "resolutions": {
-    "angular": "1.5.3"
+    "angular-animate": "1.4.3",
+    "angular-sanitize": "1.4.3",
+    "angular-ui-router": "0.2.13",
+    "angular": "1.5.5"
   }
 }

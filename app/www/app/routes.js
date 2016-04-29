@@ -71,12 +71,12 @@ angular.module('app.routes', [])
         }
       }
     })
-    .state('app.chatList', {
+    .state('app.chat', {
       url: '/chat-list',
       views: {
         'menuContent': {
-          templateUrl: 'app/chatList/chatList.html',
-          controller: 'ChatListCtrl'
+          templateUrl: 'app/chat/chat.html',
+          controller: 'ChatCtrl'
         }
       }
     })

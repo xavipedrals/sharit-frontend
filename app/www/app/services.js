@@ -1,5 +1,5 @@
-angular.module('app.services', [])
 
+angular.module('app.services', [])
   .factory('StubsFactory', ['$http', function ($http) {
     return [
       {
@@ -146,5 +146,14 @@ angular.module('app.services', [])
     return {
       handleMediaDialog: saveMedia
     }
-  }]);
+  }])
+
+  .factory('socket',function(socketFactory){
+  	//Create socket and connect to http://chat.socket.io
+   	var myIoSocket = io.connect('http://chat.socket.io');
+
+  	return socketFactory({
+        ioSocket: myIoSocket
+    });
+  });
 
