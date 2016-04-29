@@ -17,7 +17,8 @@ angular.module('app', [
   'ngCordova',
   'ngCordovaOauth',
   'ngSanitize',
-  'btford.socket-io'
+  'btford.socket-io',
+  'ngMap'
 ])
 .constant('myConfig', {
   'url': 'http://52.34.79.154',
