@@ -9759,3 +9759,10 @@ a.button {
     .add-product .previews-container .image-preview:first-child {
       margin-left: 0px;
       margin-right: 6px; }
+
+.dashboard .dashboard_item {
+  width: 46%;
+  display: inline-block;
+  margin: 2%;
+  vertical-align: top;
+  height: 200px; }
