@@ -17,6 +17,11 @@ angular.module('app.routes', [])
         templateUrl: 'app/auth/signup/signup.html',
         controller: 'SignupCtrl'
       })
+       .state('forgot', {
+         url: '/forgot',
+         templateUrl: 'app/auth/forgot/forgot.html',
+         controller: 'ForgotCtrl'
+       })
       .state('app', {
         url: '/app',
         templateUrl: 'app/common/menu/menu.html',
@@ -106,7 +111,7 @@ angular.module('app.routes', [])
   }
 ])
 
-.run(['$rootScope', '$state', 
+.run(['$rootScope', '$state',
   function($rootScope, $state) {
     $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
       if (error === 'Not authorized')
