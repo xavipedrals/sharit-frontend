@@ -15,10 +15,14 @@ angular.module('app', [
   'app.translation',
   'ngCookies',
   'ngCordova',
+  'ngCordovaOauth',
   'ngSanitize',
   'btford.socket-io'
 ])
-
+.constant('myConfig', {
+  'url': 'http://52.34.79.154',
+  'port': '8080'
+})
 .run(['$ionicPlatform', 'AuthService',
   function($ionicPlatform, AuthService) {
     $ionicPlatform.ready(function() {
