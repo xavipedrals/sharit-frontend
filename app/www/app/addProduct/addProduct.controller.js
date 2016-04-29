@@ -15,20 +15,15 @@ angular.module('app.controllers')
       $translate.refresh();
 
       $scope.$state = $state;
-      // $scope.product = null;
       console.log("Hola compi");
 
       $ionicPlatform.ready(function() {
         $scope.images = FileService.images();
-        // console.log($scope.images);
         $scope.$apply();
       });
 
       $scope.urlForImage = function(imageName) {
-        // console.log(imageName);
-        var trueOrigin = cordova.file.dataDirectory + imageName;
-        // console.log(trueOrigin);
-        return trueOrigin;
+        return cordova.file.dataDirectory + imageName;
       };
 
       $scope.addMedia = function() {
@@ -52,11 +47,11 @@ angular.module('app.controllers')
         });
       };
 
-
       $scope.submitProduct = function (product) {
         this.submittedProduct = product;
         console.log(this.submittedProduct);
         // TODO: Enviar o al servidor
+        
       };
     }
   ]);

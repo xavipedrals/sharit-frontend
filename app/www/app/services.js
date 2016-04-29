@@ -122,29 +122,51 @@ angular.module('app.services', [])
                 reject();
               });
           });
-        // } else if (type = 0){
-        //   var options1 = {
-        //     maximumImagesCount: 2,
-        //     width: 800,
-        //     height: 800,
-        //     quality: 80
-        //   };
-        //
-        //   $cordovaImagePicker.getPictures(options1)
-        //     .then(function (results) {
-        //       for (var i = 0; i < results.length; i++) {
-        //         console.log('Image URI: ' + results[i]);
-        //       }
-        //     }, function(error) {
-        //       // error getting photos
-        //     });
-        // }
       })
+    }
+
+    function uploadImagesToServer(serverUrl, imagesUrl, options) {
+      if(options === null){
+        options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = "prova";
+        options.mimeType = "text/plain";
+      }
+      if(serverUrl == null){
+        serverUrl = "http://52.34.79.154:8080/user/putItem";
+      }
+      
 
     }
 
     return {
       handleMediaDialog: saveMedia
     }
-  }]);
+  }])
+
+
+.factory('ImageUploaderService', ['FileService', '$cordovaFile', '$cordovaFileTransfer', function (FileService, $cordovaFile, $cordovaFileTransfer) {
+  var options = new FileUploadOptions();
+  options.fileKey = "file";
+  options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+  options.mimeType = "text/plain";
+
+  function uploadSingleImageToServer(url, imagePath) {
+    var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+    options.mimeType = "text/plain";
+  }
+
+}]);
+
+
+$cordovaFileTransfer.upload(server, filePath, options)
+  .then(function(result) {
+    // Success!
+  }, function(err) {
+    // Error
+  }, function (progress) {
+    // constant progress updates
+  });
 

@@ -23,6 +23,7 @@
     "cordova-plugin-camera",
     "cordova-plugin-crosswalk-webview",
     "cordova-plugin-file",
+    "cordova-plugin-file-transfer",
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [
