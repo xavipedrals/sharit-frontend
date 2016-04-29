@@ -106,13 +106,13 @@ angular.module('app.routes', [])
   }
 ])
 
-.run(['$rootScope', '$state', 
+.run(['$rootScope', '$state',
   function($rootScope, $state) {
     $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
-      if (error === 'Not authorized') {
-        console.log(error);
-        $state.go('login');
-      }
+      //if (error === 'Not authorized') {
+      //  console.log(error);
+      //  $state.go('login');
+      //}
     })
   }
 ]);

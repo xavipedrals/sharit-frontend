@@ -18,7 +18,6 @@ angular.module('app.services')
 				if (typeof token !== 'undefined') {
 					var encoded = token.split('.')[1];
 					user = JSON.parse(window.atob(encoded));
-					debugger;
 				}
 				return user;
 			}
@@ -30,8 +29,8 @@ angular.module('app.services')
 			var login = function (username, password) {
 				// TODO: Replace this code with $http call
 				var promise = $timeout(function() {
-					var response = { success: true, message: '', data: 
-						'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM' 
+					var response = { success: true, message: '', data:
+						'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM'
 					};
 					$cookies.put('auth_token', response.data);
 					currentUser = getCurrentUser();
