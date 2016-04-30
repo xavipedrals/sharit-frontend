@@ -122,23 +122,6 @@ angular.module('app.services', [])
                 reject();
               });
           });
-        // } else if (type = 0){
-        //   var options1 = {
-        //     maximumImagesCount: 2,
-        //     width: 800,
-        //     height: 800,
-        //     quality: 80
-        //   };
-        //
-        //   $cordovaImagePicker.getPictures(options1)
-        //     .then(function (results) {
-        //       for (var i = 0; i < results.length; i++) {
-        //         console.log('Image URI: ' + results[i]);
-        //       }
-        //     }, function(error) {
-        //       // error getting photos
-        //     });
-        // }
       })
 
     }
@@ -157,3 +140,32 @@ angular.module('app.services', [])
     });
   });
 
+//   .factory('httpCallsManager', ['$q', 'http', function ($http, ) {
+// }])
+//
+//
+// var promise = new Promise(function(resolve) {
+//   $http.post('http://52.34.79.154:8080/user/putItem', {
+//     params: {
+//       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjIyNjU3MzEsInVzZXJpZCI6ImRHVnpkR3h2WjJsdVRXRnlZMkZzYkd4VGVXeDJaWE4wY21seiJ9.ymlVy9SDuFk2r2VKhVSbd4dPKZObVLknJ_z5rG0cYO0",
+//       "name": "Martell",
+//       "description": "Prova de descripció",
+//       "image": "-1"
+//     }
+//   }).then(function(response) {
+//     console.log(response);
+//     console.log(response.data);
+//
+//     //TODO: Guardar camps al local storage
+//     //console.log(response.data.token);
+//     //var aux = JSON.toJson(response.data);
+//     //console.log(aux);
+//     //console.log(aux.token);
+//     //console.log(response.data.token);
+//     //console.log(response.data.iduser);
+//
+//     //$cookies.put('auth_token', response.token);
+//     //currentUser = getCurrentUser();
+//   });
+// });
+// return promise;

@@ -10,7 +10,8 @@ angular.module('app.controllers')
     '$cordovaDevice', '$cordovaFile',
     '$ionicPlatform', '$ionicActionSheet',
     'ImageService', 'FileService',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicActionSheet, ImageService, FileService) {
+    '$http',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicActionSheet, ImageService, FileService, $http) {
       $translatePartialLoader.addPart('addProduct');
       $translate.refresh();
 
@@ -57,6 +58,48 @@ angular.module('app.controllers')
         this.submittedProduct = product;
         console.log(this.submittedProduct);
         // TODO: Enviar o al servidor
-      };
+
+        // var promise = new Promise(function(resolve) {
+        //   $http.post('http://52.34.79.154:8080/user/putItem', {
+        //     params: {
+        //       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjIyNjU3MzEsInVzZXJpZCI6ImRHVnpkR3h2WjJsdVRXRnlZMkZzYkd4VGVXeDJaWE4wY21seiJ9.ymlVy9SDuFk2r2VKhVSbd4dPKZObVLknJ_z5rG0cYO0",
+        //       "name": "Martell",
+        //       "description": "Prova de descripció",
+        //       "image": "-1"
+        //     }
+        //   }).then(function(response) {
+        //     console.log(response);
+        //     console.log(response.data);
+        //
+        //     //TODO: Guardar camps al local storage
+        //     //console.log(response.data.token);
+        //     //var aux = JSON.toJson(response.data);
+        //     //console.log(aux);
+        //     //console.log(aux.token);
+        //     //console.log(response.data.token);
+        //     //console.log(response.data.iduser);
+        //
+        //     //$cookies.put('auth_token', response.token);
+        //     //currentUser = getCurrentUser();
+        //   });
+
+          $http({
+            method: 'POST',
+            url: 'http://52.34.79.154:8080/user/putItem',
+            params: {
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjIyNjgyMTAsInVzZXJpZCI6ImRHVnpkR3h2WjJsdVRXRnlZMkZzYkd4VGVXeDJaWE4wY21seiJ9.L8CaDm7iVFThL2unSfAd037zlumeoaBm5eZtsu74W4I",
+              "name": "Taladro",
+              "description": "Prova de descripció",
+              "image": "-1"
+            }
+          }).then(function successCallback(response) {
+            console.log(response);
+          });
+        };
+
+        // });
+        // return promise;
+
+      //};
     }
   ]);

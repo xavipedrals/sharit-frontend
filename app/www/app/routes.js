@@ -27,13 +27,13 @@ angular.module('app.routes', [])
         templateUrl: 'app/common/menu/menu.html',
         controller: 'MenuCtrl',
         abstract: true,
-        resolve: {
-          isAuthenticated: ['AuthService', function(AuthService) {
-            if (!AuthService.isAuthenticated()) {
-              throw 'Not authorized';
-            }
-          }]
-        }
+        // resolve: {
+        //   isAuthenticated: ['AuthService', function(AuthService) {
+        //     if (!AuthService.isAuthenticated()) {
+        //       throw 'Not authorized';
+        //     }
+        //   }]
+        // }
       })
       .state('app.dashboard', {
         url: '/dashboard',

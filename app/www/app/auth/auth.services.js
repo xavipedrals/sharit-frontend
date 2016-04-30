@@ -16,6 +16,7 @@ angular.module('app.services')
 				var token = $cookies.get('auth_token');
 				var user = {};
 				if (typeof token !== 'undefined') {
+          console.log("Vaig bé");
 					var encoded = token.split('.')[1];
 					user = JSON.parse(window.atob(encoded));
 				}
@@ -24,10 +25,31 @@ angular.module('app.services')
 
 			var isAuthenticated = function() {
 				return !(_.isEmpty(currentUser));
-			}
+			};
 
 			var login = function (username, password) {
 				// TODO: Replace this code with $http call
+
+        // var promise = new Promise(function(resolve) {
+        //   $http.get(baseUrl + '/login', {
+        //     params: {
+        //       "mail": "testlogin",
+        //       "pass": "hola"
+        //     }
+        //   }).then(function(response) {
+        //     console.log(response);
+        //     console.log(response.data);
+        //     console.log(response.data.Token);
+        //     console.log(response.data.Iduser);
+        //
+        //     //TODO: Guardar camps al local storage
+        //
+        //     $cookies.put('auth_token', response.data.Token);
+        //     currentUser = getCurrentUser();
+        //   });
+        // });
+        // return promise;
+
 				var promise = $timeout(function() {
 					var response = { success: true, message: '', data:
 						'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM'
@@ -92,17 +114,33 @@ angular.module('app.services')
 				var promise = new Promise(function(resolve) {
 					$http.get(baseUrl + '/register', {
 						params: {
-							"name": name,
-							"mail": username,
-							"pass": password
+							"name": "Xavi",
+							"surname": "Pedrals",
+							"mail": "xavi@xavi.com",
+							"pass": "1234",
+							"X": "-1",
+							"Y": "-1"
 						}
 					}).then(function(response) {
-						$cookies.put('auth_token', response.token)
+            console.log(response);
+            console.log(response.data);
+            console.log(response.data.Token);
+            console.log(response.data.Iduser);
+
+            //TODO: Guardar camps al local storage
+            //console.log(response.data.token);
+            //var aux = JSON.toJson(response.data);
+            //console.log(aux);
+            //console.log(aux.token);
+            //console.log(response.data.token);
+            //console.log(response.data.iduser);
+
+						$cookies.put('auth_token', response.token);
 						currentUser = getCurrentUser();
 					});
 				});
 				return promise;
-			}
+			};
 
 			return {
 				login: login,
