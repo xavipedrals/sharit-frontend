@@ -1,5 +1,4 @@
 angular.module('app.services', [])
-
   .factory('StubsFactory', ['$http', function ($http) {
     return [
       {
@@ -97,45 +96,45 @@ angular.module('app.services', [])
         var options = optionsForType(type);
 
         // if(type = 1) {
-          $cordovaCamera.getPicture(options).then(function (imageUrl) {
-            //console.log("imageUrl-> " + imageUrl);
-            console.log(imageUrl.indexOf('?'));
-            var realUri = null;
-            if(imageUrl.indexOf('?') != -1){
-              realUri = imageUrl.substr(0, imageUrl.indexOf('?'));
-              //console.log("realUri-> " + realUri);
-            } else {
-              realUri = imageUrl;
-              //console.log("realUri-> " + realUri);
-            }
-            var name = realUri.substr(realUri.lastIndexOf('/') + 1);
-            //console.log("name-> " + name);
-            var namePath = realUri.substr(0, realUri.lastIndexOf('/') + 1);
-            //console.log("namePath-> " + namePath);
+        $cordovaCamera.getPicture(options).then(function (imageUrl) {
+          //console.log("imageUrl-> " + imageUrl);
+          console.log(imageUrl.indexOf('?'));
+          var realUri = null;
+          if (imageUrl.indexOf('?') != -1) {
+            realUri = imageUrl.substr(0, imageUrl.indexOf('?'));
+            //console.log("realUri-> " + realUri);
+          } else {
+            realUri = imageUrl;
+            //console.log("realUri-> " + realUri);
+          }
+          var name = realUri.substr(realUri.lastIndexOf('/') + 1);
+          //console.log("name-> " + name);
+          var namePath = realUri.substr(0, realUri.lastIndexOf('/') + 1);
+          //console.log("namePath-> " + namePath);
 
-            var newName = makeid() + name;
-            $cordovaFile.copyFile(namePath, name, cordova.file.dataDirectory, newName)
-              .then(function (info) {
-                FileService.storeImage(newName);
-                resolve();
-              }, function (e) {
-                reject();
-              });
-          });
+          var newName = makeid() + name;
+          $cordovaFile.copyFile(namePath, name, cordova.file.dataDirectory, newName)
+            .then(function (info) {
+              FileService.storeImage(newName);
+              resolve();
+            }, function (e) {
+              reject();
+            });
+        });
       })
     }
 
     function uploadImagesToServer(serverUrl, imagesUrl, options) {
-      if(options === null){
+      if (options === null) {
         options = new FileUploadOptions();
         options.fileKey = "file";
         options.fileName = "prova";
         options.mimeType = "text/plain";
       }
-      if(serverUrl == null){
+      if (serverUrl == null) {
         serverUrl = "http://52.34.79.154:8080/user/putItem";
       }
-      
+
 
     }
 
@@ -144,29 +143,56 @@ angular.module('app.services', [])
     }
   }])
 
-
-.factory('ImageUploaderService', ['FileService', '$cordovaFile', '$cordovaFileTransfer', function (FileService, $cordovaFile, $cordovaFileTransfer) {
-  var options = new FileUploadOptions();
-  options.fileKey = "file";
-  options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
-  options.mimeType = "text/plain";
-
-  function uploadSingleImageToServer(url, imagePath) {
+  .factory('ImageUploaderService', ['FileService', '$cordovaFile', '$cordovaFileTransfer', function (FileService, $cordovaFile, $cordovaFileTransfer) {
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
     options.mimeType = "text/plain";
-  }
 
-}]);
+    function uploadSingleImageToServer(url, imagePath) {
+      var options = new FileUploadOptions();
+      options.fileKey = "file";
+      options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+      options.mimeType = "text/plain";
+    }
 
+  }])
 
-$cordovaFileTransfer.upload(server, filePath, options)
-  .then(function(result) {
-    // Success!
-  }, function(err) {
-    // Error
-  }, function (progress) {
-    // constant progress updates
+  .factory('socket', function (socketFactory) {
+    //Create socket and connect to http://chat.socket.io
+    var myIoSocket = io.connect('http://chat.socket.io');
+
+    return socketFactory({
+      ioSocket: myIoSocket
+    });
   });
 
+//   .factory('httpCallsManager', ['$q', 'http', function ($http, ) {
+// }])
+//
+//
+// var promise = new Promise(function(resolve) {
+//   $http.post('http://52.34.79.154:8080/user/putItem', {
+//     params: {
+//       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjIyNjU3MzEsInVzZXJpZCI6ImRHVnpkR3h2WjJsdVRXRnlZMkZzYkd4VGVXeDJaWE4wY21seiJ9.ymlVy9SDuFk2r2VKhVSbd4dPKZObVLknJ_z5rG0cYO0",
+//       "name": "Martell",
+//       "description": "Prova de descripció",
+//       "image": "-1"
+//     }
+//   }).then(function(response) {
+//     console.log(response);
+//     console.log(response.data);
+//
+//     //TODO: Guardar camps al local storage
+//     //console.log(response.data.token);
+//     //var aux = JSON.toJson(response.data);
+//     //console.log(aux);
+//     //console.log(aux.token);
+//     //console.log(response.data.token);
+//     //console.log(response.data.iduser);
+//
+//     //$cookies.put('auth_token', response.token);
+//     //currentUser = getCurrentUser();
+//   });
+// });
+// return promise;

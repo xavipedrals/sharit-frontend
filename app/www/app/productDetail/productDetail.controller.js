@@ -1,15 +1,14 @@
 /**
  * Created by xavi on 24/03/16.
  */
-angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'StubsFactory',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory) {
+angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'StubsFactory', 'NgMap',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap) {
       $translatePartialLoader.addPart('productDetail');
       $translate.refresh();
       $scope.$state = $state;
       $scope.items = StubsFactory;
       $scope.actualProduct = $rootScope.actualProduct;
       $scope.favoriteImgUrl = "assets/img/dcCCPkrbQVmgHbe1RAOC_favorite.png";
-      document.getElementById("myIF").src= "https://www.google.com/maps/embed/v1/view?key=AIzaSyCxB5-KsGXs6JQlev4SGEuhvBR9yn20Xgw&zoom=18&center=" + $scope.actualProduct.location;
 
       $scope.toggleFavorite = function () {
         if($scope.favoriteImgUrl == "assets/img/dcCCPkrbQVmgHbe1RAOC_favorite.png"){
@@ -26,6 +25,10 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
         $state.go('app.valoracions');
       }
 
-
+      NgMap.getMap().then(function(map) {
+        map.setCenter({ lat: 41.403841, lng: 2.174340 });
+        map.setZoom(10);
+        new google.maps.Marker({position: {lat: 41.403841, lng: 2.174340}, map: map});
+      });
     }
   ]);

@@ -17,18 +17,23 @@ angular.module('app.routes', [])
         templateUrl: 'app/auth/signup/signup.html',
         controller: 'SignupCtrl'
       })
+       .state('forgot', {
+         url: '/forgot',
+         templateUrl: 'app/auth/forgot/forgot.html',
+         controller: 'ForgotCtrl'
+       })
       .state('app', {
         url: '/app',
         templateUrl: 'app/common/menu/menu.html',
         controller: 'MenuCtrl',
         abstract: true,
-        resolve: {
-          isAuthenticated: ['AuthService', function(AuthService) {
-            if (!AuthService.isAuthenticated()) {
-              throw 'Not authorized';
-            }
-          }]
-        }
+        // resolve: {
+        //   isAuthenticated: ['AuthService', function(AuthService) {
+        //     if (!AuthService.isAuthenticated()) {
+        //       throw 'Not authorized';
+        //     }
+        //   }]
+        // }
       })
       .state('app.dashboard', {
         url: '/dashboard',
@@ -66,12 +71,12 @@ angular.module('app.routes', [])
         }
       }
     })
-    .state('app.chatList', {
+    .state('app.chat', {
       url: '/chat-list',
       views: {
         'menuContent': {
-          templateUrl: 'app/chatList/chatList.html',
-          controller: 'ChatListCtrl'
+          templateUrl: 'app/chat/chat.html',
+          controller: 'ChatCtrl'
         }
       }
     })
@@ -106,11 +111,13 @@ angular.module('app.routes', [])
   }
 ])
 
-.run(['$rootScope', '$state', 
+.run(['$rootScope', '$state',
   function($rootScope, $state) {
     $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
-      if (error === 'Not authorized')
-        $state.go('login');
+      //if (error === 'Not authorized') {
+      //  console.log(error);
+      //  $state.go('login');
+      //}
     })
   }
 ]);

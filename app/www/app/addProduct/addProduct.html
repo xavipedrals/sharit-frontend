@@ -1,34 +1,20 @@
 <ion-view class="add-product" title="{{ 'Add_Product_Title' | translate }}">
+  </ion-nav-view>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <div class="button-bar">
-            <!--<button id="afegirProducte-button17" class="button button-positive  button-block">Image 2</button>-->
-            <!--<button id="afegirProducte-button18" class="button button-positive  button-block">Image 3</button>-->
-        </div>
-        <form class="list">
-          <p class="title-label">{{ 'Title' | translate }}</p>
-            <label class="item item-input">
-                <!--<span class="input-label">{{ 'Title' | translate }}</span>-->
-                <input type="text" placeholder="{{ 'Title' | translate }}" ng-model="product.title">
-            </label>
-          <p class="title-label">{{ 'Description' | translate }}</p>
-            <label class="item item-input">
-                <!--<span class="input-label">{{ 'Description' | translate }}</span>-->
-                <textarea class="description" placeholder="{{ 'Description' | translate }}" ng-model="product.description"> </textarea>
-            </label>
-        </form>
-      <div class="previews-container">
-        <div class="image-preview">
-          <i class="icon ion-camera"></i>
-        </div>
-        <div class="image-preview">
-          <i class="icon ion-camera"></i>
-        </div>
-        <div class="image-preview">
-          <i class="icon ion-camera"></i>
+
+      <div class="list">
+        <label class="item item-input item-floating-label">
+          <b><span class="input-label">{{ 'Title' | translate }}</span></b>
+          <input type="text" placeholder="{{ 'Title' | translate }}" ng-model="product.title">
+        </label>
+        <div class="item item-input item-floating-label">
+          <b><span class="input-label">{{ 'Description' | translate }}</span></b>
+          <textarea type="text" placeholder="{{ 'Description' | translate }}" ng-model="product.description"></textarea>
         </div>
       </div>
+
       <button id="afegirProducte-button16" class="button button-positive  button-block" ng-click="addMedia()">{{ 'Add_Image' | translate }}</button>
-        <button id="afegirProducte-button19" class="button button-balanced  button-block" ng-click="submitProduct(product)">{{ 'Send' | translate }}</button>
+      <button id="afegirProducte-button19" class="button button-balanced  button-block" ng-click="submitProduct(product)">{{ 'Send' | translate }}</button>
       <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
         <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" style="height:200px; padding: 5px 5px 5px 5px;"/>
       </ion-scroll>

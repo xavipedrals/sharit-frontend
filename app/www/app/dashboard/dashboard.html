@@ -1,17 +1,17 @@
 <ion-view title="{{ 'Dashboard_Title' | translate }}">
-    <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <ion-content overflow-scroll="true" padding="true" class="has-header dashboard">
         <form class="list">
             <label class="item item-input" name="buscador">
                 <i class="icon ion-search placeholder-icon"></i>
                 <input type="search" placeholder="Cerca el que necessitis">
             </label>
         </form>
-        <div class="list card" ng-repeat="item in items | orderBy:'stars':true track by $index" ng-click="goToDetail(item)">
+        <div class="list card dashboard_item" ng-repeat="item in items | orderBy:'stars':true track by $index" ng-click="goToDetail(item)">
             <div class="item item-divider">{{ item.name }}</div>
             <div class="item item-body">
-                <a style="display:inline-block;" ui-sref="app.productDetail">
-                    <div>
-                        <img ng-src="{{ item.imgUrl }}" width="100%" height="auto">
+                <a style="display:inline-block; float: left;" ui-sref="app.productDetail">
+                    <div style="text-align: center">
+                        <img ng-src="{{ item.imgUrl }}" width="100%" height="110px">
                     </div>
                 </a>
                 <div>
@@ -20,4 +20,5 @@
             </div>
         </div>
     </ion-content>
+
 </ion-view>

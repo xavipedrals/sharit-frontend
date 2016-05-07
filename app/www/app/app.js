@@ -14,10 +14,17 @@ angular.module('app', [
   'pascalprecht.translate',
   'app.translation',
   'ngCookies',
-  'ngCordova'
+  'ngCordova',
+  'ngCordovaOauth',
+  'ngSanitize',
+  'btford.socket-io',
+  'ngMap'
 ])
-
-.run(['$ionicPlatform', 'AuthService', 
+.constant('myConfig', {
+  'url': 'http://52.34.79.154',
+  'port': '8080'
+})
+.run(['$ionicPlatform', 'AuthService',
   function($ionicPlatform, AuthService) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
