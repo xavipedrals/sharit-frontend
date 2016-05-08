@@ -1,21 +1,23 @@
 <ion-view title="{{ 'Request_Title' | translate }}">
-  <ion-content overflow-scroll="true" padding="true" class="has-header">
-    <div class="button_requests_dashboard">
-        <div ng-click="changetodashboard()" class="anuncis">Anuncios</div>
-        <div class="peticions button_active">Peticiones</div>
-    </div>
-    <a id="taulellDePeticions-button33" class="button button-royal  button-block" ng-click="requestProduct()">{{ 'New_Request' | translate }}</a>
-    <div class="spacer"></div>
-      <div ng-repeat="item in items track by $index">
-        <div class="item item-body">
-          <a style="display:inline-block;">
-            <div>
-              <p style="text-align:center;"><b>{{ item.requesterName }} </b> {{ 'Needs' | translate }}:</p>
-              <p> {{ item.productName }} </p>
-              <p> {{ item.description }}</p>
-            </div>
-          </a>
-        </div>
+<ion-content overflow-scroll="true" padding="true" class="has-header peticions">
+<div class="button_requests_dashboard">
+  <div ng-click="changetodashboard()" class="anuncis">Anuncios</div>
+  <div class="peticions button_active">Peticiones</div>
+</div>
+<a id="taulellDePeticions-button33" class="button button-royal button-block" ng-click="requestProduct()">{{ 'New_Request' | translate }}</a>
+<div ng-repeat="item in items track by $index">
+  <div class="item item-body">
+    <b>{{ item.requesterName }}</b> {{ 'Needs' | translate }}:
+    <div class="item_inside">
+      <div class="item_title">
+        {{ item.productName }}
       </div>
-  </ion-content>
+      <div class="item_description">
+        {{ item.description }}
+      </div>
+      <img src="http://placehold.it/200x150" alt="Imatge del producte que es busca" class="item_image">
+    </div>
+  </div>
+</div>
+</ion-content>
 </ion-view>

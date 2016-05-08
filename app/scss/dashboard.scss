@@ -20,14 +20,47 @@
 		flex: 1;
 		text-align: center;
 		padding: .5em 1em;
+		border-radius: 2px;
 	}
 	.peticions {
 		flex: 1;
 		text-align: center;
 		padding: .5em 1em;
+		border-radius: 2px;
 	}
 	.button_active {
 		background-color: #387ef5;
 		color: #fff;
 	}
+}
+
+.peticions {
+	margin-bottom: .5em;
+
+	.item {
+		margin: .7em 0;
+		border-radius: 5px;
+		padding: .5em;
+
+		.item_inside {
+			margin-top: .5em;
+			border-radius: 5px;
+			border: 1px solid #ddd;
+			background-color: #eee;
+			text-align: center;
+			padding: .7em .5em;
+
+			.item_title {
+				font-weight: bold;
+			}
+			.item_description {
+				font-size: .8em;
+			}
+			.item_image {
+				max-width: 100%;
+				max-height: 100%;
+				margin-top: .7em;
+			}
+		}
+	}	
 }
