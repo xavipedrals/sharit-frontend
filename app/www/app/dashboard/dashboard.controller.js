@@ -1,8 +1,13 @@
 angular.module('app.controllers')
-.controller('DashboardCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'StubsFactory',
-  function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory) {
+.controller('DashboardCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'StubsFactory', '$ionicHistory', 
+  function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $ionicHistory) {
    $translatePartialLoader.addPart('dashboard');
    $translate.refresh();
+
+   $scope.changetorequests = function() {
+    $ionicHistory.nextViewOptions({ disableBack: true});
+    $state.go('app.requestsDashboard');
+   }
 
    $scope.$state = $state;
    $scope.items = StubsFactory;
@@ -23,5 +28,4 @@ angular.module('app.controllers')
 
         $scope.items[j].htmlestrellitas = $htmlstars;
       }
-    }
-    ]);
+}]);

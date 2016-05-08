@@ -7,3 +7,27 @@
 		height: 200px;
 	}
 }
+
+.button_requests_dashboard {
+	width: 100%;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	margin-bottom: 1em;
+	display: flex;
+
+	.anuncis {
+		flex: 1;
+		text-align: center;
+		padding: .5em 1em;
+	}
+	.peticions {
+		flex: 1;
+		text-align: center;
+		padding: .5em 1em;
+	}
+	.button_active {
+		background-color: #387ef5;
+		color: #fff;
+	}
+}

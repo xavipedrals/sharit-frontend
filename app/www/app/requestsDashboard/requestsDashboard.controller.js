@@ -1,9 +1,14 @@
 angular.module('app.controllers')
-  .controller('RequestsDashboardCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'StubsFactory',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory) {
+  .controller('RequestsDashboardCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'StubsFactory', '$ionicHistory',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $ionicHistory) {
       $translatePartialLoader.addPart('request');
-      $translate.refresh();;
+      $translate.refresh();
       $scope.$state = $state;
+
+      $scope.changetodashboard = function() {
+        $ionicHistory.nextViewOptions({ disableBack: true});
+        $state.go('app.dashboard');
+      }
 
       $scope.$on('$ionicView.beforeEnter', function () {
         $scope.items = JSON.parse(localStorage.getItem('requests'));

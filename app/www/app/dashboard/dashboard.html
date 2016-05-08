@@ -1,5 +1,9 @@
 <ion-view title="{{ 'Dashboard_Title' | translate }}">
     <ion-content overflow-scroll="true" padding="true" class="has-header dashboard">
+        <div class="button_requests_dashboard">
+            <div class="anuncis button_active">Anuncios</div>
+            <div ng-click="changetorequests()" class="peticions">Peticiones</div>
+        </div>
         <form class="list">
             <label class="item item-input" name="buscador">
                 <i class="icon ion-search placeholder-icon"></i>

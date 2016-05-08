@@ -9860,3 +9860,22 @@ input.white {
   margin: 2%;
   vertical-align: top;
   height: 200px; }
+
+.button_requests_dashboard {
+  width: 100%;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  margin-bottom: 1em;
+  display: flex; }
+  .button_requests_dashboard .anuncis {
+    flex: 1;
+    text-align: center;
+    padding: .5em 1em; }
+  .button_requests_dashboard .peticions {
+    flex: 1;
+    text-align: center;
+    padding: .5em 1em; }
+  .button_requests_dashboard .button_active {
+    background-color: #387ef5;
+    color: #fff; }
