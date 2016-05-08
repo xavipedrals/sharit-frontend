@@ -142,8 +142,25 @@ angular.module('app.services')
 				return promise;
 			};
 
+      var forgot = function(email) {
+      		var promise = new Promise(function(resolve, reject) {
+      		  $http.put(baseUrl + '/forgot', {
+      		    params: {
+      		      email: email
+      		    }
+      		  })
+      		  .then(function(result) {
+      		    resolve();
+      		  }, function(error) {
+      		    reject(error);
+      		  });
+          });
+          return promise;
+      };
+
 			return {
 				login: login,
+				forgot: forgot,
 				googleLogin: googleLogin,
 				twitterLogin: twitterLogin,
 				signup: signup,
