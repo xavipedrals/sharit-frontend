@@ -9882,24 +9882,22 @@ input.white {
     background-color: #387ef5;
     color: #fff; }
 
-.peticions {
-  margin-bottom: .5em; }
-  .peticions .item {
-    margin: .7em 0;
+.peticions .item {
+  margin: .7em 0;
+  border-radius: 5px;
+  padding: .5em; }
+  .peticions .item .item_inside {
+    margin-top: .5em;
     border-radius: 5px;
-    padding: .5em; }
-    .peticions .item .item_inside {
-      margin-top: .5em;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      background-color: #eee;
-      text-align: center;
-      padding: .7em .5em; }
-      .peticions .item .item_inside .item_title {
-        font-weight: bold; }
-      .peticions .item .item_inside .item_description {
-        font-size: .8em; }
-      .peticions .item .item_inside .item_image {
-        max-width: 100%;
-        max-height: 100%;
-        margin-top: .7em; }
+    border: 1px solid #ddd;
+    background-color: #eee;
+    text-align: center;
+    padding: .7em .5em; }
+    .peticions .item .item_inside .item_title {
+      font-weight: bold; }
+    .peticions .item .item_inside .item_description {
+      font-size: .8em; }
+    .peticions .item .item_inside .item_image {
+      max-width: 100%;
+      max-height: 100%;
+      margin-top: .7em; }
