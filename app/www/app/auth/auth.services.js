@@ -3,6 +3,7 @@ angular.module('app.services')
 		function($http, $cookies, myConfig, $cordovaOauth, $timeout, $q) {
 			// $timeout dependency injected because of the inexistence of an API
 			var _ = window._;
+      var TOKEN_STORAGE_KEY = 'token';
 			var currentUser = getCurrentUser();
 
 			var baseUrl = myConfig.url + ':' + myConfig.port + '/user';
@@ -12,15 +13,10 @@ angular.module('app.services')
 			var TWITTER_KEY = 'a0yDQUBqAMPbUbl3NGnS0f5y4';
 			var TWITTER_SECRET = 'its a secret';
 
-      var TOKEN_STORAGE_KEY = 'token';
-
 			function getCurrentUser() {
-        //var token = window.localStorage.getItem(TOKEN_STORAGE_KEY);
-				var token = $cookies.get('auth_token');
-        console.log(token);
+        var token = window.localStorage.getItem(TOKEN_STORAGE_KEY);
         var user = {};
-				if (typeof token !== 'undefined') {
-          console.log("Vaig bé");
+				if (typeof token !== 'undefined' && !(token === null)) {
 					var encoded = token.split('.')[1];
 					user = JSON.parse(window.atob(encoded));
 				}
@@ -28,42 +24,27 @@ angular.module('app.services')
 			}
 
 			var isAuthenticated = function() {
-				return !(_.isEmpty(currentUser));
+        return !(_.isEmpty(currentUser));
 			};
 
-			var login = function (username, password) {
-				// TODO: Replace this code with $http call
-
-        var promise = new Promise(function(resolve) {
-          $http.get(baseUrl + '/login', {
-            params: {
-              "mail": "xavi.pedrals@gmail.comdas234",
-              "pass": "1234"
-            }
-          }).then(function(response) {
-            console.log(response);
-            console.log(response.data);
-            console.log(response.data.Token);
-            console.log(response.data.Iduser);
-
-            //TODO: Guardar camps al local storage
-
-            $cookies.put('auth_token', response.data.Token);
-            currentUser = getCurrentUser();
-          });
+      var login = function (email, pass) {
+        var q = $q.defer();
+        $http.get(baseUrl + '/login', {
+          params: {
+            "email": email,
+            "pass": pass
+          }
+        }).then(function successCallback(response) {
+          window.localStorage.setItem(TOKEN_STORAGE_KEY, response.data.Token);
+          currentUser = getCurrentUser();
+          q.resolve(response);
+        }, function errorCallback(response) {
+          console.log("Error al GET user/login");
+          console.log(response);
+          q.reject();
         });
-        return promise;
-
-				// var promise = $timeout(function() {
-				// 	var response = { success: true, message: '', data:
-				// 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM'
-				// 	};
-				// 	$cookies.put('auth_token', response.data);
-				// 	currentUser = getCurrentUser();
-				// 	//return getCurrentUser();
-				// }, Math.random() * 3 * 1000);
-				// return promise;
-			};
+        return q.promise;
+      };
 
 			var googleLogin = function () {
 				var promise = new Promise(function(resolve, reject) {
@@ -128,7 +109,6 @@ angular.module('app.services')
             // console.log(response.data.Token);
             // console.log(response.data.Iduser);
             //
-            // //TODO: Guardar camps al local storage
             // //console.log(response.data.token);
             // //var aux = JSON.toJson(response.data);
             // //console.log(aux);
@@ -150,12 +130,14 @@ angular.module('app.services')
           method  : 'POST',
           url     : baseUrl,
           data    : data,
-          headers : {"Content-type":"text/plain"}
+          headers : {'Content-Type': 'text/plain'}
+          //TODO: Comment line above when CORS is poperly configured
         }).then(function successCallback(response) {
           console.log(response);
+          window.localStorage.setItem(TOKEN_STORAGE_KEY, response.data.Token);
+          //currentUser = getCurrentUser();
+          //TODO: Uncomment line above when CORS is poperly configured
           q.resolve(response);
-          //if (data.errors) {
-            // Showing errors
         }, function errorCallback(response) {
           console.log("Puta bida");
           console.log(response);

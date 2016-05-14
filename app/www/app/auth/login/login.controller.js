@@ -4,8 +4,9 @@ angular.module('app.controllers')
 			if (AuthService.isAuthenticated())
 				$state.go('app.dashboard');
 
+      $scope.input = {};
 			$scope.login = function() {
-				var promise = AuthService.login($scope.username, $scope.password);
+				var promise = AuthService.login($scope.input.email, $scope.input.pass);
 				promise
 					.then(function() {
 						$state.go('app.dashboard');
