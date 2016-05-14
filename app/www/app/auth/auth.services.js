@@ -1,6 +1,6 @@
 angular.module('app.services')
-	.factory('AuthService', ['$http', '$cookies', 'myConfig', '$cordovaOauth', '$timeout',
-		function($http, $cookies, myConfig, $cordovaOauth, $timeout) {
+	.factory('AuthService', ['$http', '$cookies', 'myConfig', '$cordovaOauth', '$timeout', '$q',
+		function($http, $cookies, myConfig, $cordovaOauth, $timeout, $q) {
 			// $timeout dependency injected because of the inexistence of an API
 			var _ = window._;
 			var currentUser = getCurrentUser();
@@ -12,9 +12,13 @@ angular.module('app.services')
 			var TWITTER_KEY = 'a0yDQUBqAMPbUbl3NGnS0f5y4';
 			var TWITTER_SECRET = 'its a secret';
 
+      var TOKEN_STORAGE_KEY = 'token';
+
 			function getCurrentUser() {
+        //var token = window.localStorage.getItem(TOKEN_STORAGE_KEY);
 				var token = $cookies.get('auth_token');
-				var user = {};
+        console.log(token);
+        var user = {};
 				if (typeof token !== 'undefined') {
           console.log("Vaig bé");
 					var encoded = token.split('.')[1];
@@ -30,35 +34,35 @@ angular.module('app.services')
 			var login = function (username, password) {
 				// TODO: Replace this code with $http call
 
-        // var promise = new Promise(function(resolve) {
-        //   $http.get(baseUrl + '/login', {
-        //     params: {
-        //       "mail": "testlogin",
-        //       "pass": "hola"
-        //     }
-        //   }).then(function(response) {
-        //     console.log(response);
-        //     console.log(response.data);
-        //     console.log(response.data.Token);
-        //     console.log(response.data.Iduser);
-        //
-        //     //TODO: Guardar camps al local storage
-        //
-        //     $cookies.put('auth_token', response.data.Token);
-        //     currentUser = getCurrentUser();
-        //   });
-        // });
-        // return promise;
+        var promise = new Promise(function(resolve) {
+          $http.get(baseUrl + '/login', {
+            params: {
+              "mail": "xavi.pedrals@gmail.comdas234",
+              "pass": "1234"
+            }
+          }).then(function(response) {
+            console.log(response);
+            console.log(response.data);
+            console.log(response.data.Token);
+            console.log(response.data.Iduser);
 
-				var promise = $timeout(function() {
-					var response = { success: true, message: '', data:
-						'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM'
-					};
-					$cookies.put('auth_token', response.data);
-					currentUser = getCurrentUser();
-					//return getCurrentUser();
-				}, Math.random() * 3 * 1000);
-				return promise;
+            //TODO: Guardar camps al local storage
+
+            $cookies.put('auth_token', response.data.Token);
+            currentUser = getCurrentUser();
+          });
+        });
+        return promise;
+
+				// var promise = $timeout(function() {
+				// 	var response = { success: true, message: '', data:
+				// 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM'
+				// 	};
+				// 	$cookies.put('auth_token', response.data);
+				// 	currentUser = getCurrentUser();
+				// 	//return getCurrentUser();
+				// }, Math.random() * 3 * 1000);
+				// return promise;
 			};
 
 			var googleLogin = function () {
@@ -109,37 +113,61 @@ angular.module('app.services')
 				return promise;
 			};
 
-			var signup = function(name, username, password) {
+			var signup = function(name, surname, email, password) {
+        console.log(baseUrl);
+        var data = {
+          name: name,
+          surname: surname,
+          email: email,
+          password: password
+        };
+				//var promise = new Promise(function(resolve) {
+				// 	$http.post(baseUrl, {name: name, surname: surname, email: email, pass: password}).then(function(response) {
+            // console.log(response);
+            // console.log(response.data);
+            // console.log(response.data.Token);
+            // console.log(response.data.Iduser);
+            //
+            // //TODO: Guardar camps al local storage
+            // //console.log(response.data.token);
+            // //var aux = JSON.toJson(response.data);
+            // //console.log(aux);
+            // //console.log(aux.token);
+            // //console.log(response.data.token);
+            // //console.log(response.data.iduser);
+            //
+            // window.localStorage.setItem(TOKEN_STORAGE_KEY, response.data.Token);
+            //
+            // $cookies.put('auth_token', response.data.Token);
+				// 		currentUser = getCurrentUser();
+				// 	});
 
-				var promise = new Promise(function(resolve) {
-					$http.get(baseUrl + '/register', {
-						params: {
-							"name": "Xavi",
-							"surname": "Pedrals",
-							"mail": "xavi@xavi.com",
-							"pass": "1234",
-							"X": "-1",
-							"Y": "-1"
-						}
-					}).then(function(response) {
-            console.log(response);
-            console.log(response.data);
-            console.log(response.data.Token);
-            console.log(response.data.Iduser);
+        //var promise = new Promise(function(resolve) {
 
-            //TODO: Guardar camps al local storage
-            //console.log(response.data.token);
-            //var aux = JSON.toJson(response.data);
-            //console.log(aux);
-            //console.log(aux.token);
-            //console.log(response.data.token);
-            //console.log(response.data.iduser);
+        var q = $q.defer();
 
-						$cookies.put('auth_token', response.token);
-						currentUser = getCurrentUser();
-					});
-				});
-				return promise;
+        $http({
+          method  : 'POST',
+          url     : baseUrl,
+          data    : data,
+          headers : {"Content-type":"text/plain"}
+        }).then(function successCallback(response) {
+          console.log(response);
+          q.resolve(response);
+          //if (data.errors) {
+            // Showing errors
+        }, function errorCallback(response) {
+          console.log("Puta bida");
+          console.log(response);
+          q.reject();
+        });
+
+        return q.promise;
+
+        //});
+				//return promise;
+
+
 			};
 
 			return {

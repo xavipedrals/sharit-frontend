@@ -5,8 +5,6 @@ angular.module('app.controllers')
 				$state.go('app.dashboard');
 
 			$scope.login = function() {
-
-
 				var promise = AuthService.login($scope.username, $scope.password);
 				promise
 					.then(function() {
