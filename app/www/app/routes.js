@@ -98,6 +98,15 @@ angular.module('app.routes', [])
             }
           }
         })
+    .state('app.configuration', {
+          url: '/configuration',
+          views: {
+            'menuContent': {
+              templateUrl: 'app/configuration/configuration.html',
+              controller: 'ConfigurationCtrl'
+            }
+          }
+        })
       .state('app.addProduct', {
         url: '/add-product',
         views: {
