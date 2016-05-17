@@ -130,7 +130,7 @@ angular.module('app.services')
           method  : 'POST',
           url     : baseUrl,
           data    : data,
-          headers : {'Content-Type': 'text/plain'}
+          headers : {'Content-Type': 'application/json'}
           //TODO: Comment line above when CORS is poperly configured
         }).then(function successCallback(response) {
           console.log(response);
