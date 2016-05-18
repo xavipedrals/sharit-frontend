@@ -100,8 +100,9 @@ angular.module('app.services')
           name: name,
           surname: surname,
           email: email,
-          password: password
+          pass: password
         };
+        console.log(data);
 				//var promise = new Promise(function(resolve) {
 				// 	$http.post(baseUrl, {name: name, surname: surname, email: email, pass: password}).then(function(response) {
             // console.log(response);
