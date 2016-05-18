@@ -1,139 +1,95 @@
-
 angular.module('app.controllers')
-  .controller('ChatCtrl',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, socket, $sanitize, $ionicScrollDelegate, $timeout) {
-      $translatePartialLoader.addPart('chats');
-      $translate.refresh();
+    .controller('ChatCtrl',
+        function ($scope, $rootScope, $translate, $translatePartialLoader, $state, socket, $sanitize, $ionicScrollDelegate, $timeout) {
+            $translatePartialLoader.addPart('chats');
+            $translate.refresh();
 
-      $scope.$state = $state;
+            $scope.$state = $state;
 
-     var self=this;
-       	var typing = false;
-       	var lastTypingTime;
-       	var TYPING_TIMER_LENGTH = 400;
+            var self = this;
+            var typing = false;
+            var lastTypingTime;
+            var TYPING_TIMER_LENGTH = 400;
 
-       	//Add colors
-       	var COLORS = [
-     	    '#e21400', '#91580f', '#f8a700', '#f78b00',
-     	    '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
-     	    '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
-     	  ];
+            self.messages = [];
 
-     	 //initializing messages array
-     	self.messages=[]
+            var data = new Object();
+            data.userId = "12345";
+            data.roomId = "12345";
 
-       	socket.on('connect',function(){
+            console.log("connect");
 
-       	  connected = true
+            socket.on('connect', function () {
+                socket.join(roomId);
+                socket.emit('connection', JSON.stringify(data));
 
-       	  //Add user
-       	  socket.emit('add user', 'abc');
+                socket.on('newMessage', function (data) {
+                    if (data.message && data.userId) {
+                        addMessageToList(data.userId, true, data.message)
+                    }
+                });
 
-       	  // On login display welcome message
-       	  socket.on('login', function (data) {
-     	    //Set the value of connected flag
-     	    self.connected = true
-     	    self.number_message= message_string(data.numUsers)
-     	  });
+                socket.on('typing', function (data) {
+                    addChatTyping(data.userId);
+                });
 
-     	  // Whenever the server emits 'new message', update the chat body
-     	  socket.on('new message', function (data) {
-     	  	if(data.message&&data.username)
-     	  	{
-     	   		addMessageToList(data.username,true,data.message)
-     	  	}
-     	  });
+                socket.on('stopTyping', function (data) {
+                    removeChatTyping(data.userId);
+                });
+            })
 
-     	  // Whenever the server emits 'user joined', log it in the chat body
-     	  socket.on('user joined', function (data) {
-     	  	addMessageToList("",false,data.username + " joined")
-     	  	addMessageToList("",false,message_string(data.numUsers))
-     	  });
+            //function called when user hits the send button
+            self.sendMessage = function () {
+                console.log('send')
+                socket.emit('newMessage', self.message)
+                addMessageToList(data.userId, true, self.message)
+                socket.emit('stopTyping');
+                self.message = ""
+            }
 
-     	  // Whenever the server emits 'user left', log it in the chat body
-     	  socket.on('user left', function (data) {
-     	    addMessageToList("",false,data.username+" left")
-     	    addMessageToList("",false,message_string(data.numUsers))
-     	  });
+            //function called on Input Change
+            self.updateTyping = function () {
+                sendUpdateTyping()
+            }
 
-     	  //Whenever the server emits 'typing', show the typing message
-     	  socket.on('typing', function (data) {
-     	    addChatTyping(data);
-     	  });
+            // Display message by adding it to the message list
+            function addMessageToList(username, style_type, message) {
+                username = $sanitize(username)
+                removeChatTyping(username)
+                self.messages.push({
+                    content: $sanitize(message),
+                    style: style_type,
+                    username: username,
+                })
+                $ionicScrollDelegate.scrollBottom();
+            }
 
-     	  // Whenever the server emits 'stop typing', kill the typing message
-     	  socket.on('stop typing', function (data) {
-     	    removeChatTyping(data.username);
-     	  });
-       	})
+            // Updates the typing event
+            function sendUpdateTyping() {
+                if (!typing) {
+                    typing = true;
+                    socket.emit('typing');
+                }
+                lastTypingTime = (new Date()).getTime();
+                $timeout(function () {
+                    var typingTimer = (new Date()).getTime();
+                    var timeDiff = typingTimer - lastTypingTime;
+                    if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
+                        socket.emit('stop typing');
+                        typing = false;
+                    }
+                }, TYPING_TIMER_LENGTH)
+            }
 
-       	//function called when user hits the send button
-       	self.sendMessage=function(){
-       	  console.log('send')
-       		socket.emit('new message', self.message)
-       		addMessageToList('abc',true,self.message)
-       		socket.emit('stop typing');
-       		self.message = ""
-       	}
+            // Adds the visual chat typing message
+            function addChatTyping(username) {
+                addMessageToList(username, true, " is typing");
+            }
 
-       	//function called on Input Change
-       	self.updateTyping=function(){
-       		sendUpdateTyping()
-       	}
-
-       	// Display message by adding it to the message list
-       	function addMessageToList(username,style_type,message){
-       		username = $sanitize(username)
-       		removeChatTyping(username)
-       		var color = style_type ? getUsernameColor(username) : null
-       		self.messages.push({content:$sanitize(message),style:style_type,username:username,color:color})
-       		$ionicScrollDelegate.scrollBottom();
-       	}
-
-       	//Generate color for the same user.
-       	function getUsernameColor (username) {
-     	    // Compute hash code
-     	    var hash = 7;
-     	    for (var i = 0; i < username.length; i++) {
-     	       hash = username.charCodeAt(i) + (hash << 5) - hash;
-     	    }
-     	    // Calculate color
-     	    var index = Math.abs(hash % COLORS.length);
-     	    return COLORS[index];
-       	}
-
-       	// Updates the typing event
-       	function sendUpdateTyping(){
-       		if(connected){
-       			if (!typing) {
-     		        typing = true;
-     		        socket.emit('typing');
-     		    }
-       		}
-       		lastTypingTime = (new Date()).getTime();
-       		$timeout(function () {
-     	        var typingTimer = (new Date()).getTime();
-     	        var timeDiff = typingTimer - lastTypingTime;
-     	        if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
-     	          socket.emit('stop typing');
-     	          typing = false;
-     	        }
-           	}, TYPING_TIMER_LENGTH)
-       	}
-
-     	// Adds the visual chat typing message
-     	function addChatTyping (data) {
-     	    addMessageToList(data.username,true," is typing");
-     	}
-
-     	// Removes the visual chat typing message
-     	function removeChatTyping (username) {
-     	  	self.messages = self.messages.filter(function(element){return element.username != username || element.content != " is typing"})
-     	}
-
-       	// Return message string depending on the number of users
-       	function message_string(number_of_users)
-       	{
-       		return number_of_users === 1 ? "there's 1 participant":"there are " + number_of_users + " participants"
-       	}
-  });
+            // Removes the visual chat typing message
+            function removeChatTyping(username) {
+                self.messages = self.messages.filter(function (element) {
+                    return element.username != username || element.content != " is typing"
+                })
+            }
+        });

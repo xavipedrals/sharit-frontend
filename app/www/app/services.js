@@ -132,8 +132,8 @@ angular.module('app.services', [])
   }])
 
   .factory('socket',function(socketFactory){
-  	//Create socket and connect to http://chat.socket.io
-   	var myIoSocket = io.connect('http://chat.socket.io');
+  	//Create socket and connect
+   	var myIoSocket = io.connect('http://52.34.79.154:5000');
 
   	return socketFactory({
         ioSocket: myIoSocket
