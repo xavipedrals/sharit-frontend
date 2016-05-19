@@ -14,59 +14,54 @@ angular.module('app.controllers')
             self.messages = [];
 
             var data = new Object();
-            data.userId = "12345";
-            data.roomId = "12345";
+            data.userId = "testUser1";
+            data.roomId = "dGVzdFVzZXIxdGVzdFVzZXIyaXRlbTEyMDE2LTA1LTE5IDIwOjUzOjQ0LjAzNTgxNzg0MyArMDIwMCBDRVNU";
 
-            console.log("connect");
 
-            socket.on('connect', function () {
-                socket.join(roomId);
-                socket.emit('connection', JSON.stringify(data));
+            socket.on('connection', function () {
+              socket.emit('setRoom', JSON.stringify(data));
+            });
 
-                socket.on('newMessage', function (data) {
-                    if (data.message && data.userId) {
-                        addMessageToList(data.userId, true, data.message)
-                    }
-                });
+          socket.on('newMessage', function (data) {
+            console.log('newMessage');
+            console.log(data);
+            data = JSON.parse(data);
+            if (data.message && data.userId) {
+              addMessageToList(data.userId, true, data.message)
+            }
+          });
 
-                socket.on('typing', function (data) {
-                    addChatTyping(data.userId);
-                });
-
-                socket.on('stopTyping', function (data) {
-                    removeChatTyping(data.userId);
-                });
-            })
+            console.log(JSON.stringify(data));
+            socket.emit('setRoom', JSON.stringify(data));
 
             //function called when user hits the send button
             self.sendMessage = function () {
-                console.log('send')
-                socket.emit('newMessage', self.message)
-                addMessageToList(data.userId, true, self.message)
-                socket.emit('stopTyping');
+                data.message = self.message;
+                console.log('send');
+                socket.emit('newMessage', JSON.stringify(data));
                 self.message = ""
-            }
+            };
 
             //function called on Input Change
             self.updateTyping = function () {
                 sendUpdateTyping()
-            }
+            };
 
             // Display message by adding it to the message list
             function addMessageToList(username, style_type, message) {
-                username = $sanitize(username)
-                removeChatTyping(username)
+                username = $sanitize(username);
+                removeChatTyping(username);
                 self.messages.push({
                     content: $sanitize(message),
                     style: style_type,
-                    username: username,
-                })
+                    username: username
+                });
                 $ionicScrollDelegate.scrollBottom();
             }
 
             // Updates the typing event
             function sendUpdateTyping() {
-                if (!typing) {
+                /*if (!typing) {
                     typing = true;
                     socket.emit('typing');
                 }
@@ -78,7 +73,7 @@ angular.module('app.controllers')
                         socket.emit('stop typing');
                         typing = false;
                     }
-                }, TYPING_TIMER_LENGTH)
+                }, TYPING_TIMER_LENGTH)*/
             }
 
             // Adds the visual chat typing message
@@ -89,7 +84,7 @@ angular.module('app.controllers')
             // Removes the visual chat typing message
             function removeChatTyping(username) {
                 self.messages = self.messages.filter(function (element) {
-                    return element.username != username || element.content != " is typing"
+                    return element.username != username || element.content != " is typing";
                 })
             }
         });
