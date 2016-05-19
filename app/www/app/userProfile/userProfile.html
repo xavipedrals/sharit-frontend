@@ -1,39 +1,63 @@
 <ion-view title="{{ 'Profile_Title' | translate }}">
-    <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <div>
-            <p>
-            </p>
-            <h2 style="text-align:center;">Dani G.</h2>
-            <p></p>
+    <ion-content overflow-scroll="true" class="has-header user_profile">
+        <ng-map class="mapa"></ng-map>
+        <div class="up_img">
+            <img src="../assets/img/user.jpg" alt="Profile Image">
         </div>
-        <div style="text-align:center;">
-            <img src="img/E9Y08hwnREqPAGIqbV1v_user.png" width="20%" height="auto">
+        <div class="up_estrellitas">⭐⭐⭐⭐⭐</div>
+        <div class="up_name">
+            Dani G.
         </div>
-        <div>
-            <p style="text-align:center;">⭐⭐⭐⭐⭐ - ✅</p>
-            <p></p>
+        <div class="up_extrainfo">
+          {{ 'Number_Of_Lent_Products' | translate }}: <b>10</b>
         </div>
-        <div class="spacer" style="width: 300px; height: 20px;"></div>
-        <div>
-            <p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.3653116132123!2d2.111207016324169!3d41.38787227926425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49850dadd0cbb%3A0x5c2e12d6c52a99f4!2sCampus+Nord+UPC!5e0!3m2!1sca!2ses!4v1457528399148"
-                width="300" height="150" frameborder="0" style="border:0" allowfullscreen=""></iframe>
-            </p>
+        <div class="up_extrainfo">
+          {{ 'Number_Of_Requested_Products' | translate }}: <b>3</b>
         </div>
-        <div>
-            <p>
-              {{ 'Number_Of_Lent_Products' | translate }}:
-                <b>10</b>
-            </p>
-            <p>
-              {{ 'Number_Of_Requested_Products' | translate }}:
-                <b>3</b>
-            </p>
-        </div>
-        <div class="button-bar">
+        <!-- <div class="button-bar up_buttons">
             <a ui-sref="menu.actuals" id="perfil-button1" class="button button-stable button-small button-block">{{ 'Actual_Products' | translate }}</a>
             <a ui-sref="menu.peticions" id="perfil-button22" class="button button-stable button-small button-block">{{ 'Requested_Products' | translate }}</a>
             <a ui-sref="menu.valoracions" id="perfil-button2" class="button button-stable button-small button-block">{{ 'Ratings' | translate }}</a>
+        </div> -->
+        <div class="up_info">
+            <div class="up_buttons">
+                <div class="up_button selected">
+                    <div class="up_button_num">
+                        8
+                    </div>
+                    <div class="up_button_text">
+                        Anuncis
+                    </div>
+                </div>
+                <div class="up_button">
+                    <div class="up_button_num">
+                        3
+                    </div>
+                    <div class="up_button_text">
+                        Peticions
+                    </div>
+                </div>
+                <div class="up_button">
+                    <div class="up_button_num">
+                        10
+                    </div>
+                    <div class="up_button_text">
+                        Valoracions
+                    </div>
+                </div>
+                <div class="up_button">
+                    <div class="up_button_num">
+                        5
+                    </div>
+                    <div class="up_button_text">
+                        M'agrades
+                    </div>
+                </div>
+            </div>
+
+            <div class="up_button_container">
+                Aquí va el contingut dinàmic de cada pestanya.
+            </div>
         </div>
     </ion-content>
 </ion-view>

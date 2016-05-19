@@ -1,8 +1,10 @@
 angular.module('app.controllers')
 	.controller('SignupCtrl', ['$scope', '$state', 'AuthService',
 		function($scope, $state, AuthService) {
-			$scope.signup = function() {
-				var promise = AuthService.signup($scope.name, $scope.username, $scope.password);
+
+      $scope.input = {};
+      $scope.signup = function() {
+				var promise = AuthService.signup($scope.input.name, $scope.input.surname, $scope.input.email, $scope.input.password);
 				promise
 					.then(function() {
 						$state.go('app.dashboard');
