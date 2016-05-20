@@ -14,7 +14,7 @@ angular.module('app.controllers')
    };
 
    $scope.$state = $state;
-   $scope.items = StubsFactory;
+   //$scope.items = StubsFactory;
 
     AnuncioFactory.getAnuncios().then(function (anuncios) {
       console.log("Exito");
@@ -22,7 +22,7 @@ angular.module('app.controllers')
 
       for (i = 0; i < anuncios.length; i++) {
         console.log(anuncios[i].Image1);
-        if(/*anuncios[i].Image1 === undefined*/ true){
+        if(typeof anuncios[i].Image1 !== 'undefined'){
           anuncios[i].Image1 = 'assets/img/box.png'
         }
       }
