@@ -15,7 +15,7 @@ angular.module('app.controllers')
 
             var data = new Object();
             data.userId = "testUser1";
-            data.roomId = "dGVzdFVzZXIxdGVzdFVzZXIyaXRlbTEyMDE2LTA1LTE5IDIwOjUzOjQ0LjAzNTgxNzg0MyArMDIwMCBDRVNU";
+            data.roomId = "dGVzdFVzZXIxdGVzdFVzZXIyaXRlbTEyMDE2LTA1LTIwIDA2OjM3OjU5LjgxMTgyMzkxNCArMDAwMCBVVEM=";
 
 
             socket.on('connection', function () {

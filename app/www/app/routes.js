@@ -72,7 +72,7 @@ angular.module('app.routes', [])
       }
     })
     .state('app.chat', {
-      url: '/chat-list',
+      url: '/chat',
       views: {
         'menuContent': {
           templateUrl: 'app/chat/chat.html',
@@ -80,6 +80,15 @@ angular.module('app.routes', [])
         }
       }
     })
+      .state('app.chatRooms', {
+        url: '/chat-rooms',
+        views: {
+          'menuContent': {
+            templateUrl: 'app/chat/chatRooms.html',
+            controller: 'ChatRoomsCtrl'
+          }
+        }
+      })
     .state('app.requestProduct', {
         url: '/request-product',
         views: {
