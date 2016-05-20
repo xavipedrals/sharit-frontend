@@ -22,7 +22,8 @@ angular.module('app', [
 ])
 .constant('myConfig', {
   'url': 'http://52.34.79.154',
-  'port': '8080'
+  'port': '8080',
+  'TOKEN_STORAGE_KEY': 'token'
 })
 .run(['$ionicPlatform', 'AuthService',
   function($ionicPlatform, AuthService) {

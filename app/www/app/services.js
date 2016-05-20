@@ -101,7 +101,7 @@ angular.module('app.services', [])
             //console.log("imageUrl-> " + imageUrl);
             console.log(imageUrl.indexOf('?'));
             var realUri = null;
-            if(imageUrl.indexOf('?') != -1){
+            if (imageUrl.indexOf('?') != -1) {
               realUri = imageUrl.substr(0, imageUrl.indexOf('?'));
               //console.log("realUri-> " + realUri);
             } else {
@@ -131,14 +131,91 @@ angular.module('app.services', [])
     }
   }])
 
-  .factory('socket',function(socketFactory){
-  	//Create socket and connect to http://chat.socket.io
-   	var myIoSocket = io.connect('http://chat.socket.io');
+  .factory('socket', function (socketFactory) {
+    //Create socket and connect to http://chat.socket.io
+    var myIoSocket = io.connect('http://chat.socket.io');
 
-  	return socketFactory({
-        ioSocket: myIoSocket
+    return socketFactory({
+      ioSocket: myIoSocket
     });
-  });
+  })
+
+  .factory('HttpCalls', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+    var baseUrl = myConfig.url + ':' + myConfig.port;
+
+    function getAnuncios() {
+      var q = $q.defer();
+
+      $http({
+        method: 'GET',
+        url: baseUrl + '/anuncios',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    var postAnuncio = function (title, description) {
+      var data = {
+        name: title,
+        description: description
+      };
+      var q = $q.defer();
+
+      $http({
+        method: 'POST',
+        url: baseUrl + '/anuncio',
+        data: data,
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    };
+
+    var postPeticion = function (title, description) {
+      var data = {
+        name: title,
+        description: description
+      };
+      var q = $q.defer();
+
+      $http({
+        method: 'POST',
+        url: baseUrl + '/peticion',
+        data: data,
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    };
+
+    return {
+      postAnuncio: postAnuncio,
+      postPeticion: postPeticion,
+      getAnuncios: getAnuncios
+    }
+  }]);
 
 //   .factory('httpCallsManager', ['$q', 'http', function ($http, ) {
 // }])
