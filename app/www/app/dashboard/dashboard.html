@@ -10,7 +10,7 @@
                 <input type="search" placeholder="Cerca el que necessitis">
             </label>
         </form>
-        <div class="list card dashboard_item" ng-repeat="item in items | orderBy:'Stars':true track by $index" ng-click="goToDetail(item)">
+        <div class="list card dashboard_item" ng-repeat="item in items | orderBy:'ItemName':true track by $index" ng-click="goToDetail(item)">
             <div class="item item-divider">{{ item.ItemName }}</div>
             <div class="item item-body">
                 <a style="display:inline-block; float: left;" ui-sref="app.productDetail">
