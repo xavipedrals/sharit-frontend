@@ -3,14 +3,13 @@ angular.module('app.services', [])
   .factory('StubsFactory', ['$http', function ($http) {
     return [
       {
-        name: 'Hammer',
-        imgUrl: 'assets/img/s3H3Hyn0Rn0tv96qQEsc_martillo.jpg',
-        stars: 3,
-        description: "Deixo el meu martell de fusta. és nou de fa poc i es troba en perfectes condicions. També serveix per treure claus.",
-        lastSharit: "Fa una setmana",
+        ItemName: 'Hammer',
+        Image1: 'assets/img/s3H3Hyn0Rn0tv96qQEsc_martillo.jpg',
+        Stars: 3,
+        Description: "Deixo el meu martell de fusta. és nou de fa poc i es troba en perfectes condicions. També serveix per treure claus.",
+        LastSharit: "Fa una setmana",
         ownerName: "Dani Gil",
         location: "51.503333, -0.127500"
-
       },
       {
         name: 'Stairs',
@@ -140,6 +139,58 @@ angular.module('app.services', [])
     });
   })
 
+  .factory('AnuncioFactory', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+    var baseUrl = myConfig.url + ':' + myConfig.port;
+
+    function getAnuncios() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/anuncios',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    var postAnuncio = function (title, description) {
+      var data = {
+        itemname: title,
+        description: description
+      };
+      var q = $q.defer();
+
+      $http({
+        method: 'POST',
+        url: baseUrl + '/anuncio',
+        data: data,
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    };
+
+    return {
+      postAnuncio: postAnuncio,
+      getAnuncios: getAnuncios
+    }
+  }])
+
+
   .factory('HttpCalls', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
     var baseUrl = myConfig.url + ':' + myConfig.port;
 
@@ -164,7 +215,7 @@ angular.module('app.services', [])
 
     var postAnuncio = function (title, description) {
       var data = {
-        name: title,
+        itemname: title,
         description: description
       };
       var q = $q.defer();
@@ -188,7 +239,7 @@ angular.module('app.services', [])
 
     var postPeticion = function (title, description) {
       var data = {
-        name: title,
+        itemname: title,
         description: description
       };
       var q = $q.defer();
