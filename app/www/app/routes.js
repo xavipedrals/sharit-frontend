@@ -65,6 +65,7 @@ angular.module('app.routes', [])
       })
     .state('app.requestsDashboard', {
       url: '/requests-dashboard',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'app/requestsDashboard/requestsDashboard.html',

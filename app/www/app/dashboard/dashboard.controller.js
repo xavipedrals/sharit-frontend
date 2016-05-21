@@ -19,7 +19,7 @@ angular.module('app.controllers')
     AnuncioFactory.getAnuncios().then(function (anuncios) {
       //console.log(anuncios);
       for (i = 0; i < anuncios.length; i++) {
-        if(typeof anuncios[i].Image1 !== 'undefined' || anuncios[i].Image1 === null || anuncios[i].Image1 === ''){
+        if(typeof anuncios[i].Image1 === 'undefined' || anuncios[i].Image1 === null || anuncios[i].Image1 === ''){
           anuncios[i].Image1 = 'assets/img/box.png';
         }
         if(typeof anuncios[i].ItemName === 'undefined' || anuncios[i].ItemName === null || anuncios[i].ItemName === ''){
