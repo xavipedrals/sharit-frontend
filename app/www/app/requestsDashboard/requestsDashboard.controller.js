@@ -22,14 +22,13 @@ angular.module('app.controllers')
         //console.log(anuncios);
         for (i = 0; i < requests.length; i++) {
           if(typeof requests[i].Image1 === 'undefined' || requests[i].Image1 === null || requests[i].Image1 === ''){
-            console.log("hola");
             requests[i].Image1 = 'assets/img/lupa.png';
           }
           if(typeof requests[i].Name === 'undefined' || requests[i].Name === null || requests[i].Name === ''){
             requests[i].Name = 'Lupa mágica';
           }
         }
-        console.log(requests);
+        //console.log(requests);
         $scope.items = requests;
       });
 

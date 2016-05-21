@@ -213,8 +213,8 @@ angular.module('app.services', [])
 
     var postPeticion = function (title, description) {
       var data = {
-        itemname: title,
-        description: description
+        name: title,
+        descripcio: description
       };
       var q = $q.defer();
 

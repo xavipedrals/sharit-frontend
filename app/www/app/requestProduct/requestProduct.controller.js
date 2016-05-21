@@ -49,7 +49,10 @@ angular.module('app.controllers')
         product.requesterName = 'testUser';
         console.log(this.submittedProduct);
         // TODO: Enviar peticio al servidor
-        
+        PeticionFactory.createPeticion(product.title, product.description).then(function (response) {
+          console.log("Funciona");
+          //console.log(response);
+        });
         
         /*
          Remove this comment when server api is ready
