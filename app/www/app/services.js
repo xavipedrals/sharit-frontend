@@ -190,6 +190,57 @@ angular.module('app.services', [])
     }
   }])
 
+  .factory('PeticionFactory', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+    var baseUrl = myConfig.url + ':' + myConfig.port;
+
+    function getPeticiones() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/peticiones',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    var postPeticion = function (title, description) {
+      var data = {
+        itemname: title,
+        description: description
+      };
+      var q = $q.defer();
+
+      $http({
+        method: 'POST',
+        url: baseUrl + '/peticion',
+        data: data,
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    };
+
+    return {
+      createPeticion: postPeticion,
+      getPeticiones: getPeticiones
+    }
+  }])
+
 
   .factory('HttpCalls', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
     var baseUrl = myConfig.url + ':' + myConfig.port;
