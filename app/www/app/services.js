@@ -241,6 +241,85 @@ angular.module('app.services', [])
     }
   }])
 
+  .factory('ProfileFactory', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+    var baseUrl = myConfig.url + ':' + myConfig.port;
+
+    function getGeneralInfo() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/user',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    function getUserAnuncios() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/user',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    function getUserPeticiones() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/peticionesUsuario',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    function getUserValoraciones() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/user',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    return {
+      getGeneralInfo: getGeneralInfo
+    }
+  }])
 
   .factory('HttpCalls', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
     var baseUrl = myConfig.url + ':' + myConfig.port;

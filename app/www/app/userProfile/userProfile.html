@@ -2,11 +2,11 @@
     <ion-content overflow-scroll="true" class="has-header user_profile">
         <ng-map class="mapa"></ng-map>
         <div class="up_img">
-            <img src="../assets/img/user.jpg" alt="Profile Image">
+            <img ng-src="{{ userInfo.Image1 }}" alt="Profile Image">
         </div>
         <div class="up_estrellitas">⭐⭐⭐⭐⭐</div>
         <div class="up_name">
-            Dani G.
+            {{ userInfo.Name }} {{ userInfo.Surname }}
         </div>
         <div class="up_extrainfo">
           {{ 'Number_Of_Lent_Products' | translate }}: <b>10</b>

@@ -9913,7 +9913,8 @@ input.white {
     width: 120px;
     border-radius: 60px;
     border: 5px solid #fff;
-    z-index: 20; }
+    z-index: 20;
+    background: whitesmoke; }
 
 .user_profile .up_estrellitas {
   text-align: center; }
