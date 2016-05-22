@@ -15,8 +15,6 @@ angular.module('app.controllers')
             "userid": $scope.user_id
           }
         }).then(function successCallback(response) {
-          window.localStorage.setItem(TOKEN_STORAGE_KEY, response.data.Token);
-          currentUser = getCurrentUser();
           q.resolve(response);
         }, function errorCallback(response) {
           console.log("Error al GET user/login");

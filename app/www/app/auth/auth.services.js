@@ -23,9 +23,9 @@ angular.module('app.services')
 				return user;
 			}
 
-			var isAuthenticated = function() {
+      var isAuthenticated = function() {
         return !(_.isEmpty(currentUser));
-			};
+      };
 
       var login = function (email, pass) {
         var q = $q.defer();
@@ -37,12 +37,15 @@ angular.module('app.services')
         }).then(function successCallback(response) {
           window.localStorage.setItem(TOKEN_STORAGE_KEY, response.data.Token);
           currentUser = getCurrentUser();
+          //getCurrentUserData();
           q.resolve(response);
         }, function errorCallback(response) {
           console.log("Error al GET user/login");
           console.log(response);
           q.reject();
         });
+        console.log('currentuserlogin2: ' + currentUser.userid);
+
         return q.promise;
       };
 

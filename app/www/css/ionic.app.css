@@ -9854,6 +9854,40 @@ input.white {
 .content {
   bottom: 68px; }
 
+.bubble {
+  position: relative;
+  width: 250px;
+  height: 65px;
+  padding: 4px;
+  background: #FFFFFF;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px; }
+
+.right-bubble:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 10px 0 10px 6px;
+  border-color: transparent #FFFFFF;
+  display: block;
+  width: 0;
+  z-index: 1;
+  right: -6px;
+  top: 33px; }
+
+.left-bubble:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 10px 6px 10px 0;
+  border-color: transparent #FFFFFF;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -6px;
+  top: 33px; }
+
 .dashboard .dashboard_item {
   width: 46%;
   display: inline-block;
