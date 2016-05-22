@@ -37,6 +37,7 @@ angular.module('app.routes', [])
       })
       .state('app.dashboard', {
         url: '/dashboard',
+        cache: false,
         views: {
           'menuContent': {
             templateUrl: 'app/dashboard/dashboard.html',
@@ -64,6 +65,7 @@ angular.module('app.routes', [])
       })
     .state('app.requestsDashboard', {
       url: '/requests-dashboard',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'app/requestsDashboard/requestsDashboard.html',

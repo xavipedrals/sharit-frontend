@@ -7,15 +7,16 @@
 <a id="taulellDePeticions-button33" class="button button-royal button-block" ng-click="requestProduct()">{{ 'New_Request' | translate }}</a>
 <div ng-repeat="item in items track by $index">
   <div class="item item-body">
-    <b>{{ item.requesterName }}</b> {{ 'Needs' | translate }}:
+    <b>{{ item.IDuser }}</b> {{ 'Needs' | translate }}:
     <div class="item_inside">
       <div class="item_title">
-        {{ item.productName }}
+        {{ item.Name }}
       </div>
       <div class="item_description">
-        {{ item.description }}
+        {{ item.Descripcio }}
       </div>
-      <img src="http://placehold.it/200x150" alt="Imatge del producte que es busca" class="item_image">
+      <img ng-src="{{ item.Image1 }}">
+      <!--<img ng-src="http://placehold.it/200x150" alt="Imatge del producte que es busca" class="item_image">-->
     </div>
   </div>
 </div>

@@ -3,11 +3,11 @@ angular.module('app.services', [])
   .factory('StubsFactory', ['$http', function ($http) {
     return [
       {
-        name: 'Hammer',
-        imgUrl: 'assets/img/s3H3Hyn0Rn0tv96qQEsc_martillo.jpg',
-        stars: 3,
-        description: "Deixo el meu martell de fusta. és nou de fa poc i es troba en perfectes condicions. També serveix per treure claus.",
-        lastSharit: "Fa una setmana",
+        ItemName: 'Hammer',
+        Image1: 'assets/img/s3H3Hyn0Rn0tv96qQEsc_martillo.jpg',
+        Stars: 3,
+        Description: "Deixo el meu martell de fusta. és nou de fa poc i es troba en perfectes condicions. També serveix per treure claus.",
+        LastSharit: "Fa una setmana",
         ownerName: "Dani Gil",
         location: "51.503333, -0.127500"
 
@@ -101,7 +101,7 @@ angular.module('app.services', [])
             //console.log("imageUrl-> " + imageUrl);
             console.log(imageUrl.indexOf('?'));
             var realUri = null;
-            if(imageUrl.indexOf('?') != -1){
+            if (imageUrl.indexOf('?') != -1) {
               realUri = imageUrl.substr(0, imageUrl.indexOf('?'));
               //console.log("realUri-> " + realUri);
             } else {
@@ -136,10 +136,269 @@ angular.module('app.services', [])
    	//var myIoSocket = io.connect('http://52.34.79.154:5000');
    	var myIoSocket = io.connect('http://52.34.79.154:5000');
 
-  	return socketFactory({
-        ioSocket: myIoSocket
+    return socketFactory({
+      ioSocket: myIoSocket
     });
-  });
+  })
+
+  .factory('AnuncioFactory', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+    var baseUrl = myConfig.url + ':' + myConfig.port;
+
+    function getAnuncios() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/anuncios',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    var postAnuncio = function (title, description) {
+      var data = {
+        itemname: title,
+        description: description
+      };
+      var q = $q.defer();
+
+      $http({
+        method: 'POST',
+        url: baseUrl + '/anuncio',
+        data: data,
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    };
+
+    return {
+      postAnuncio: postAnuncio,
+      getAnuncios: getAnuncios
+    }
+  }])
+
+  .factory('PeticionFactory', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+    var baseUrl = myConfig.url + ':' + myConfig.port;
+
+    function getPeticiones() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/peticiones',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    var postPeticion = function (title, description) {
+      var data = {
+        name: title,
+        descripcio: description
+      };
+      var q = $q.defer();
+
+      $http({
+        method: 'POST',
+        url: baseUrl + '/peticion',
+        data: data,
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    };
+
+    return {
+      createPeticion: postPeticion,
+      getPeticiones: getPeticiones
+    }
+  }])
+
+  .factory('ProfileFactory', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+    var baseUrl = myConfig.url + ':' + myConfig.port;
+
+    function getGeneralInfo() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/user',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    function getUserAnuncios() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/user',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    function getUserPeticiones() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/peticionesUsuario',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    function getUserValoraciones() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/user',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    return {
+      getGeneralInfo: getGeneralInfo
+    }
+  }])
+
+  .factory('HttpCalls', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+    var baseUrl = myConfig.url + ':' + myConfig.port;
+
+    function getAnuncios() {
+      var q = $q.defer();
+
+      $http({
+        method: 'GET',
+        url: baseUrl + '/anuncios',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    var postAnuncio = function (title, description) {
+      var data = {
+        itemname: title,
+        description: description
+      };
+      var q = $q.defer();
+
+      $http({
+        method: 'POST',
+        url: baseUrl + '/anuncio',
+        data: data,
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    };
+
+    var postPeticion = function (title, description) {
+      var data = {
+        itemname: title,
+        description: description
+      };
+      var q = $q.defer();
+
+      $http({
+        method: 'POST',
+        url: baseUrl + '/peticion',
+        data: data,
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+      }).then(function successCallback(response) {
+        console.log("Exito");
+        console.log(response);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    };
+
+    return {
+      postAnuncio: postAnuncio,
+      postPeticion: postPeticion,
+      getAnuncios: getAnuncios
+    }
+  }]);
 
 //   .factory('httpCallsManager', ['$q', 'http', function ($http, ) {
 // }])
