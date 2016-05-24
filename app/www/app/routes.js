@@ -86,7 +86,7 @@ angular.module('app.routes', [])
         url: '/chat-rooms',
         views: {
           'menuContent': {
-            templateUrl: 'app/chat/chatRooms.html',
+            templateUrl: 'app/chatRooms/chatRooms.html',
             controller: 'ChatRoomsCtrl'
           }
         }

@@ -19,18 +19,16 @@ angular.module('app.controllers')
 
       //get user data
       var q = $q.defer();
-      console.log("token:" + window.localStorage.getItem('token'));
       $http({
         method: 'GET',
         url: myConfig.url + ':' + myConfig.port + '/user',
         headers: {'token': window.localStorage.getItem('token')}
       }).then(function successCallback(response) {
         console.log(JSON.stringify(response.data));
-        $scope.currentUser = new Object();
-        $scope.currentUser.id = response.data.ID;
-        $scope.currentUser.name = response.data.Name;
-        $scope.currentUser.surname = response.data.Surname;
-        console.log(JSON.stringify($scope.currentUser));
+        $rootScope.currentUser = new Object();
+        $rootScope.currentUser.id = response.data.IDuser;
+        $rootScope.currentUser.name = response.data.Name;
+        $rootScope.currentUser.surname = response.data.Surname;
         q.resolve(response);
       }, function errorCallback(response) {
         q.reject();
@@ -53,6 +51,10 @@ angular.module('app.controllers')
       $scope.goToDetail = function (item) {
         // console.log($index);
         $rootScope.actualProduct = item;
+        //TODO: remove hardcoded itemId and user
+        //Vaca lletera
+        $rootScope.actualProduct.id = item.Idd;
+        $rootScope.actualProduct.lenderUserId = item.IDuser //test@test.com
         $state.go('app.productDetail');
       }
 

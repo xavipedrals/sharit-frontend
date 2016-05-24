@@ -21,12 +21,11 @@ angular.module('app.controllers')
 
       self.messages = [];
 
-      var currentUser = $scope.currentUser;
-
       var data = new Object();
-      console.log('data ' + JSON.stringify(AuthService.currentUser));
-      data.userId = currentUser.id;
-      data.roomId = $scope.selectedRoom;
+      console.log(JSON.stringify($rootScope.currentUser));
+      console.log(JSON.stringify($rootScope.currentRoom));
+      data.userId = $rootScope.currentUser.id;
+      data.roomId = $rootScope.currentRoom.id;
 
 
       // "dGVzdFVzZXIxdGVzdFVzZXIyaXRlbTEyMDE2LTA1LTIwIDA2OjM3OjU5LjgxMTgyMzkxNCArMDAwMCBVVEM=";
@@ -41,7 +40,16 @@ angular.module('app.controllers')
         console.log(data);
         data = JSON.parse(data);
         if (data.message && data.userId) {
-          addMessageToList(data.userId, true, data.message)
+          if (data.userId == $rootScope.currentRoom.userId1) {
+            console.log($rootScope.currentRoom.userName1);
+            addMessageToList($rootScope.currentRoom.userName1, true, data.message);
+          }
+          else if (data.userId == $rootScope.currentRoom.userId2) {
+            console.log($rootScope.currentRoom.userName2);
+            addMessageToList($rootScope.currentRoom.userName2, true, data.message);
+          }
+          else
+            addMessageToList('Edward Snowden', true, 'chat hijaked, contact the admins');
         }
       });
 

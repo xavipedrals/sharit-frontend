@@ -14,7 +14,7 @@
         <div>
             <p>{{actualProduct.description}}</p>
         </div>
-        <a ui-sref="menu.xat" id="martellDeFusta-button7" class="button button-calm  button-block">Ho necessito! </a>
+        <a id="martellDeFusta-button7" ng-show="canAskForProduct" class="button button-calm button-block " ng-click="startChat()">Ho necessito! </a>
         <div>
             <p style="text-align:center; color: #777; font-size: 14px;">
                 <b>3</b>&nbsp;sharits

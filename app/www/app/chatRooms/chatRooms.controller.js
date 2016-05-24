@@ -1,44 +1,51 @@
 angular.module('app.controllers')
-  .controller('ChatCtrl',
-    function ($scope, $rootScope, $translate, $translatePartialLoader, $state, myConfig) {
+  .controller('ChatRoomsCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'myConfig', '$http', '$q',
+    function ($scope, $rootScope, $translate, $translatePartialLoader, $state, myConfig, $http, $q) {
       $translatePartialLoader.addPart('chats');
       $translate.refresh();
 
       $scope.$state = $state;
 
-      var baseUrl = myConfig.url + ':' + myConfig.port;
-
-      var userInfo = function (email, pass) {
+      $scope.goToChat = function (room){
+        console.log(room);
         var q = $q.defer();
-        $http.get(baseUrl + '/user', {
-          params: {
-            "userid": $scope.user_id
-          }
+        $http({
+          method: 'GET',
+          url: myConfig.url + ':' + myConfig.port + '/room/findRoom',
+          params: {'roomid': room.RoomId}
         }).then(function successCallback(response) {
+          console.log(JSON.stringify(response));
+          $rootScope.currentRoom = new Object();
+          $rootScope.currentRoom.id = response.data.RoomId;
+          $rootScope.currentRoom.userId1= room.UserID1;
+          $rootScope.currentRoom.userName1= room.NameU1;
+          $rootScope.currentRoom.userId2= room.UserID2;
+          $rootScope.currentRoom.userName2= room.NameU2;
+
+          console.log($rootScope.currentRoom);
+          $state.go('app.chat');
           q.resolve(response);
         }, function errorCallback(response) {
-          console.log("Error al GET user/login");
-          console.log(response);
           q.reject();
         });
-        return q.promise;
-      };
+      }
 
-      var login = function (email, pass) {
-        var q = $q.defer();
-        $http.get(baseUrl + '/room/findRooms', {
-          params: {
-            "userid": $scope.user_id
-          }
-        }).then(function successCallback(response) {
-          window.localStorage.setItem(TOKEN_STORAGE_KEY, response.data.Token);
-          currentUser = getCurrentUser();
-          q.resolve(response);
-        }, function errorCallback(response) {
-          console.log("Error al GET user/login");
-          console.log(response);
-          q.reject();
-        });
-        return q.promise;
-      };
-    });
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: myConfig.url + ':' + myConfig.port + '/room/findRooms',
+        params: {'userid': $rootScope.currentUser.id}
+      }).then(function successCallback(response) {
+        console.log(JSON.stringify(response.data));
+        $scope.rooms = response.data;
+        $scope.currentUser = new Object();
+        $scope.currentUser.id = $rootScope.currentUser.id;
+        $scope.currentUser.name = $rootScope.currentUser.name;
+        $scope.currentUser.surname = $rootScope.currentUser.surname;
+        console.log($scope.rooms[0]);
+        console.log($scope.rooms[1]);
+        q.resolve(response);
+      }, function errorCallback(response) {
+        q.reject();
+      });
+    }]);
