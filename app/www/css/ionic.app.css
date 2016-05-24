@@ -9902,6 +9902,86 @@ input.white {
       max-height: 100%;
       margin-top: .7em; }
 
+.configuration {
+  padding: 20px; }
+  .configuration .title {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #333; }
+  .configuration input {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    /* Remove First */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-shadow: none !important; }
+  .configuration select {
+    width: 100%; }
+  .configuration #photo_and_name {
+    display: flex; }
+    .configuration #photo_and_name #photo {
+      margin-right: 30px;
+      flex: 1; }
+      .configuration #photo_and_name #photo .title {
+        text-align: center; }
+      .configuration #photo_and_name #photo img {
+        width: 100px;
+        height: 100px;
+        background-color: #eee;
+        border-radius: 50px;
+        border: 5px solid #ddd; }
+    .configuration #photo_and_name #name {
+      flex: 2; }
+      .configuration #photo_and_name #name #surname {
+        padding-top: 11px; }
+  .configuration #change_password {
+    width: 100%;
+    padding: 7px 0;
+    border: 1px solid #11c1f3;
+    color: #11c1f3;
+    margin-top: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer; }
+  .configuration .wrap {
+    margin-top: 10px;
+    margin-bottom: 5px; }
+  .configuration #language label {
+    height: 40px;
+    border-radius: 5px;
+    width: 100%; }
+    .configuration #language label select {
+      right: initial; }
+  .configuration .mapa {
+    height: 150px !important;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); }
+  .configuration #logout {
+    width: 100%;
+    padding: 7px 0;
+    border: 1px solid #ef473a;
+    color: #ef473a;
+    margin: 15px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer; }
+  .configuration #save {
+    left: 0;
+    right: 0;
+    padding: 15px 0;
+    margin: 0 -20px;
+    text-transform: uppercase;
+    background-color: #33cd5f;
+    color: #fff;
+    text-align: center;
+    cursor: pointer; }
+
 .user_profile .mapa {
   height: 150px; }
 
