@@ -16,11 +16,12 @@ angular.module('app.controllers')
         }).then(function successCallback(response) {
           console.log(JSON.stringify(response));
           $rootScope.currentRoom = new Object();
-          $rootScope.currentRoom.id = response.data.RoomId;
+          $rootScope.currentRoom.id = response.data.Room.RoomId;
           $rootScope.currentRoom.userId1= room.UserID1;
           $rootScope.currentRoom.userName1= room.NameU1;
           $rootScope.currentRoom.userId2= room.UserID2;
           $rootScope.currentRoom.userName2= room.NameU2;
+          $rootScope.currentRoom.messages= response.data.Room.MessagesRoom;
 
           console.log($rootScope.currentRoom);
           $state.go('app.chat');
@@ -42,8 +43,6 @@ angular.module('app.controllers')
         $scope.currentUser.id = $rootScope.currentUser.id;
         $scope.currentUser.name = $rootScope.currentUser.name;
         $scope.currentUser.surname = $rootScope.currentUser.surname;
-        console.log($scope.rooms[0]);
-        console.log($scope.rooms[1]);
         q.resolve(response);
       }, function errorCallback(response) {
         q.reject();

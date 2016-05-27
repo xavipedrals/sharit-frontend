@@ -19,16 +19,31 @@ angular.module('app.controllers')
       var lastTypingTime;
       var TYPING_TIMER_LENGTH = 400;
 
+      self.currentUser = $rootScope.currentUser;
       self.messages = [];
 
+      for (var i = 0; i < $rootScope.currentRoom.messages.length; ++i) {
+        var message = new Object();
+        message.userId = $rootScope.currentRoom.messages[i].UserID;
+        message.text = $rootScope.currentRoom.messages[i].Text;
+        message.date = $rootScope.currentRoom.messages[i].date;
+        self.messages.push(message);
+      }
+      $ionicScrollDelegate.scrollBottom();
+
+      self.messages.sort(function(a,b){
+        var c = new Date(a.date);
+        var d = new Date(b.date);
+        return c-d;
+      });
+
+
+      $scope.currentUser = $rootScope.currentUser.id;
       var data = new Object();
       console.log(JSON.stringify($rootScope.currentUser));
       console.log(JSON.stringify($rootScope.currentRoom));
       data.userId = $rootScope.currentUser.id;
       data.roomId = $rootScope.currentRoom.id;
-
-
-      // "dGVzdFVzZXIxdGVzdFVzZXIyaXRlbTEyMDE2LTA1LTIwIDA2OjM3OjU5LjgxMTgyMzkxNCArMDAwMCBVVEM=";
 
 
       socket.on('connection', function () {
@@ -37,24 +52,31 @@ angular.module('app.controllers')
 
       socket.on('newMessage', function (data) {
         console.log('newMessage');
-        console.log(data);
+        console.log(JSON.stringify(data));
         data = JSON.parse(data);
         if (data.message && data.userId) {
           if (data.userId == $rootScope.currentRoom.userId1) {
-            console.log($rootScope.currentRoom.userName1);
-            addMessageToList($rootScope.currentRoom.userName1, true, data.message);
+            console.log('newMessage1');
+            var message = new Object();
+            message.userId = data.userId.UserID;
+            message.text = data.message;
+            message.date = data.date;
+            self.messages.push(message);
           }
           else if (data.userId == $rootScope.currentRoom.userId2) {
-            console.log($rootScope.currentRoom.userName2);
-            addMessageToList($rootScope.currentRoom.userName2, true, data.message);
+            console.log('newMessage2');
+            var message = new Object();
+            message.userId = data.userId.UserID;
+            message.text = data.message;
+            message.date = data.date;
+            self.messages.push(message);
           }
-          else
-            addMessageToList('Edward Snowden', true, 'chat hijaked, contact the admins');
+          $ionicScrollDelegate.scrollBottom();
         }
       });
 
       console.log(JSON.stringify(data));
-      socket.emit('setRoom', JSON.stringify(data));
+      //socket.emit('setRoom', JSON.stringify(data));
 
       //function called when user hits the send button
       self.sendMessage = function () {
@@ -70,16 +92,14 @@ angular.module('app.controllers')
       };
 
       // Display message by adding it to the message list
-      function addMessageToList(username, style_type, message) {
-        username = $sanitize(username);
+      /*function addMessageToList(message) {
         removeChatTyping(username);
         self.messages.push({
-          content: $sanitize(message),
-          style: style_type,
+          text: $sanitize(message),
           username: username
         });
         $ionicScrollDelegate.scrollBottom();
-      }
+      }*/
 
       // Updates the typing event
       function sendUpdateTyping() {
@@ -99,14 +119,14 @@ angular.module('app.controllers')
       }
 
       // Adds the visual chat typing message
-      function addChatTyping(username) {
+      /*function addChatTyping(username) {
         addMessageToList(username, true, " is typing");
-      }
+      }*/
 
       // Removes the visual chat typing message
-      function removeChatTyping(username) {
+      /*function removeChatTyping(username) {
         self.messages = self.messages.filter(function (element) {
           return element.username != username || element.content != " is typing";
         })
-      }
+      }*/
     }]);

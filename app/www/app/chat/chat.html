@@ -15,13 +15,12 @@
 
 <ion-view title="{{ 'Chat_Title' | translate }}" ng-controller="ChatCtrl as chatCtrl" class="light-grey">
   <ion-content has-bouncing="true" class="content">
-    <div ng-show="chatCtrl.connected">
-      <div class="log">{{chatCtrl.number_message}}</div>
-    </div>
     <div>
       <ul>
-        <li ng-class="{'message':message.style,'log':!message.style}"  ng-repeat="message in chatCtrl.messages" >
-          <span ng-show="message.style" ng-style="{color:message.color}" >{{message.username}} : </span >{{message.content}}
+        <li ng-repeat="message in chatCtrl.messages">
+          <span ng-if="message.userId == currentUser.Id" class="bubble right-bubble" >{{message.text}}</span>
+          <span ng-if="message.userId != currentUser.Id" class="bubble left-bubble"  >{{message.text}}</span>
+          <span padding = "15px"></span>
         </li>
       </ul>
     </div>
