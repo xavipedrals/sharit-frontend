@@ -41,6 +41,10 @@
         // console.log($index);
         $rootScope.actualProduct = item;
         $state.go('app.productDetail');
+      };
+
+      $scope.sayHello = function () {
+        console.log("Hola");
       }
 
 	 }

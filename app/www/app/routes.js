@@ -56,6 +56,7 @@ angular.module('app.routes', [])
       })
       .state('app.userProfile', {
         url: '/user-profile',
+        cache: false,
         views: {
           'menuContent': {
             templateUrl: 'app/userProfile/userProfile.html',
