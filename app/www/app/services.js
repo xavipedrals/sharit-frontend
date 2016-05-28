@@ -139,7 +139,7 @@ angular.module('app.services', [])
     });
   })
 
-  .factory('AnuncioFactory', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+  .factory('AnuncioFactory', ['$http', '$q', 'myConfig', '$cordovaFile', function ($http, $q, myConfig, $cordovaFile) {
     var baseUrl = myConfig.url + ':' + myConfig.port;
 
     function getAnuncios() {
@@ -160,11 +160,10 @@ angular.module('app.services', [])
       return q.promise;
     }
 
-    var postAnuncio = function (title, description) {
-      var data = {
-        itemname: title,
-        description: description
-      };
+    var postAnuncio = function (title, description, images) {
+
+
+
       var q = $q.defer();
 
       $http({
@@ -321,7 +320,7 @@ angular.module('app.services', [])
     }
   }])
 
-  .factory('HttpCalls', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+  .factory('HttpCalls', ['$http', '$q', 'myConfig', '$cordovaFile', function ($http, $q, myConfig, $cordovaFile) {
     var baseUrl = myConfig.url + ':' + myConfig.port;
 
     function getAnuncios() {
@@ -343,28 +342,39 @@ angular.module('app.services', [])
       return q.promise;
     }
 
-    var postAnuncio = function (title, description) {
-      var data = {
-        itemname: title,
-        description: description
-      };
+    var postAnuncio = function (title, description, images) {
+      
+      debugger;
+
       var q = $q.defer();
 
-      $http({
-        method: 'POST',
-        url: baseUrl + '/anuncio',
-        data: data,
-        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
-      }).then(function successCallback(response) {
-        console.log("Exito");
-        console.log(response);
-        q.resolve(response);
-      }, function errorCallback(response) {
-        console.log("Puta bida");
-        console.log(response);
-        q.reject();
+      // Get data image and prepare to send it
+      $cordovaFile.readAsText(cordova.file.dataDirectory, images[0]).then(function(data) {
+        var data = {
+          itemname: title,
+          description: description,
+          image1: btoa(encodeURIComponent(data).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+            return String.fromCharCode('0x' + p1);
+          }))  // At the moment, only one image is allowed
+        };
+
+        $http({
+          method: 'POST',
+          url: baseUrl + '/anuncio',
+          data: data,
+          headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+        }).then(function successCallback(response) {
+          console.log("Exito");
+          console.log(response);
+          q.resolve(response);
+        }, function errorCallback(response) {
+          console.log("Puta bida");
+          console.log(response);
+          q.reject();
+        });
       });
-      return q.promise;
+
+      return q.promise;      
     };
 
     var postPeticion = function (title, description) {

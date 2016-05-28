@@ -15,9 +15,8 @@ angular.module('app.controllers')
       $translatePartialLoader.addPart('addProduct');
       $translate.refresh();
 
+      $scope.product = {};
       $scope.$state = $state;
-      // $scope.product = null;
-      console.log("Hola compi");
 
       $ionicPlatform.ready(function() {
         $scope.images = FileService.images();
@@ -50,15 +49,17 @@ angular.module('app.controllers')
         $scope.hideSheet();
         ImageService.handleMediaDialog(type).then(function() {
           $scope.$apply();
+          // TODO: Replace the line above with a push on images array
         });
       };
 
 
-      $scope.submitProduct = function (product) {
-        this.submittedProduct = product;
-        console.log(this.submittedProduct);
+      $scope.submitProduct = function () {
+        debugger;
+        // this.submittedProduct = $scope.product;
+        // console.log(this.submittedProduct);
         // TODO: Enviar o al servidor
-        HttpCalls.postAnuncio(product.title, product.description).then(function () {
+        HttpCalls.postAnuncio($scope.product.title, $scope.product.description, $scope.images).then(function () {
           console.log("Victoria!");
         });
 
@@ -88,11 +89,6 @@ angular.module('app.controllers')
 
 
 
-        };
-
-        // });
-        // return promise;
-
-      //};
+      };
     }
   ]);
