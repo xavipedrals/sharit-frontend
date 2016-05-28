@@ -7,7 +7,7 @@
         <form class="list">
             <label class="item item-input" name="buscador">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="search" placeholder="Cerca el que necessitis">
+                <input type="text" placeholder="Cerca el que necessitis">
             </label>
         </form>
         <div class="list card dashboard_item" ng-repeat="item in items | orderBy:'ItemName':true track by $index" ng-click="goToDetail(item)">

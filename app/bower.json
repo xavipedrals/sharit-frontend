@@ -18,7 +18,8 @@
     "angular-sanitize": "1.5.5",
     "angular-ui-router": "1.0.0-alpha.4",
     "ng-cordova-oauth": "^0.2.5",
-    "ngmap": "^1.17.3"
+    "ngmap": "^1.17.3",
+    "angular-bootstrap": "^1.3.3"
   },
   "resolutions": {
     "angular-animate": "1.4.3",
