@@ -1,39 +1,48 @@
 angular.module('app.controllers')
-.controller('DashboardCtrl', ['$scope',
-  '$rootScope', '$translate',
-  '$translatePartialLoader',
-  '$state', 'StubsFactory',
-  '$ionicHistory', 'AnuncioFactory',
-  function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $ionicHistory, AnuncioFactory) {
-   $translatePartialLoader.addPart('dashboard');
-   $translate.refresh();
+  .controller('DashboardCtrl', ['$scope',
+    '$rootScope', '$translate',
+    '$translatePartialLoader',
+    '$state', 'StubsFactory',
+    '$ionicHistory', 'AnuncioFactory',
+    function ($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $ionicHistory, AnuncioFactory) {
+      $translatePartialLoader.addPart('dashboard');
+      $translate.refresh();
 
-   $scope.changetorequests = function() {
-    $ionicHistory.nextViewOptions({ disableBack: true});
-    $state.go('app.requestsDashboard');
-   };
+      $scope.changetorequests = function () {
+        $ionicHistory.nextViewOptions({disableBack: true});
+        $state.go('app.requestsDashboard');
+      };
 
-   $scope.$state = $state;
-   //$scope.items = StubsFactory;
+      $scope.$state = $state;
+      //$scope.items = StubsFactory;
+      var _selected;
 
-    AnuncioFactory.getAnuncios().then(function (anuncios) {
-      //console.log(anuncios);
-      $scope.itemNames = [];
-      for (i = 0; i < anuncios.length; i++) {
-        if(typeof anuncios[i].Image1 === 'undefined' || anuncios[i].Image1 === null || anuncios[i].Image1 === ''){
-          anuncios[i].Image1 = 'assets/img/box.png';
+      $scope.selected = "";
+
+      $scope.ngModelOptionsSelected = function (value) {
+        if (arguments.length) {
+          _selected = value;
+        } else {
+          return _selected;
         }
-        if(typeof anuncios[i].ItemName === 'undefined' || anuncios[i].ItemName === null || anuncios[i].ItemName === ''){
-          anuncios[i].ItemName = 'Caja sorpresa';
-        }
-        $scope.itemNames.push(anuncios[i].ItemName);
-      }
-      //console.log(anuncios);
-      $scope.items = anuncios;
-      //console.log($scope.itemNames);
-    });
+      };
 
-   $scope.goToDetail = function (item) {
+      AnuncioFactory.getAnuncios().then(function (anuncios) {
+        $scope.itemNames = [];
+        for (i = 0; i < anuncios.length; i++) {
+          if (typeof anuncios[i].Image1 === 'undefined' || anuncios[i].Image1 === null || anuncios[i].Image1 === '') {
+            anuncios[i].Image1 = 'assets/img/box.png';
+          }
+          if (typeof anuncios[i].ItemName === 'undefined' || anuncios[i].ItemName === null || anuncios[i].ItemName === '') {
+            anuncios[i].ItemName = 'Caja sorpresa';
+          }
+          $scope.itemNames.push(anuncios[i].ItemName);
+        }
+        $scope.items = anuncios;
+        //console.log($scope.itemNames);
+      });
+
+      $scope.goToDetail = function (item) {
         // console.log($index);
         $rootScope.actualProduct = item;
         $state.go('app.productDetail');
@@ -50,4 +59,4 @@ angular.module('app.controllers')
 
         $scope.items[j].htmlestrellitas = $htmlstars;
       }
-}]);
+    }]);
