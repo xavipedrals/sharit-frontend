@@ -45,11 +45,11 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
         }).then(function successCallback(response) {
           console.log(JSON.stringify(response.data));
           $rootScope.currentRoom = new Object();
-          $rootScope.currentRoom.roomId = response.data.Room.RoomId;
-          $rootScope.currentRoom.userId1= response.data.Room.UserID1;
-          $rootScope.currentRoom.userName1= response.data.Room.NameU1;
-          $rootScope.currentRoom.userId2= response.data.Room.UserID2;
-          $rootScope.currentRoom.userName2= response.data.Room.NameU2;
+          $rootScope.currentRoom.roomId = response.data.RoomId;
+          $rootScope.currentRoom.userId1= response.data.UserID1;
+          $rootScope.currentRoom.userName1= response.data.NameU1;
+          $rootScope.currentRoom.userId2= response.data.UserID2;
+          $rootScope.currentRoom.userName2= response.data.NameU2;
           $rootScope.currentRoom.messages= new Array();
           $state.go('app.chat');
           q.resolve(response);

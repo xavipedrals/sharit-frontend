@@ -134,7 +134,7 @@ angular.module('app.services', [])
   .factory('socket',function(socketFactory){
   	//Create socket and connect
    	//var myIoSocket = io.connect('http://52.34.79.154:5000');
-   	var myIoSocket = io.connect('http://52.34.79.154:5000');
+   	var myIoSocket = io.connect('http://localhost:5000');
 
     return socketFactory({
       ioSocket: myIoSocket
@@ -151,8 +151,8 @@ angular.module('app.services', [])
         url: baseUrl + '/anuncios',
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
       }).then(function successCallback(response) {
-        //console.log("Exito");
-        //console.log(response);
+        console.log("Exito");
+        console.log(response);
         q.resolve(response.data);
       }, function errorCallback(response) {
         console.log("Puta bida");

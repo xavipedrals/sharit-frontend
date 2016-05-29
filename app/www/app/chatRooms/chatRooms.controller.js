@@ -21,9 +21,9 @@ angular.module('app.controllers')
           $rootScope.currentRoom.userName1= room.NameU1;
           $rootScope.currentRoom.userId2= room.UserID2;
           $rootScope.currentRoom.userName2= room.NameU2;
+          console.log(response.data.Room.MessagesRoom);
           $rootScope.currentRoom.messages= response.data.Room.MessagesRoom;
 
-          console.log($rootScope.currentRoom);
           $state.go('app.chat');
           q.resolve(response);
         }, function errorCallback(response) {

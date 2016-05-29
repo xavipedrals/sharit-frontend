@@ -51,10 +51,9 @@ angular.module('app.controllers')
       $scope.goToDetail = function (item) {
         // console.log($index);
         $rootScope.actualProduct = item;
-        //TODO: remove hardcoded itemId and user
-        //Vaca lletera
         $rootScope.actualProduct.id = item.Idd;
-        $rootScope.actualProduct.lenderUserId = item.IDuser //test@test.com
+        $rootScope.actualProduct.lenderUserId = item.IDuser;
+        console.log(item);
         $state.go('app.productDetail');
       }
 
