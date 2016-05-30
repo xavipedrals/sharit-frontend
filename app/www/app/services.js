@@ -349,13 +349,12 @@ angular.module('app.services', [])
       var q = $q.defer();
 
       // Get data image and prepare to send it
-      $cordovaFile.readAsText(cordova.file.dataDirectory, images[0]).then(function(data) {
+      $cordovaFile.readAsDataURL(cordova.file.dataDirectory, images[0]).then(function(image) {
+        debugger;
         var data = {
           itemname: title,
           description: description,
-          image1: btoa(encodeURIComponent(data).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-            return String.fromCharCode('0x' + p1);
-          }))  // At the moment, only one image is allowed
+          image1: image // At the moment, only one image is allowed
         };
 
         $http({

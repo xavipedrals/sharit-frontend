@@ -4,7 +4,7 @@
             <img ng-src={{favoriteImgUrl}} ng-click="toggleFavorite()" width="10%" height="auto">
         </div>
         <div style="text-align:;">
-            <img ng-src={{actualProduct.imgUrl}} width="100%" height="auto">
+            <img ng-src="data:image/png;base64,{{actualProduct.imgUrl}}"" width="100%" height="auto">
         </div>
         <form class="list"></form>
         <div>
