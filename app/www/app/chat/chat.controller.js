@@ -21,20 +21,12 @@ angular.module('app.controllers')
 
       self.currentUser = $rootScope.currentUser;
       self.messages = [];
-
-      console.log('aqui!');
-      console.log(JSON.stringify($rootScope.currentRoom.messages));
-
       if ($rootScope.currentRoom.messages)
         for (var i = 0; i < $rootScope.currentRoom.messages.length; ++i) {
           var message = new Object();
-
           message.userId = $sanitize($rootScope.currentRoom.messages[i].UserId);
           message.text = $sanitize($rootScope.currentRoom.messages[i].Text);
           message.date = $sanitize($rootScope.currentRoom.messages[i].Date);
-
-          console.log(message.userId == self.currentUser.id);
-
           self.messages.push(message);
         }
       $ionicScrollDelegate.scrollBottom();
@@ -51,41 +43,42 @@ angular.module('app.controllers')
       data.roomId = $rootScope.currentRoom.id;
 
       socket.on('connection', function () {
+        console.log('connection');
         socket.emit('setRoom', JSON.stringify(data));
         $ionicScrollDelegate.scrollBottom();
       });
 
       socket.on('newMessage', function (data) {
+        console.log('newMessage');
         data = JSON.parse(data);
         if (data.message && data.userId) {
           if (data.userId == $rootScope.currentRoom.userId1) {
             console.log('newMessage1');
             var message = new Object();
-            message.userId = data.userId.UserID;
-            message.text = data.message;
-            message.date = data.date;
+            message.userId = $sanitize(data.userId);
+            message.text = $sanitize(data.message);
+            message.date = $sanitize(data.date);
             self.messages.push(message);
           }
           else if (data.userId == $rootScope.currentRoom.userId2) {
             var message = new Object();
-            message.userId = data.userId.UserID;
-            message.text = data.message;
-            message.date = data.date;
+            message.userId = $sanitize(data.userId);
+            message.text = $sanitize(data.message);
+            message.date = $sanitize(data.date);
             self.messages.push(message);
           }
           $ionicScrollDelegate.scrollBottom();
         }
       });
 
-      console.log(JSON.stringify(data));
-      //socket.emit('setRoom', JSON.stringify(data));
-
       //function called when user hits the send button
       self.sendMessage = function () {
         if (self.message) {
         data.message = self.message;
         socket.emit('newMessage', JSON.stringify(data));
-        self.message = ""}
+        self.message = "";
+        data.message = "";
+        }
       };
 
       //function called on Input Change
