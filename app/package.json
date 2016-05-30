@@ -21,7 +21,6 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "cordova-plugin-camera",
-    "cordova-plugin-crosswalk-webview",
     "cordova-plugin-file",
     "ionic-plugin-keyboard"
   ],

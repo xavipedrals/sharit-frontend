@@ -4,10 +4,14 @@
       <div ng-click="changetodashboard()" class="anuncis">Anuncios</div>
       <div class="peticions button_active">Peticiones</div>
     </div>
-    <a id="taulellDePeticions-button33" class="button button-royal button-block" ng-click="requestProduct()">{{ 'New_Request' | translate }}</a>
-    <div ng-repeat="item in items track by $index">
+    <a id="taulellDePeticions-button33" class="button button-royal button-block" ng-click="requestProduct()">{{
+      'New_Request' | translate }}</a>
+    <input type="text" ng-model="selected" uib-typeahead="item for item in itemNames | filter:$viewValue | limitTo:8"
+           placeholder="Cerca el que necessitis">
+
+    <div ng-repeat="item in items | filter:selected">
       <div class="item item-body">
-        <b>{{ item.IDuser }}</b> {{ 'Needs' | translate }}:
+        <b>{{ item.UserName }} {{ item.UserSurname }}</b> {{ 'Needs' | translate }}:
         <div class="item_inside">
           <div class="item_title">
             {{ item.Name }}

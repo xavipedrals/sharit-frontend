@@ -9,6 +9,18 @@ angular.module('app.controllers')
       $translate.refresh();
       $scope.$state = $state;
 
+      var _selected;
+
+      $scope.selected = "";
+
+      $scope.ngModelOptionsSelected = function (value) {
+        if (arguments.length) {
+          _selected = value;
+        } else {
+          return _selected;
+        }
+      };
+
       $scope.changetodashboard = function() {
         $ionicHistory.nextViewOptions({ disableBack: true});
         $state.go('app.dashboard');
@@ -19,7 +31,7 @@ angular.module('app.controllers')
       // });
 
       PeticionFactory.getPeticiones().then(function (requests) {
-        //console.log(anuncios);
+        $scope.itemNames = [];
         for (i = 0; i < requests.length; i++) {
           if(typeof requests[i].Image1 === 'undefined' || requests[i].Image1 === null || requests[i].Image1 === ''){
             requests[i].Image1 = 'assets/img/lupa.png';
@@ -27,8 +39,9 @@ angular.module('app.controllers')
           if(typeof requests[i].Name === 'undefined' || requests[i].Name === null || requests[i].Name === ''){
             requests[i].Name = 'Lupa mágica';
           }
+          $scope.itemNames.push(requests[i].Name);
         }
-        //console.log(requests);
+        console.log(requests);
         $scope.items = requests;
       });
 

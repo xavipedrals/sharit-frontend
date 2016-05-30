@@ -9,13 +9,24 @@ angular.module('app.controllers')
       $translatePartialLoader.addPart('dashboard');
       $translate.refresh();
 
-      $scope.changetorequests = function() {
-        $ionicHistory.nextViewOptions({ disableBack: true});
+      $scope.changetorequests = function () {
+        $ionicHistory.nextViewOptions({disableBack: true});
         $state.go('app.requestsDashboard');
       };
 
       $scope.$state = $state;
       //$scope.items = StubsFactory;
+      var _selected;
+
+      $scope.selected = "";
+
+      $scope.ngModelOptionsSelected = function (value) {
+        if (arguments.length) {
+          _selected = value;
+        } else {
+          return _selected;
+        }
+      };
 
       //get user data
       var q = $q.defer();
