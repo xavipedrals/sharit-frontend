@@ -1,27 +1,27 @@
-angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'StubsFactory', 'NgMap', '$q', '$http', 'myConfig',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap, $q, $http, myConfig) {
-      $translatePartialLoader.addPart('productDetail');
-      $translate.refresh();
+angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', '$stateParams', 'StubsFactory', 'NgMap', '$q', '$http', 'myConfig', 'ProductService',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, $stateParams, StubsFactory, NgMap, $q, $http, myConfig, ProductService) {
+      	// TODO: Remove this i18n methods from controller
+      	$translatePartialLoader.addPart('productDetail');
+      	$translate.refresh();
 
-      debugger;
-      $scope.$state = $state;
-      $scope.items = StubsFactory;
-      $scope.actualProduct = $rootScope.actualProduct;
-      $scope.favoriteImgUrl = "assets/img/dcCCPkrbQVmgHbe1RAOC_favorite.png";
-      $scope.canAskForProduct = $rootScope.actualProduct.lenderUserId != $rootScope.currentUser.id;
-      console.log($rootScope.actualProduct.lenderUserId + " " + $rootScope.currentUser.id);
-      console.log($scope.canAskForProduct);
+      	// Get the accessed product
+      	ProductService.get($stateParams.id)
+      		.then(function(response) {
+      			$scope.product = response.data;
+		      	$scope.canAskForProduct = $scope.product.IDuser != $rootScope.currentUser.id;
+		      	$scope.$apply();
+      		}, function(error) {
+      			// TODO: Do something when failing!
+      		});
 
+      $scope.favoriteImgUrl = "assets/img/not_fav.png";
       $scope.toggleFavorite = function () {
-        if($scope.favoriteImgUrl == "assets/img/dcCCPkrbQVmgHbe1RAOC_favorite.png"){
-          $scope.favoriteImgUrl = "assets/img/ci9k3i82QD66XbEI4bZ6_favorite-2.png"
+        if($scope.favoriteImgUrl == "assets/img/not_fav.png"){
+          $scope.favoriteImgUrl = "assets/img/fav.png"
         } else {
-          $scope.favoriteImgUrl = "assets/img/dcCCPkrbQVmgHbe1RAOC_favorite.png";
+          $scope.favoriteImgUrl = "assets/img/not_fav.png";
         }
       };
-      // $scope.goToUserProfile = function () {
-      //   $state.go('userProfile');
-      // }
 
       $scope.showValoracions = function () {
         $state.go('app.valoracions');
@@ -33,17 +33,17 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
         new google.maps.Marker({position: {lat: 41.403841, lng: 2.174340}, map: map});
       });
 
-
-
       $scope.startChat = function () {
         //get user data
         var q = $q.defer();
         $http({
-          method: 'POST',
-          url: myConfig.url + ':' + myConfig.port + '/room/create',
-          data: {'UserID1': $rootScope.currentUser.id,
-            'UserID2': $rootScope.actualProduct.lenderUserId,
-            'ItemID' : $rootScope.actualProduct.id}
+          	method: 'POST',
+          	url: myConfig.url + ':' + myConfig.port + '/room/create',
+         	data: {
+	          	'UserID1': $rootScope.currentUser.id,
+	            'UserID2': $scope.product.IDuser,
+	            'ItemID' : $scope.product.id 
+        	}
         }).then(function successCallback(response) {
           console.log(JSON.stringify(response.data));
           $rootScope.currentRoom = new Object();

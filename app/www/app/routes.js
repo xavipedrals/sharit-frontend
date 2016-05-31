@@ -46,7 +46,7 @@ angular.module('app.routes', [])
         }
       })
       .state('app.productDetail', {
-        url: '/product-detail',
+        url: '/product-detail/:id',
         views: {
           'menuContent': {
             templateUrl: 'app/productDetail/productDetail.html',

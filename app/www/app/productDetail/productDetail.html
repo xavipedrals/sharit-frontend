@@ -1,10 +1,10 @@
-<ion-view title={{actualProduct.name}}>
+<ion-view title="{{ product.name }}">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
         <div style="text-align:right;">
-            <img ng-src={{favoriteImgUrl}} ng-click="toggleFavorite()" width="10%" height="auto">
+            <img ng-src="{{ favoriteImgUrl }}" ng-click="toggleFavorite()" width="10%" height="auto">
         </div>
         <div style="text-align:;">
-            <img ng-src="data:image/png;base64,{{actualProduct.imgUrl}}"" width="100%" height="auto">
+            <img ng-src="{{ product.Image1 }}" width="100%" height="auto">
         </div>
         <form class="list"></form>
         <div>
@@ -12,9 +12,9 @@
             <p></p>
         </div>
         <div>
-            <p>{{actualProduct.description}}</p>
+            <p>{{ product.description }}</p>
         </div>
-        <a id="martellDeFusta-button7" ng-show="canAskForProduct" class="button button-calm button-block " ng-click="startChat()">Ho necessito! </a>
+        <a id="martellDeFusta-button7" ng-if="canAskForProduct" class="button button-calm button-block " ng-click="startChat()">Ho necessito! </a>
         <div>
             <p style="text-align:center; color: #777; font-size: 14px;">
                 <b>3</b>&nbsp;sharits
@@ -23,7 +23,7 @@
         <div>
             <p style="text-align:center; color: #777; font-size: 14px;">
                 Últim sharit:
-                <b>{{actualProduct.lastSharit}}</b>
+                <b>{{ product.LastSharit }}</b>
             </p>
         </div>
         <a ui-sref="menu.valoracions" id="martellDeFusta-button3" class="button button-balanced button-small button-block" ng-click="showValoracions()">Valoracions (6)</a>
@@ -33,7 +33,7 @@
             </p>
         </div> -->
         <ng-map></ng-map>
-        <a ui-sref="userProfile" id="martellDeFusta-button5" class="button button-light  button-block">{{actualProduct.ownerName}}</a>
+        <a ui-sref="userProfile" id="martellDeFusta-button5" class="button button-light  button-block">{{ product.ownerName }}</a>
         <div>
             <p style="text-align:center;">⭐⭐⭐⭐⭐</p>
             <p></p>
