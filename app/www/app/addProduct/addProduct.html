@@ -1,4 +1,4 @@
-<ion-view class="add-product" title="{{ 'Add_Product_Title' | translate }}">
+<ion-view class="add-product" title="{{ 'Add_Product_Title' | translate }}" cache-view="false">
   </ion-nav-view>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
 
@@ -16,7 +16,7 @@
       <button id="afegirProducte-button16" class="button button-positive  button-block" ng-click="addMedia()">{{ 'Add_Image' | translate }}</button>
       <button id="afegirProducte-button19" class="button button-balanced  button-block" ng-click="submitProduct()">{{ 'Send' | translate }}</button>
       <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
-        <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" style="height:200px; padding: 5px 5px 5px 5px;"/>
+        <img ng-repeat="image in images" ng-src="{{image}}" style="height:200px; padding: 5px 5px 5px 5px;"/>
       </ion-scroll>
     </ion-content>
 </ion-view>
