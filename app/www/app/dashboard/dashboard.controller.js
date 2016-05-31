@@ -35,7 +35,7 @@ angular.module('app.controllers')
         url: myConfig.url + ':' + myConfig.port + '/user',
         headers: {'token': window.localStorage.getItem('token')}
       }).then(function successCallback(response) {
-        console.log(JSON.stringify(response.data));
+        //console.log(JSON.stringify(response.data));
         $rootScope.currentUser = new Object();
         $rootScope.currentUser.id = response.data.IDuser;
         $rootScope.currentUser.name = response.data.Name;
@@ -59,15 +59,6 @@ angular.module('app.controllers')
         $scope.items = anuncios;
         //console.log($scope.itemNames);
       });
-
-      $scope.goToDetail = function (item) {
-        // console.log($index);
-        $rootScope.actualProduct = item;
-        $rootScope.actualProduct.id = item.Idd;
-        $rootScope.actualProduct.lenderUserId = item.IDuser;
-        console.log(item);
-        $state.go('app.productDetail');
-      }
 
       for (var j in $scope.items) {
         var item = $scope.items[j];
