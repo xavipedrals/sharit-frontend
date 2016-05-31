@@ -2,6 +2,8 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
     function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap, $q, $http, myConfig) {
       $translatePartialLoader.addPart('productDetail');
       $translate.refresh();
+
+      debugger;
       $scope.$state = $state;
       $scope.items = StubsFactory;
       $scope.actualProduct = $rootScope.actualProduct;
