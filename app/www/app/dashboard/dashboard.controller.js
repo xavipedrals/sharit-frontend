@@ -46,17 +46,18 @@ angular.module('app.controllers')
       });
 
       AnuncioFactory.getAnuncios().then(function (anuncios) {
-        //console.log(anuncios);
+        $scope.itemNames = [];
         for (i = 0; i < anuncios.length; i++) {
-          if(typeof anuncios[i].Image1 === 'undefined' || anuncios[i].Image1 === null || anuncios[i].Image1 === ''){
+          if (typeof anuncios[i].Image1 === 'undefined' || anuncios[i].Image1 === null || anuncios[i].Image1 === '') {
             anuncios[i].Image1 = 'assets/img/box.png';
           }
-          if(typeof anuncios[i].ItemName === 'undefined' || anuncios[i].ItemName === null || anuncios[i].ItemName === ''){
+          if (typeof anuncios[i].ItemName === 'undefined' || anuncios[i].ItemName === null || anuncios[i].ItemName === '') {
             anuncios[i].ItemName = 'Caja sorpresa';
           }
+          $scope.itemNames.push(anuncios[i].ItemName);
         }
-        //console.log(anuncios);
         $scope.items = anuncios;
+        //console.log($scope.itemNames);
       });
 
       $scope.goToDetail = function (item) {
