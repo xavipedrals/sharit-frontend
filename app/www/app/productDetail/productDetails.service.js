@@ -34,54 +34,45 @@ angular.module('app.services')
 					throw "Product not available";
 				}
 				// TODO: Remove currentUser from $rootScope
-				return _.includes($rootScope.currentUser.FavUser, currentProduct.Idd);
+				return new Boolean(_.find($rootScope.currentUser.FavUser, ['IDitem', currentProduct.Idd])).valueOf();
 			};
 
-			var setFavourite = function() {
-				return new Promise(function(resolve, reject) {
-					if (_.isEmpty(currentProduct)) {
-						console.log('currentProduct is empty');
-						throw "Product not available";
-					} 
-					$http({
-						method: 'POST',
-						url: baseUrl + '/fav',
-						data: {
-							'IDitem': currentProduct.itemId,
-							'IDuser': currentProduct.userId
-						},
-						// TODO: Capture every request and add the token automatically
-						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
-					})
-					.then(function(response) {
-						resolve(response);
-					}, function(error) {
-						console.log('POST /fav failed: ' + error);
-						reject(error);
-					});
-				});
-			};
-
-			var unsetFavourite = function() {
+			// Set or unset an item as favourite to the current user.
+			// If unset param is true, then unset the item as favourite.
+			var setFavourite = function(unset) {
 				return new Promise(function(resolve, reject) {
 					if (_.isEmpty(currentProduct)) {
 						console.log('currentProduct is empty');
 						throw "Product not available";
 					}
-					$http({
-						method: 'DELETE',
+
+					var config = {
 						url: baseUrl + '/fav',
-						data: {
-							'IDitem': currentProduct.itemId,
-							'IDuser': currentProduct.userId
-						},
 						// TODO: Capture every request and add the token automatically
 						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
-					})
+					};
+
+					if (unset) {
+						config.method = 'DELETE';
+						config.params = {
+							'IDitem': currentProduct.Idd,
+							'IDuser': currentProduct.IDuser
+						};
+					} else {
+						config.method = 'POST';
+						config.data = {
+							'IDitem': currentProduct.Idd,
+							'IDuser': currentProduct.IDuser
+						};
+					}
+
+					$http(config)
 					.then(function(response) {
+						// TODO: Remove currentUser from $rootScope
+						$rootScope.currentUser.FavUser = response.FavUser;
 						resolve(response);
 					}, function(error) {
-						console.log('DELETE /fav failed: ' + error);
+						console.log((unset ? 'DELETE' : 'POST') + '/fav failed: ' + error);
 						reject(error);
 					});
 				});
@@ -90,8 +81,7 @@ angular.module('app.services')
 			return {
 				get: get,
 				isFavourite: isFavourite,
-				setFavourite: setFavourite,
-				unsetFavourite: unsetFavourite
+				setFavourite: setFavourite
 			}
 		}
 	]);

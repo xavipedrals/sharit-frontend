@@ -28,6 +28,7 @@ angular.module('app.controllers')
         }
       };
 
+      // TODO: Remove all this shit and put it in a fuckin' service!
       //get user data
       var q = $q.defer();
       $http({
@@ -40,6 +41,7 @@ angular.module('app.controllers')
         $rootScope.currentUser.id = response.data.IDuser;
         $rootScope.currentUser.name = response.data.Name;
         $rootScope.currentUser.surname = response.data.Surname;
+        $rootScope.currentUser.FavUser = response.data.FavUser;
         q.resolve(response);
       }, function errorCallback(response) {
         q.reject();

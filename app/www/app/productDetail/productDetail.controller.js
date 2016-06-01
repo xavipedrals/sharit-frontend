@@ -6,6 +6,9 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
 
       	$scope.productImage = '';
       	$scope.canAskForProduct = '';
+      	var favoriteImgs = ['assets/img/not_fav.png', 'assets/img/fav.png'];
+      	var favoriteImgsIndex = 0;
+      	$scope.favoriteImg = favoriteImgs[favoriteImgsIndex];
 
       	// Get the accessed product
       	ProductService.get($stateParams.itemId, $stateParams.ownerId)
@@ -13,19 +16,34 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       			$scope.product = response;
       			$scope.productImage = $scope.product.Image1;
 		      	$scope.canAskForProduct = $scope.product.IDuser != $rootScope.currentUser.id;
-		      	//$scope.$apply();
+		      	if (ProductService.isFavourite()) {
+		      		favoriteImgsIndex = 1;
+		      		$scope.favoriteImg = favoriteImgs[favoriteImgsIndex];
+		      	}
+		      	$scope.$apply();
       		}, function(error) {
       			// TODO: Do something when failing!
       		});
 
-      $scope.favoriteImgUrl = "assets/img/not_fav.png";
-      $scope.toggleFavorite = function () {
-        if($scope.favoriteImgUrl == "assets/img/not_fav.png"){
-          $scope.favoriteImgUrl = "assets/img/fav.png"
-        } else {
-          $scope.favoriteImgUrl = "assets/img/not_fav.png";
-        }
-      };
+      	$scope.toggleFavorite = function () {
+        	//if(!ProductService.isFavourite()){
+        		ProductService.setFavourite($scope.favoriteImgsIndex)
+        			.then(function(response) {
+		          		favoriteImgsIndex ^= 1;
+		          		$scope.favoriteImg = favoriteImgs[favoriteImgsIndex];
+		          		$scope.$apply();
+        			}, function(error) {
+        				// TODO: Do something when failing!
+        			});
+    		// } else {
+    		// 	ProductService.setFavourite(true)
+    		// 		.then(function(response) {
+		    //       		$scope.favoriteImgUrl = "assets/img/not_fav.png"
+      //   			}, function(error) {
+      //   				// TODO: Do something when failing!
+      //   			});
+      //   	}
+      	};
 
       $scope.showValoracions = function () {
         $state.go('app.valoracions');
