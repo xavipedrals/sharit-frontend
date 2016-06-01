@@ -4,12 +4,16 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       	$translatePartialLoader.addPart('productDetail');
       	$translate.refresh();
 
+      	$scope.productImage = '';
+      	$scope.canAskForProduct = '';
+
       	// Get the accessed product
-      	ProductService.get($stateParams.id)
+      	ProductService.get($stateParams.itemId, $stateParams.ownerId)
       		.then(function(response) {
-      			$scope.product = response.data;
+      			$scope.product = response;
+      			$scope.productImage = $scope.product.Image1;
 		      	$scope.canAskForProduct = $scope.product.IDuser != $rootScope.currentUser.id;
-		      	$scope.$apply();
+		      	//$scope.$apply();
       		}, function(error) {
       			// TODO: Do something when failing!
       		});

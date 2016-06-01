@@ -46,7 +46,10 @@ angular.module('app.routes', [])
         }
       })
       .state('app.productDetail', {
-        url: '/product-detail/:id',
+        url: '/product-detail/:itemId',
+        params: {
+          'ownerId': null
+        },
         views: {
           'menuContent': {
             templateUrl: 'app/productDetail/productDetail.html',

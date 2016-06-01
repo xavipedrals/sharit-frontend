@@ -1,21 +1,25 @@
 angular.module('app.services')
 	.factory('ProductService', ['$http', 'myConfig', '$rootScope',
 		function($http, myConfig, $rootScope) {
+			var _ = window._;
 			var baseUrl = myConfig.url + ':' + myConfig.port;
+			var currentProduct = {};
 
-			var get = function(id) {
+			var get = function(itemId, userId) {
 				return new Promise(function(resolve, reject) {
 					$http({
 						method: 'GET',
 						url: baseUrl + '/anuncio',
 						params: {
-							'idItem': id
+							'idItem': itemId,
+							'idUser': userId
 						},
 						// TODO: Capture every request and add the token automatically
 						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}	
 					})
 					.then(function(response) {
-						resolve(response);
+						currentProduct = response.data;
+						resolve(currentProduct);
 					}, function(error) {
 						console.log('GET /anuncio failed: ' + error);
 						reject(error);
@@ -23,16 +27,29 @@ angular.module('app.services')
 				});
 			};
 
-			var setFavourite = function(id) {
+			// Check if the current product is favourite to the current user
+			var isFavourite = function() {
+				if (_.isEmpty(currentProduct)) {
+					console.log('currentProduct is empty');
+					throw "Product not available";
+				}
+				// TODO: Remove currentUser from $rootScope
+				return _.includes($rootScope.currentUser.FavUser, currentProduct.Idd);
+			};
+
+			var setFavourite = function() {
 				return new Promise(function(resolve, reject) {
+					if (_.isEmpty(currentProduct)) {
+						console.log('currentProduct is empty');
+						throw "Product not available";
+					} 
 					$http({
 						method: 'POST',
 						url: baseUrl + '/fav',
 						data: {
-							'IDitem': id,
-							'IDuser': $rootScope.currentUser.id	// It may be the id of the owner, and not the current user ones.
-																// TODO: Set currentUser as a variable in a service.
-						}
+							'IDitem': currentProduct.itemId,
+							'IDuser': currentProduct.userId
+						},
 						// TODO: Capture every request and add the token automatically
 						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
 					})
@@ -45,16 +62,19 @@ angular.module('app.services')
 				});
 			};
 
-			var unsetFavourite = function(id) {
+			var unsetFavourite = function() {
 				return new Promise(function(resolve, reject) {
+					if (_.isEmpty(currentProduct)) {
+						console.log('currentProduct is empty');
+						throw "Product not available";
+					}
 					$http({
 						method: 'DELETE',
 						url: baseUrl + '/fav',
 						data: {
-							'IDitem': id,
-							'IDuser': $rootScope.currentUser.id	// It may be the id of the owner, and not the current user ones.
-																// TODO: Set currentUser as a variable in a service.
-						}
+							'IDitem': currentProduct.itemId,
+							'IDuser': currentProduct.userId
+						},
 						// TODO: Capture every request and add the token automatically
 						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
 					})
@@ -65,10 +85,11 @@ angular.module('app.services')
 						reject(error);
 					});
 				});
-			}
+			};
 
 			return {
 				get: get,
+				isFavourite: isFavourite,
 				setFavourite: setFavourite,
 				unsetFavourite: unsetFavourite
 			}
