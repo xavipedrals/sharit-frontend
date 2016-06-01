@@ -7,7 +7,7 @@ angular.module('app.controllers')
 						$ionicHistory.goBack();
 					}, function(error) {
 						// TODO: Do something when failing!
-					})
-			}
+					});
+			};
 		}
 	]);

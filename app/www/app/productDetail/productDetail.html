@@ -3,8 +3,18 @@
         <div style="text-align:right;">
             <img ng-src="{{ favoriteImg }}" ng-click="toggleFavorite()" width="10%" height="auto">
         </div>
-        <div style="text-align:;">
-            <img ng-show="productImage" ng-src="{{ productImage }}" width="100%" height="auto">
+        <div ng-if="productImage" style="text-align:;">
+            <ion-slide-box>
+                <ion-slide>
+                    <img ng-src="{{ productImage }}" width="100%" height="auto">
+                </ion-slide>
+                <ion-slide ng-if="product.Image2">
+                    <img ng-src="{{ product.Image2 }}" width="100%" height="auto">
+                </ion-slide>
+                <ion-slide ng-if="product.Image3">
+                    <img ng-src="{{ product.Image3 }}" width="100%" height="auto">
+                </ion-slide>
+            </ion-slide-box>
         </div>
         <form class="list"></form>
         <div>
