@@ -45,28 +45,16 @@ angular.module('app.services')
 						console.log('currentProduct is empty');
 						throw "Product not available";
 					}
-
-					var config = {
+					$http({
+						method: (unset ? 'DELETE' : 'POST'),
 						url: baseUrl + '/fav',
+						data: {
+							'IDitem': currentProduct.Idd,
+							'IDuser': currentProduct.IDuser
+						},
 						// TODO: Capture every request and add the token automatically
 						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
-					};
-
-					if (unset) {
-						config.method = 'DELETE';
-						config.params = {
-							'IDitem': currentProduct.Idd,
-							'IDuser': currentProduct.IDuser
-						};
-					} else {
-						config.method = 'POST';
-						config.data = {
-							'IDitem': currentProduct.Idd,
-							'IDuser': currentProduct.IDuser
-						};
-					}
-
-					$http(config)
+					})
 					.then(function(response) {
 						// TODO: Remove currentUser from $rootScope
 						$rootScope.currentUser.FavUser = response.FavUser;
