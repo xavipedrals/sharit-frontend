@@ -131,7 +131,21 @@ angular.module('app.routes', [])
             controller: 'AddProductCtrl'
           }
         }
-      });
+      })
+    .state('app.complaints', {
+      url: '/complaints',
+      cache: false,
+      params: {
+        'itemId': null,
+        'ownerId': null
+      },
+      views: {
+        'menuContent': {
+          templateUrl: 'app/complaints/complaints.html',
+          controller: 'ComplaintsCtrl'
+        }
+      }
+    });
     $urlRouterProvider.otherwise('/login');
   }
 ])
