@@ -16,26 +16,30 @@ angular.module('app.controllers')
       $translate.refresh();
 
       $scope.product = {}; // TODO: Cache the product values
-      $scope.images = FileService.images();
-      $scope.$state = $state; // TODO: Do we need this?
+      $scope.images = FileService.images(false);
 
       $scope.addMedia = function() {
-        $scope.hideSheet = $ionicActionSheet.show({
-          buttons: [
-            { text: 'Take photo' },
-            { text: 'Photo from library' }
-          ],
-          titleText: 'Add images',
-          cancelText: 'Cancel',
-          buttonClicked: function(index) {
-            $scope.addImage(index);
-          }
-        });
+        if ($scope.images.length < 3) {
+          $scope.hideSheet = $ionicActionSheet.show({
+            buttons: [
+              { text: 'Take photo' },
+              { text: 'Photo from library' }
+            ],
+            titleText: 'Add images',
+            cancelText: 'Cancel',
+            buttonClicked: function(index) {
+              $scope.addImage(index);
+            }
+          });
+        } else {
+          // TODO: Show toast to inform that the user has reached the limit.
+        }
+        
       };
 
       $scope.addImage = function(type) {
         $scope.hideSheet();
-        ImageService.handleMediaDialog(type).then(function(data) {
+        ImageService.handleMediaDialog(type, false).then(function(data) {
           //$scope.images.push(data);
         });
       };

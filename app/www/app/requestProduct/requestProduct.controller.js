@@ -8,80 +8,51 @@ angular.module('app.controllers')
     '$ionicPlatform', '$ionicActionSheet',
     'ImageService', 'FileService',
     'PeticionFactory',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicActionSheet, ImageService, FileService, PeticionFactory) {
+    '$ionicHistory',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicActionSheet, ImageService, FileService, PeticionFactory, $ionicHistory) {
       $translatePartialLoader.addPart('request');
       $translate.refresh();
 
-      $ionicPlatform.ready(function () {
-        $scope.images = FileService.images();
-        //$scope.$apply();
-      });
-
-      $scope.urlForImage = function (imageName) {
-        var trueOrigin = cordova.file.dataDirectory + imageName;
-        return trueOrigin;
-      };
+      $scope.request = {}; // TODO: Cache the request values
+      $scope.images = FileService.images(true);
 
       $scope.addMedia = function () {
-        $scope.hideSheet = $ionicActionSheet.show({
-          buttons: [
-            {text: 'Take photo'},
-            {text: 'Photo from library'}
-          ],
-          titleText: 'Add images',
-          cancelText: 'Cancel',
-          buttonClicked: function (index) {
-            $scope.addImage(index);
-          }
-        });
+        if ($scope.images.length < 1) {
+          $scope.hideSheet = $ionicActionSheet.show({
+            buttons: [
+              {text: 'Take photo'},
+              {text: 'Photo from library'}
+            ],
+            titleText: 'Add images',
+            cancelText: 'Cancel',
+            buttonClicked: function (index) {
+              $scope.addImage(index);
+            }
+          });
+        } else {
+          // TODO: Show toast to inform that the user has reached the limit.
+        }
+        
       };
 
       $scope.addImage = function (type) {
         $scope.hideSheet();
-        ImageService.handleMediaDialog(type).then(function () {
+        ImageService.handleMediaDialog(type, true).then(function () {
           //$scope.$apply();
         });
       };
 
 
-      $scope.submitProduct = function (product) {
-        this.submittedProduct = product;
-        product.requesterName = 'testUser';
-        console.log(this.submittedProduct);
+      $scope.submitRequest = function () {
+        // this.submittedProduct = product;
+        // product.requesterName = 'testUser';
+        // console.log(this.submittedProduct);
         // TODO: Enviar peticio al servidor
-        PeticionFactory.createPeticion(product.title, product.description).then(function (response) {
+        PeticionFactory.createPeticion($scope.request.title, $scope.request.description, $scope.images[0]).then(function (response) {
           console.log("Funciona");
           //console.log(response);
         });
         
-        /*
-         Remove this comment when server api is ready
-
-         var request = require('request');
-
-         // Set the headers
-         var headers = {
-         'User-Agent':       'Super Agent/0.0.1',
-         'Content-Type':     'application/x-www-form-urlencoded'
-         }
-
-         // Configure the request
-         var options = {
-         url: 'http://whatever.pizza',
-         method: 'POST',
-         headers: headers,
-         form: {'requesterName': 'xxx', 'productName': 'yyy', 'description' : 'zzz'}
-         }
-
-         // Start the request
-         request(options, function (error, response, body) {
-         if (!error && response.statusCode == 200) {
-         // Print out the response body
-         console.log(body)
-         }
-         })
-
-         */
         var requests = localStorage.getItem('requests');
         console.log(requests);
         if (requests === undefined || requests == null) requests = [{
@@ -101,8 +72,8 @@ angular.module('app.controllers')
         }
         requests = JSON.stringify(requests);
         localStorage.setItem('requests', requests);
-        $state.go('app.requestsDashboard', {}, {reload: true});
-
+        //$state.go('app.requestsDashboard', {}, {reload: true});
+        $ionicHistory.goBack();
 
         /*var requests = localStorage.getItem('requests');
          if (requests === undefined || requests == null) requests = product;

@@ -66,10 +66,36 @@ angular.module('app.services')
 				});
 			};
 
+			// var owner = function() {
+			// 	return new Promise(function(resolve, reject) {
+			// 		if (_.isEmpty(currentProduct)) {
+			// 			console.log('currentProduct is empty');
+			// 			throw "Product not available";
+			// 		}
+			// 		$http({
+			// 			method: 'GET',
+			// 			url: baseUrl + '/user',
+			// 			params: {
+			// 				'id': currentProduct.IDuser
+			// 			},
+			// 			// TODO: Capture every request and add the token automatically
+			// 			headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+			// 		})
+			// 		.then(function(response) {
+			// 			debugger;
+			// 			resolve(response);
+			// 		}, function(error) {
+			// 			console.log('GET /user failed: ' + error);
+			// 			reject(error);
+			// 		})
+			// 	})
+			// }
+
 			return {
 				get: get,
 				isFavourite: isFavourite,
-				setFavourite: setFavourite
+				setFavourite: setFavourite,
+				//owner: owner
 			}
 		}
 	]);

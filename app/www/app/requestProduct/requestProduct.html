@@ -3,18 +3,18 @@
     <div class="list">
       <label class="item item-input item-floating-label">
         <b><span class="input-label">{{ 'Title' | translate }}</span></b>
-        <input type="text" placeholder="{{ 'Title' | translate }}" ng-model="product.title">
+        <input type="text" placeholder="{{ 'Title' | translate }}" ng-model="request.title">
       </label>
       <div class="item item-input item-floating-label">
         <b><span class="input-label">{{ 'Description' | translate }}</span></b>
-        <textarea type="text" placeholder="{{ 'Description' | translate }}" ng-model="product.description"></textarea>
+        <textarea type="text" placeholder="{{ 'Description' | translate }}" ng-model="request.description"></textarea>
       </div>
     </div>
 
     <button id="demanarProducte-button16" class="button button-positive  button-block" ng-click="addMedia()">{{ 'Add Image' | translate }}</button>
-    <button id="demanarProducte-button19" class="button button-balanced  button-block" ng-click="submitProduct(product)">{{ 'Send Request' | translate }}</button>
+    <button id="demanarProducte-button19" class="button button-balanced  button-block" ng-click="submitRequest()">{{ 'Send Request' | translate }}</button>
     <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
-      <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" style="height:200px; padding: 5px 5px 5px 5px;"/>
+      <img ng-repeat="image in images" ng-src="{{ image }}" style="height:200px; padding: 5px 5px 5px 5px;"/>
     </ion-scroll>
   </ion-content>
 </ion-view>

@@ -56,7 +56,7 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
          	data: {
 	          	'UserID1': $rootScope.currentUser.id,
 	            'UserID2': $scope.product.IDuser,
-	            'ItemID' : $scope.product.id 
+	            'ItemID' : $scope.product.Idd
         	}
         }).then(function successCallback(response) {
           console.log(JSON.stringify(response.data));
