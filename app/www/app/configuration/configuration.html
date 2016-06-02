@@ -9,7 +9,7 @@
         		<div class="title">
         			Foto
         		</div>
-        		<img src="assets/img/boy.png">
+        		<img ng-src="{{ settings.image }}">
         	</div>
 
 					<!-- NAME AND SURNAME -->
@@ -17,11 +17,11 @@
 						<div class="title">
 							Nom
 						</div>
-						<input type="text" name="">
+						<input type="text" ng-model="settings.name">
 						<div class="title" id="surname">
 							Cognom
 						</div>
-						<input type="text" name="">
+						<input type="text" ng-model="settings.surname">
 					</div>
 
         </div>
@@ -36,10 +36,11 @@
      			<div class="title">
 						Idioma
 					</div>
-     			<label class = "item item-input item-select">
-						<select>
-						  <option selected>Català</option>
-						  <option>Español</option>
+     			<label class="item item-input item-select">
+						<select ng-model="settings.lang">
+						  <option value="ca">Català</option>
+						  <option value="es-ES">Español</option>
+						  <option value="en-US">Anglés</option>
 						</select>
 					</label>
      		</div>
@@ -49,22 +50,22 @@
 	        <div class="title">
 						Radi (metres)
 					</div>
-					<input type="text" name="">
+					<input type="text" ng-model="settings.radius">
 				</div>
 
 				<!-- UBICACIÓ -->
         <div class="wrap">
-	        <div class="title">
-						Ubicació
+	        <div id="geolocation" ng-click="setLocation()">
+						Canviar ubicació
 					</div>
-					<input type="text" name="">
+					
 				</div>
 				
 				<!-- MAPA -->
 				<ng-map class="mapa"></ng-map>
 
 				<!-- CHANGE PASSWORD -->
-        <div id="logout">
+        <div id="logout" ng-click="logout()">
 					Tancar sessió
 				</div>
 
