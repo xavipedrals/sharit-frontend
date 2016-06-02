@@ -11,7 +11,8 @@
               <span>{{room.NameItem}}</span>
             </td>
             <td width="30%" height="30px">
-              <a class="button button-royal" style="width: 100px" ng-click="goToRate(room)">{{
+              <a class="button button-royal" style="width: 100px" ng-click="goToRate(room)" ng-hide="((currentUser.id == room.UserID1) && room.Rated1) ||
+                      ((currentUser.id == room.UserID2) && room.Rated2)">{{
                 'Rate_Lending' | translate }}</a>
             </td>
           </tr>
