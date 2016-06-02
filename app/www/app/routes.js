@@ -120,6 +120,15 @@ angular.module('app.routes', [])
             }
           }
         })
+    .state('app.rateProduct', {
+        url: '/rateProduct',
+        views: {
+          'menuContent': {
+            templateUrl: 'app/rateProduct/rateProduct.html',
+            controller: 'RateProductCtrl'
+          }
+        }
+      })
       .state('app.addProduct', {
         url: '/add-product',
         views: {
