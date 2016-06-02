@@ -27,6 +27,7 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       			$scope.product = response.It;
       			$scope.productImage = $scope.product.Image1;
 		      	$scope.canAskForProduct = $scope.product.IDuser != $rootScope.currentUser.id;
+            console.log($scope.product.IDuser, $rootScope.currentUser.id, $scope.canAskForProduct );
 
             NgMap.getMap().then(function(map) {
               map.setCenter({ lat: $scope.ownerData.position.x, lng: $scope.ownerData.position.y });
@@ -63,13 +64,12 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
         var q = $q.defer();
         console.log('PRODUCTE');
         console.log(JSON.stringify($scope.actualProduct,1,1));
-        console.log('iduser pel david: ', $scope.actualProduct.IDuser);
         $http({
           method: 'POST',
           url: myConfig.url + ':' + myConfig.port + '/transaccion',
           headers: {'token': window.localStorage.getItem('token')},
-          data: {'itemID': $scope.actualProduct.Idd,
-            'iduser': $scope.actualProduct.IDuser}
+          data: {'itemID': $stateParams.itemId,
+            'iduser': $stateParams.ownerId}
         }).then(function successCallback(response) {
           console.log('UN COP CREADA LA TRANSACCO');
           console.log(JSON.stringify(response.data, 1, 1));
@@ -79,8 +79,8 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
             method: 'POST',
             url: myConfig.url + ':' + myConfig.port + '/room/create',
             data: {'UserID1': $rootScope.currentUser.id,
-              'UserID2': $rootScope.actualProduct.lenderUserId,
-              'ItemID' : $rootScope.actualProduct.id,
+              'UserID2': $stateParams.ownerId,
+              'ItemID' : $stateParams.itemId,
               'idtrans' : response.data.IDTrans /*barbaraTrans*/}
           }).then(function successCallback(response2) {
             console.log(JSON.stringify(response2.data));

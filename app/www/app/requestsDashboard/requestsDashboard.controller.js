@@ -3,11 +3,53 @@ angular.module('app.controllers')
     ['$scope', '$rootScope', '$translate',
       '$translatePartialLoader', '$state',
       'StubsFactory', '$ionicHistory',
-      'PeticionFactory',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $ionicHistory, PeticionFactory) {
+      'PeticionFactory','$q','$http', 'myConfig',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $ionicHistory, PeticionFactory, $q, $http, myConfig) {
       $translatePartialLoader.addPart('request');
       $translate.refresh();
       $scope.$state = $state;
+
+      $scope.acceptRequest = function (item) {
+        console.log(JSON.stringify(item,1,1));
+        //creo una nova transaccio
+        var q = $q.defer();
+        $http({
+          method: 'POST',
+          url: myConfig.url + ':' + myConfig.port + '/transaccion',
+          headers: {'token': window.localStorage.getItem('token')},
+          data: {'itemID': item.ID,
+            'iduser': item.To}
+        }).then(function successCallback(response) {
+          console.log('UN COP CREADA LA TRANSACCO');
+          console.log(JSON.stringify(response.data, 1, 1));
+          //creo una nova room
+          var r = $q.defer();
+          $http({
+            method: 'POST',
+            url: myConfig.url + ':' + myConfig.port + '/room/create',
+            data: {'UserID1': $rootScope.currentUser.id,
+              'UserID2': item.To,
+              'ItemID' : item.ID,
+              'idtrans' : response.data.IDTrans}
+          }).then(function successCallback(response2) {
+            console.log(JSON.stringify(response2.data));
+            $rootScope.currentRoom = new Object();
+            $rootScope.currentRoom.roomId = response2.data.RoomId;
+            $rootScope.currentRoom.userId1= response2.data.UserID1;
+            $rootScope.currentRoom.userName1= response2.data.NameU1;
+            $rootScope.currentRoom.userId2= response2.data.UserID2;
+            $rootScope.currentRoom.userName2= response2.data.NameU2;
+            $rootScope.currentRoom.messages= new Array();
+            $state.go('app.chat');
+            r.resolve(response2);
+          }, function errorCallback(response2) {
+            r.reject();
+          });
+          q.resolve(response);
+        }, function errorCallback(response) {
+          q.reject();
+        });
+      };
 
       var _selected;
 

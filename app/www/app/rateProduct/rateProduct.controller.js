@@ -12,7 +12,7 @@ angular.module('app.controllers')
           $http({
             method: 'POST',
             url: myConfig.url + ':' + myConfig.port + '/valorarUser',
-            params: {
+            data: {
               'idpet': $rootScope.currentRoom.idTrans,
               'user': $rootScope.currentRoom.userId1,
               'roomid': $rootScope.currentRoom.id,

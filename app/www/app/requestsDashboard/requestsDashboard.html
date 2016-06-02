@@ -20,7 +20,7 @@
             {{ item.Descripcio }}
           </div>
           <img ng-src="{{ item.Image }}">
-          <a class="button button-royal button-block" ng-click="acceptRequest()">{{
+          <a class="button button-royal button-block" ng-click="acceptRequest(item)">{{
             'Accept_Request' | translate }}</a>
           <!--<img ng-src="http://placehold.it/200x150" alt="Imatge del producte que es busca" class="item_image">-->
         </div>

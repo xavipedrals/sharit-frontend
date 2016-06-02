@@ -62,6 +62,15 @@ angular.module('app.controllers')
         //console.log($scope.itemNames);
       });
 
+      $scope.goToDetail = function (item) {
+        // console.log($index);
+        $rootScope.actualProduct = item;
+        $rootScope.actualProduct.id = item.Idd;
+        $rootScope.actualProduct.lenderUserId = item.IDuser;
+        console.log(item);
+        $state.go('app.productDetail');
+      }
+
       for (var j in $scope.items) {
         var item = $scope.items[j];
 
