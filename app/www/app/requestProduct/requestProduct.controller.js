@@ -44,43 +44,31 @@ angular.module('app.controllers')
 
 
       $scope.submitRequest = function () {
-        // this.submittedProduct = product;
-        // product.requesterName = 'testUser';
-        // console.log(this.submittedProduct);
-        // TODO: Enviar peticio al servidor
         PeticionFactory.createPeticion($scope.request.title, $scope.request.description, $scope.images[0]).then(function (response) {
-          console.log("Funciona");
-          //console.log(response);
+          $scope.request = {};
+          $scope.images = [];
+          //$ionicHistory.goBack();
         });
         
-        var requests = localStorage.getItem('requests');
-        console.log(requests);
-        if (requests === undefined || requests == null) requests = [{
-          'requesterName': 'testUser',
-          'productName': product.title,
-          'description': product.description
-        }];
+        // var requests = localStorage.getItem('requests');
+        // console.log(requests);
+        // if (requests === undefined || requests == null) requests = [{
+        //   'requesterName': 'testUser',
+        //   'productName': $scope.request.title,
+        //   'description': $scope.request.description
+        // }];
 
-        else {
-          requests = JSON.parse(requests);
-          console.log(requests);
-          requests.push({
-            'requesterName': 'testUser',
-            'productName': product.title,
-            'description': product.description
-          })
-        }
-        requests = JSON.stringify(requests);
-        localStorage.setItem('requests', requests);
-        //$state.go('app.requestsDashboard', {}, {reload: true});
-        $ionicHistory.goBack();
-
-        /*var requests = localStorage.getItem('requests');
-         if (requests === undefined || requests == null) requests = product;
-         else requests.push(product);
-         localStorage.setItem('requests', JSON.stringify(requests));*/
-
-
+        // else {
+        //   requests = JSON.parse(requests);
+        //   console.log(requests);
+        //   requests.push({
+        //     'requesterName': 'testUser',
+        //     'productName': $scope.request.title,
+        //     'description': $scope.request.description
+        //   })
+        // }
+        // requests = JSON.stringify(requests);
+        // localStorage.setItem('requests', requests);
       };
     }
   ]);

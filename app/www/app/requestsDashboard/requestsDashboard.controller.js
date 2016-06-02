@@ -26,45 +26,18 @@ angular.module('app.controllers')
         $state.go('app.dashboard');
       };
 
-      // $scope.$on('$ionicView.beforeEnter', function () {
-      //   $scope.items = JSON.parse(localStorage.getItem('requests'));
-      // });
-
       PeticionFactory.getPeticiones().then(function (requests) {
         $scope.itemNames = [];
         for (i = 0; i < requests.length; i++) {
-          if(typeof requests[i].Image1 === 'undefined' || requests[i].Image1 === null || requests[i].Image1 === ''){
-            requests[i].Image1 = 'assets/img/lupa.png';
+          if(typeof requests[i].Image === 'undefined' || requests[i].Image === null || requests[i].Image === ''){
+            requests[i].Image = 'assets/img/lupa.png';
           }
           if(typeof requests[i].Name === 'undefined' || requests[i].Name === null || requests[i].Name === ''){
             requests[i].Name = 'Lupa mágica';
           }
           $scope.itemNames.push(requests[i].Name);
         }
-        console.log(requests);
         $scope.items = requests;
       });
-
-      $scope.requestProduct = function () {
-        $state.go('app.requestProduct');
-      };
-      //$scope.items = JSON.parse(localStorage.getItem('requests'));
-      //console.log($scope.items);
     }
   ]);
-
-
-
-/*
- var requests;
- try {
- requests = localStorage.requests;
- }
- catch (err) {
- requests =
- "[{'requesterName': 'person1', 'productName': 'product1', 'description' : 'description1'}," +
- "{'requesterName': 'person2', 'productName': 'product2', 'description' : 'description2'}," +
- "{'requesterName': 'person2', 'productName': 'product2', 'description' : 'description2'}]";
- localStorage.requests = requests;
- }
- */

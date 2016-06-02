@@ -49,6 +49,7 @@ angular.module('app.controllers')
         HttpCalls.postAnuncio($scope.product.title, $scope.product.description, $scope.images).then(function () {
           $scope.product = {};
           $scope.images = [];
+          //$ionicHistory.goBack();
         });
       };
     }
