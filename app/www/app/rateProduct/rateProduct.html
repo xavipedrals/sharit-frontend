@@ -1,73 +1,28 @@
 <!--<ion-view title="{{ 'Menu_Settings' | translate }}">-->
-<ion-view title="Valoraaar producte">
-    <ion-content overflow-scroll="true" class="has-header configuration">
-        
-        <!-- PHOTO AND NAME -->
-        <div id="photo_and_name">
-          
-          <!-- PHOTO -->
-          <div id="photo">
-            <div class="title">
-              asdf
-            </div>
-            <img src="assets/img/boy.png">
+<ion-view title="Valorar producte">
+    <ion-content overflow-scroll="true" class="has-header rateProduct">
+        <!-- RATE -->
+
+        <div class="img_stars">
+          <img src="http://placehold.it/100x100" alt="">
+          <!-- STARS -->
+          <div class="stars">
+
+            <form>
+              <fieldset>
+                <span class="star-cb-group">
+                  <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+                  <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
+                  <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
+                  <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+                  <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+                </span>
+              </fieldset>
+            </form>
+
           </div>
-
-          <!-- NAME AND SURNAME -->
-          <div id="name">
-            <div class="title">
-              Nom
-            </div>
-            <input type="text" name="">
-            <div class="title" id="surname">
-              Cognom
-            </div>
-            <input type="text" name="">
-          </div>
-
         </div>
-
-        <!-- CHANGE PASSWORD -->
-        <div id="change_password">
-          Canviar contrasenya
-        </div>
-
-        <!-- IDIOMA -->
-        <div class="wrap" id="language">
-          <div class="title">
-            Idioma
-          </div>
-          <label class = "item item-input item-select">
-            <select>
-              <option selected>Català</option>
-              <option>Español</option>
-            </select>
-          </label>
-        </div>
-
-        <!-- RADI -->
-        <div class="wrap">
-          <div class="title">
-            Radi (metres)
-          </div>
-          <input type="text" name="">
-        </div>
-
-        <!-- UBICACIÓ -->
-        <div class="wrap">
-          <div class="title">
-            Ubicació
-          </div>
-          <input type="text" name="">
-        </div>
-        
-        <!-- MAPA -->
-        <ng-map class="mapa"></ng-map>
-
-        <!-- CHANGE PASSWORD -->
-        <div id="logout">
-          Tancar sessió
-        </div>
+        <textarea name="" placeholder="hellooooo"></textarea>
 
         <!-- SAVE -->
         <div id="save">

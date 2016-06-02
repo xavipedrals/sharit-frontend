@@ -9982,6 +9982,83 @@ a.button {
     text-align: center;
     cursor: pointer; }
 
+.rateProduct .img_stars {
+  display: flex;
+  padding: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 1em; }
+
+.rateProduct textarea {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  height: 50px;
+  margin: 1em; }
+
+.rateProduct .stars {
+  margin-left: 1em; }
+  .rateProduct .stars .star-cb-group {
+    /* remove inline-block whitespace */
+    font-size: 0;
+    /* flip the order so we can use the + and ~ combinators */
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    /* the hidden clearer */ }
+    .rateProduct .stars .star-cb-group * {
+      font-size: 3rem; }
+    .rateProduct .stars .star-cb-group > input {
+      display: none; }
+      .rateProduct .stars .star-cb-group > input + label {
+        /* only enough room for the star */
+        display: inline-block;
+        overflow: hidden;
+        text-indent: 9999px;
+        width: 1em;
+        white-space: nowrap;
+        cursor: pointer; }
+        .rateProduct .stars .star-cb-group > input + label:before {
+          display: inline-block;
+          text-indent: -9999px;
+          content: "☆";
+          color: #888; }
+      .rateProduct .stars .star-cb-group > input:checked ~ label:before,
+      .rateProduct .stars .star-cb-group > input + label:hover ~ label:before,
+      .rateProduct .stars .star-cb-group > input + label:hover:before {
+        content: "★";
+        color: #e52;
+        text-shadow: 0 0 1px #333; }
+    .rateProduct .stars .star-cb-group > .star-cb-clear + label {
+      text-indent: -9999px;
+      width: .5em;
+      margin-left: -.5em; }
+    .rateProduct .stars .star-cb-group > .star-cb-clear + label:before {
+      width: .5em; }
+    .rateProduct .stars .star-cb-group:hover > input + label:before {
+      content: "☆";
+      color: #888;
+      text-shadow: none; }
+    .rateProduct .stars .star-cb-group:hover > input + label:hover ~ label:before,
+    .rateProduct .stars .star-cb-group:hover > input + label:hover:before {
+      content: "★";
+      color: #e52;
+      text-shadow: 0 0 1px #333; }
+  .rateProduct .stars :root {
+    font-size: 2em;
+    font-family: Helvetica, arial, sans-serif; }
+  .rateProduct .stars fieldset {
+    border: 0; }
+
+.rateProduct #save {
+  left: 0;
+  right: 0;
+  padding: 15px 0;
+  margin: 0 -20px;
+  text-transform: uppercase;
+  background-color: #33cd5f;
+  color: #fff;
+  text-align: center;
+  cursor: pointer; }
+
 .user_profile .mapa {
   height: 150px; }
 
