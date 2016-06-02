@@ -9,7 +9,7 @@ angular.module('app.controllers')
 				var promise = AuthService.login($scope.input.email, $scope.input.pass);
 				promise
 					.then(function(response) {
-						$translate.use(response.data.Idioma);
+						//$translate.use(response.data.Idioma);
 						$state.go('app.dashboard');
             console.log('Auth success!');
 					})
