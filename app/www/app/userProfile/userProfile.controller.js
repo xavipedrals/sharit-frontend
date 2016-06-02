@@ -19,7 +19,7 @@
         }
         if(info.Stars == '0') info.Stars = 4;
         $scope.userInfo = info;
-        
+
         if(info.ItemsUser != null){
           for (i = 0; i < info.ItemsUser.length; i++) {
             if (typeof info.ItemsUser[i].Image1 === 'undefined' || info.ItemsUser[i].Image1 === null || info.ItemsUser[i].Image1 === '') {
