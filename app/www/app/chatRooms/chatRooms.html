@@ -1,11 +1,21 @@
 <ion-view title="{{ 'Chat_Title' | translate }}" >
   <ion-content overflow-scroll="true" padding="true" class="has-header">
-    <div ng-repeat="room in rooms track by $index" ng-click="goToChat(room)">
+    <div ng-repeat="room in rooms track by $index">
       <div class="item item-body">
-        <span ng-if="room.UserID1 != currentUser.id"> {{room.NameU1}} </span>
-        <span ng-if="room.UserID2 != currentUser.id"> {{room.NameU2}} </span>
-        <br>
-        <span>{{room.NameItem}}</span>
+        <table>
+          <tr>
+            <td width="70%" ng-click="goToChat(room)">
+              <span ng-if="room.UserID1 != currentUser.id"> {{room.NameU1}} {{room.SurnameU1}}</span>
+              <span ng-if="room.UserID2 != currentUser.id"> {{room.NameU2}} {{room.SurnameU2}}</span>
+              <br>
+              <span>{{room.NameItem}}</span>
+            </td>
+            <td width="30%" height="30px">
+              <a class="button button-royal" style="width: 100px" ng-click="goToRate(room)">{{
+                'Rate_Lending' | translate }}</a>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </ion-content>

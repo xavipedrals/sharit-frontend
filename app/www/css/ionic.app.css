@@ -9839,6 +9839,21 @@ a.button {
 .input {
   width: 100%; }
 
+.button-finish-lending {
+  width: 100%;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  margin-bottom: 1em;
+  display: flex;
+  flex: 1;
+  text-align: center;
+  padding: .7em 1em;
+  border-radius: 2px; }
+  .button-finish-lending .button_active {
+    background-color: #387ef5;
+    color: #fff; }
+
 .dashboard .dashboard_item {
   width: 46%;
   display: inline-block;

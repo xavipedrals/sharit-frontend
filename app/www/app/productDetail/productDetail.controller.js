@@ -3,7 +3,6 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       $translatePartialLoader.addPart('productDetail');
       $translate.refresh();
 
-      debugger;
       $scope.$state = $state;
       $scope.items = StubsFactory;
       $scope.actualProduct = $rootScope.actualProduct;
@@ -36,24 +35,43 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
 
 
       $scope.startChat = function () {
-        //get user data
+        //creo una nova transaccio
         var q = $q.defer();
+        console.log('PRODUCTE');
+        console.log(JSON.stringify($scope.actualProduct,1,1));
+        console.log('iduser pel david: ', $scope.actualProduct.IDuser);
         $http({
           method: 'POST',
-          url: myConfig.url + ':' + myConfig.port + '/room/create',
-          data: {'UserID1': $rootScope.currentUser.id,
-            'UserID2': $rootScope.actualProduct.lenderUserId,
-            'ItemID' : $rootScope.actualProduct.id}
+          url: myConfig.url + ':' + myConfig.port + '/transaccion',
+          headers: {'token': window.localStorage.getItem('token')},
+          data: {'itemID': $scope.actualProduct.Idd,
+            'iduser': $scope.actualProduct.IDuser}
         }).then(function successCallback(response) {
-          console.log(JSON.stringify(response.data));
-          $rootScope.currentRoom = new Object();
-          $rootScope.currentRoom.roomId = response.data.RoomId;
-          $rootScope.currentRoom.userId1= response.data.UserID1;
-          $rootScope.currentRoom.userName1= response.data.NameU1;
-          $rootScope.currentRoom.userId2= response.data.UserID2;
-          $rootScope.currentRoom.userName2= response.data.NameU2;
-          $rootScope.currentRoom.messages= new Array();
-          $state.go('app.chat');
+          console.log('UN COP CREADA LA TRANSACCO');
+          console.log(JSON.stringify(response.data, 1, 1));
+          //creo una nova room
+          var r = $q.defer();
+          $http({
+            method: 'POST',
+            url: myConfig.url + ':' + myConfig.port + '/room/create',
+            data: {'UserID1': $rootScope.currentUser.id,
+              'UserID2': $rootScope.actualProduct.lenderUserId,
+              'ItemID' : $rootScope.actualProduct.id,
+              'idtrans' : response.data.IDTrans /*barbaraTrans*/}
+          }).then(function successCallback(response2) {
+            console.log(JSON.stringify(response2.data));
+            $rootScope.currentRoom = new Object();
+            $rootScope.currentRoom.roomId = response2.data.RoomId;
+            $rootScope.currentRoom.userId1= response2.data.UserID1;
+            $rootScope.currentRoom.userName1= response2.data.NameU1;
+            $rootScope.currentRoom.userId2= response2.data.UserID2;
+            $rootScope.currentRoom.userName2= response2.data.NameU2;
+            $rootScope.currentRoom.messages= new Array();
+            $state.go('app.chat');
+            r.resolve(response2);
+          }, function errorCallback(response2) {
+            r.reject();
+          });
           q.resolve(response);
         }, function errorCallback(response) {
           q.reject();
