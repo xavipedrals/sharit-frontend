@@ -1,13 +1,14 @@
 angular.module('app.controllers')
-.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'ProfileFactory', 'AuthService', '$ionicActionSheet', 'ImageService', 'FileService', '$cordovaGeolocation',
-	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService, $ionicActionSheet, ImageService, FileService, $cordovaGeolocation) {
+.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'ProfileFactory', 'AuthService', '$ionicActionSheet', 'ImageService', 'FileService', '$cordovaGeolocation', 'ConfigurationService',
+	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService, $ionicActionSheet, ImageService, FileService, $cordovaGeolocation, ConfigurationService) {
 		$translatePartialLoader.addPart('configuration');
 		$translate.refresh();
 		
     $scope.settings = {};
+    var user = {};
 
 		ProfileFactory.getGeneralInfo().then(function (info) {
-
+        user = info;
         $scope.settings = {
           'name': info.Name,
           'surname': info.Surname,
@@ -65,8 +66,7 @@ angular.module('app.controllers')
           map.setCenter({ lat: $scope.settings.position.x, lng: $scope.settings.position.y });
           map.setZoom(10);
           new google.maps.Marker({ position: { lat: $scope.settings.position.x, lng: $scope.settings.position.y }, map: map });
-        });
-        
+        });        
       }, function (error) {
         // TODO: Show something when failing!
       })
@@ -84,7 +84,22 @@ angular.module('app.controllers')
     };
 
     $scope.saveChanges = function() {
-      // TODO: Update the user.
+      // Prepare the data to submit
+      user.Name = $scope.settings.name;
+      user.Surname = $scope.settings.surname;
+      user.Idioma = $scope.settings.lang;
+      user.Image = $scope.settings.image;
+      user.Radi = $scope.settings.radius;
+      user.X = $scope.settings.position.x;
+      user.Y = $scope.settings.position.y;
+
+      ConfigurationService.update(user)
+        .then(function(response) {
+          $translate.use(response.Idioma);
+          $translate.refresh();
+        }, function(error) {
+          // TODO: Show something when failing!
+        })
     };
   }
 ]);
