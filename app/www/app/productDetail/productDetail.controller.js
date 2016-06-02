@@ -74,7 +74,7 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
 
       $scope.showValoracions = function () {
         $state.go('app.valoracions');
-      }
+      };
 
       $scope.startChat = function () {
         //get user data

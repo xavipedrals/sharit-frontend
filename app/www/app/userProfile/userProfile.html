@@ -45,7 +45,7 @@
             <uib-tab index="1">
               <uib-tab-heading>
                 <div class="up_button_num">
-                  {{ userPeticiones.length }}
+                  {{ userPeticiones.length ? userPeticiones.length : 0 }}
                 </div>
                 <div class="up_button_text">
                   Peticions
@@ -70,7 +70,7 @@
             <uib-tab index="2">
               <uib-tab-heading>
                 <div class="up_button_num">
-                  {{ userValoraciones.length }}
+                  {{ userInfo.Valoracions.length ? userInfo.Valoracions.length : 0 }}
                 </div>
                 <div class="up_button_text">
                   Valoracions
@@ -82,13 +82,25 @@
             <uib-tab index="3">
               <uib-tab-heading>
                 <div class="up_button_num">
-                  {{ userFavoritos.length }}
+                  {{ userFavoritos.length ? userFavoritos.length : 0 }}
                 </div>
                 <div class="up_button_text">
-                  M'agrades
+                  Favoritos
                 </div>
               </uib-tab-heading>
-              M'agrades
+              <div class="list card dashboard_item" ng-repeat="item in userFavoritos" ng-click="goToDetail(item)">
+                <div class="item item-divider">{{ item.ItemName }}</div>
+                <div class="item item-body">
+                  <a style="display:inline-block; float: left;" ui-sref="app.productDetail">
+                    <div style="text-align: center">
+                      <img ng-src="{{ item.Image1 }}" width="100%" height="110px">
+                    </div>
+                  </a>
+                  <div>
+                    <p style="text-align:center;">{{ item.htmlestrellitas }}</p>
+                  </div>
+                </div>
+              </div>
             </uib-tab>
 
 

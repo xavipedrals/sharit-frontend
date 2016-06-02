@@ -5,7 +5,7 @@
     function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap, ProfileFactory) {
  		$translatePartialLoader.addPart('profile');
  		$translate.refresh();
-    
+
       $scope.otherProfile = false;
 
       ProfileFactory.getGeneralInfo().then(function (info) {
@@ -20,12 +20,14 @@
         if(info.Stars == '0') info.Stars = 4;
         $scope.userInfo = info;
 
-        for (i = 0; i < info.ItemsUser.length; i++) {
-          if (typeof info.ItemsUser[i].Image1 === 'undefined' || info.ItemsUser[i].Image1 === null || info.ItemsUser[i].Image1 === '') {
-            info.ItemsUser[i].Image1 = 'assets/img/box.png';
-          }
-          if (typeof info.ItemsUser[i].ItemName === 'undefined' || info.ItemsUser[i].ItemName === null || info.ItemsUser[i].ItemName === '') {
-            info.ItemsUser[i].ItemName = 'Caja sorpresa';
+        if(info.ItemsUser != null){
+          for (i = 0; i < info.ItemsUser.length; i++) {
+            if (typeof info.ItemsUser[i].Image1 === 'undefined' || info.ItemsUser[i].Image1 === null || info.ItemsUser[i].Image1 === '') {
+              info.ItemsUser[i].Image1 = 'assets/img/box.png';
+            }
+            if (typeof info.ItemsUser[i].ItemName === 'undefined' || info.ItemsUser[i].ItemName === null || info.ItemsUser[i].ItemName === '') {
+              info.ItemsUser[i].ItemName = 'Caja sorpresa';
+            }
           }
         }
         $scope.anunciosUser = info.ItemsUser;
@@ -47,7 +49,7 @@
           }
           $scope.userPeticiones = peticiones;
         });
-        
+
         ProfileFactory.getUserValoraciones().then(function (valoraciones) {
           console.log("valoraciones");
           console.log(valoraciones);
@@ -57,6 +59,14 @@
         ProfileFactory.getUserFavoritos().then(function (favoritos) {
           console.log("favoritos");
           console.log(favoritos);
+          for (i = 0; i < favoritos.length; i++) {
+            if (typeof favoritos[i].Image1 === 'undefined' || favoritos[i].Image1 === null || favoritos[i].Image1 === '') {
+              favoritos[i].Image1 = 'assets/img/box.png';
+            }
+            if (typeof favoritos[i].ItemName === 'undefined' || favoritos[i].ItemName === null || favoritos[i].ItemName === '') {
+              favoritos[i].ItemName = 'Caja sorpresa';
+            }
+          }
           $scope.userFavoritos = favoritos;
         });
 
@@ -76,9 +86,9 @@
         console.log("updatePeticiones");
       }
 
-      $scope.updateValoraciones = function () {
-        console.log("updateValoraciones");
-      }
+      // $scope.updateValoraciones = function () {
+      //   console.log("updateValoraciones");
+      // }
 
       $scope.updateFavoritos = function () {
         console.log("updateFavoritos");

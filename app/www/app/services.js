@@ -325,8 +325,8 @@ angular.module('app.services', [])
         url: baseUrl + '/favs',
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
       }).then(function successCallback(response) {
-        //console.log("Exito");
-        //console.log(response);
+        console.log("Exito");
+        console.log(response);
         q.resolve(response.data);
       }, function errorCallback(response) {
         console.log("Puta bida");
