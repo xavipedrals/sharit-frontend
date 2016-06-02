@@ -1,38 +1,62 @@
-angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'StubsFactory', 'NgMap', '$q', '$http', 'myConfig',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap, $q, $http, myConfig) {
-      $translatePartialLoader.addPart('productDetail');
-      $translate.refresh();
+angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', '$stateParams', 'StubsFactory', 'NgMap', '$q', '$http', 'myConfig', 'ProductService',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, $stateParams, StubsFactory, NgMap, $q, $http, myConfig, ProductService) {
+      	// TODO: Remove this i18n methods from controller
+      	$translatePartialLoader.addPart('productDetail');
+      	$translate.refresh();
 
-      $scope.$state = $state;
-      $scope.items = StubsFactory;
-      $scope.actualProduct = $rootScope.actualProduct;
-      $scope.favoriteImgUrl = "assets/img/dcCCPkrbQVmgHbe1RAOC_favorite.png";
-      $scope.canAskForProduct = $rootScope.actualProduct.lenderUserId != $rootScope.currentUser.id;
-      console.log($rootScope.actualProduct.lenderUserId + " " + $rootScope.currentUser.id);
-      console.log($scope.canAskForProduct);
+      	$scope.productImage = '';
+      	$scope.canAskForProduct = '';
+        $scope.ownerData = {};
 
-      $scope.toggleFavorite = function () {
-        if($scope.favoriteImgUrl == "assets/img/dcCCPkrbQVmgHbe1RAOC_favorite.png"){
-          $scope.favoriteImgUrl = "assets/img/ci9k3i82QD66XbEI4bZ6_favorite-2.png"
-        } else {
-          $scope.favoriteImgUrl = "assets/img/dcCCPkrbQVmgHbe1RAOC_favorite.png";
-        }
-      };
-      // $scope.goToUserProfile = function () {
-      //   $state.go('userProfile');
-      // }
+      	var favoriteImgs = ['assets/img/not_fav.png', 'assets/img/fav.png'];
+      	var favoriteImgsIndex = 0;
+      	$scope.favoriteImg = favoriteImgs[favoriteImgsIndex];
+
+      	// Get the accessed product
+      	ProductService.get($stateParams.itemId, $stateParams.ownerId)
+      		.then(function(response) {
+            console.log(response);
+            $scope.ownerData = {
+              'id': response.IDuser,
+              'name': response.Name + ' ' + response.Surname,
+              'position': {
+                'x': response.X,
+                'y': response.Y
+              }
+            };
+      			$scope.product = response.It;
+      			$scope.productImage = $scope.product.Image1;
+		      	$scope.canAskForProduct = $scope.product.IDuser != $rootScope.currentUser.id;
+
+            NgMap.getMap().then(function(map) {
+              map.setCenter({ lat: $scope.ownerData.position.x, lng: $scope.ownerData.position.y });
+              map.setZoom(10);
+              new google.maps.Marker({position: {lat: $scope.ownerData.position.x, lng: $scope.ownerData.position.y }, map: map});
+            });
+
+		      	if (ProductService.isFavourite()) {
+		      		favoriteImgsIndex = 1;
+		      		$scope.favoriteImg = favoriteImgs[favoriteImgsIndex];
+		      	}
+		      	$scope.$apply();
+      		}, function(error) {
+      			// TODO: Do something when failing!
+      		});
+
+      	$scope.toggleFavorite = function () {
+    		ProductService.setFavourite(favoriteImgsIndex)
+    			.then(function(response) {
+	          		favoriteImgsIndex ^= 1;
+	          		$scope.favoriteImg = favoriteImgs[favoriteImgsIndex];
+	          		$scope.$apply();
+    			}, function(error) {
+    				// TODO: Do something when failing!
+    			});
+      	};
 
       $scope.showValoracions = function () {
         $state.go('app.valoracions');
       }
-
-      NgMap.getMap().then(function(map) {
-        map.setCenter({ lat: 41.403841, lng: 2.174340 });
-        map.setZoom(10);
-        new google.maps.Marker({position: {lat: 41.403841, lng: 2.174340}, map: map});
-      });
-
-
 
       $scope.startChat = function () {
         //creo una nova transaccio
@@ -76,6 +100,12 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
         }, function errorCallback(response) {
           q.reject();
         });
+      };
+
+      $scope.goToUserProfile = function (id) {
+        console.log("go to user profile "+ id);
+        $rootScope.actualUserId = id;
+        $state.go('app.otherUserProfile');
       }
     }
   ]);

@@ -37,8 +37,8 @@ angular.module('app.services', [])
     var images;
     var IMAGE_STORAGE_KEY = 'images';
 
-    function getImages() {
-      var img = window.localStorage.getItem(IMAGE_STORAGE_KEY);
+    function getImages(request) {
+      var img = window.localStorage.getItem(IMAGE_STORAGE_KEY + '-' + (request ? 'request' : 'ad'));
       if (img) {
         images = JSON.parse(img);
       } else {
@@ -47,13 +47,13 @@ angular.module('app.services', [])
       return images;
     }
 
-    function addImage(img) {
+    function addImage(img, request) {
       images.push(img);
-      window.localStorage.setItem(IMAGE_STORAGE_KEY, JSON.stringify(images));
+      window.localStorage.setItem(IMAGE_STORAGE_KEY + '-' + (request ? 'request' : 'ad'), JSON.stringify(images));
     }
 
-    function removeImages() {
-      window.localStorage.removeItem(IMAGE_STORAGE_KEY);
+    function removeImages(request) {
+      window.localStorage.removeItem(IMAGE_STORAGE_KEY + '-' + (request ? 'request' : 'ad'));
     }
 
     return {
@@ -97,7 +97,7 @@ angular.module('app.services', [])
       };
     }
 
-    function saveMedia(type) {
+    function saveMedia(type, request) {
       return $q(function (resolve, reject) {
         var options = optionsForType(type);
 
@@ -114,7 +114,7 @@ angular.module('app.services', [])
 
           $cordovaFile.readAsDataURL(path, name)
             .then(function(data) {
-              FileService.storeImage(data);
+              FileService.storeImage(data, request);
               resolve(data);
             }, function (error) {
               console.log('Error uploading image: ' + error);
@@ -149,8 +149,8 @@ angular.module('app.services', [])
         url: baseUrl + '/anuncios',
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
       }).then(function successCallback(response) {
-        console.log("Exito");
-        console.log(response);
+        // console.log("Exito");
+        // console.log(response);
         q.resolve(response.data);
       }, function errorCallback(response) {
         console.log("Puta bida");
@@ -189,7 +189,7 @@ angular.module('app.services', [])
     }
   }])
 
-  .factory('PeticionFactory', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+  .factory('PeticionFactory', ['$http', '$q', 'myConfig', 'FileService', function ($http, $q, myConfig, FileService) {
     var baseUrl = myConfig.url + ':' + myConfig.port;
 
     function getPeticiones() {
@@ -210,10 +210,11 @@ angular.module('app.services', [])
       return q.promise;
     }
 
-    var postPeticion = function (title, description) {
+    var postPeticion = function (title, description, image) {
       var data = {
         name: title,
-        descripcio: description
+        descripcio: description,
+        image: image
       };
       var q = $q.defer();
 
@@ -223,8 +224,7 @@ angular.module('app.services', [])
         data: data,
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
       }).then(function successCallback(response) {
-        console.log("Exito");
-        console.log(response);
+        FileService.removeImages(true); // Remove the images after posting the item.
         q.resolve(response);
       }, function errorCallback(response) {
         console.log("Puta bida");
@@ -248,6 +248,27 @@ angular.module('app.services', [])
       $http({
         method: 'GET',
         url: baseUrl + '/user',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    function getOtherUserInfo(id) {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/user',
+        params: {
+          id: id
+        },
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
       }).then(function successCallback(response) {
         //console.log("Exito");
@@ -317,6 +338,7 @@ angular.module('app.services', [])
 
     return {
       getGeneralInfo: getGeneralInfo,
+      getOtherUserInfo: getOtherUserInfo,
       getUserPeticiones: getUserPeticiones,
       getUserValoraciones: getUserValoraciones,
       getUserFavoritos: getUserFavoritos
@@ -334,8 +356,8 @@ angular.module('app.services', [])
         url: baseUrl + '/anuncios',
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
       }).then(function successCallback(response) {
-        console.log("Exito");
-        console.log(response);
+        // console.log("Exito");
+        // console.log(response);
         q.resolve(response);
       }, function errorCallback(response) {
         console.log("Puta bida");
@@ -364,7 +386,7 @@ angular.module('app.services', [])
         data: data,
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
       }).then(function successCallback(response) {
-        FileService.removeImages(); // Remove the images after posting the item.
+        FileService.removeImages(false); // Remove the images after posting the item.
         q.resolve(response);
       }, function errorCallback(error) {
         console.log('POST /anuncio failed: ' + error);
