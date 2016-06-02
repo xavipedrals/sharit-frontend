@@ -21,7 +21,7 @@
             <uib-tab index="0" select="updateAnuncios()">
               <uib-tab-heading>
                   <div class="up_button_num">
-                    {{ anunciosUser.length }}
+                    {{ anunciosUser.length ? anunciosUser.length : 0 }}
                   </div>
                   <div class="up_button_text">
                     Anuncis
