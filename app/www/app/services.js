@@ -52,8 +52,13 @@ angular.module('app.services', [])
       window.localStorage.setItem(IMAGE_STORAGE_KEY, JSON.stringify(images));
     }
 
+    function removeImages() {
+      window.localStorage.removeItem(IMAGE_STORAGE_KEY);
+    }
+
     return {
       storeImage: addImage,
+      removeImages: removeImages,
       images: getImages
     }
   })
@@ -96,34 +101,27 @@ angular.module('app.services', [])
       return $q(function (resolve, reject) {
         var options = optionsForType(type);
 
-        // if(type = 1) {
-          $cordovaCamera.getPicture(options).then(function (imageUrl) {
-            //console.log("imageUrl-> " + imageUrl);
-            console.log(imageUrl.indexOf('?'));
-            var realUri = null;
-            if (imageUrl.indexOf('?') != -1) {
-              realUri = imageUrl.substr(0, imageUrl.indexOf('?'));
-              //console.log("realUri-> " + realUri);
-            } else {
-              realUri = imageUrl;
-              //console.log("realUri-> " + realUri);
-            }
-            var name = realUri.substr(realUri.lastIndexOf('/') + 1);
-            //console.log("name-> " + name);
-            var namePath = realUri.substr(0, realUri.lastIndexOf('/') + 1);
-            //console.log("namePath-> " + namePath);
+        $cordovaCamera.getPicture(options).then(function (imageUrl) {
 
-            var newName = makeid() + name;
-            $cordovaFile.copyFile(namePath, name, cordova.file.dataDirectory, newName)
-              .then(function (info) {
-                FileService.storeImage(newName);
-                resolve();
-              }, function (e) {
-                reject();
-              });
-          });
-      })
+          var realUri = null;
+          if (imageUrl.indexOf('?') != -1)
+            realUri = imageUrl.substr(0, imageUrl.indexOf('?'));
+          else
+            realUri = imageUrl;
 
+          var name = realUri.substr(realUri.lastIndexOf('/') + 1);
+          var path = realUri.substr(0, realUri.lastIndexOf('/') + 1);
+
+          $cordovaFile.readAsDataURL(path, name)
+            .then(function(data) {
+              FileService.storeImage(data);
+              resolve(data);
+            }, function (error) {
+              console.log('Error uploading image: ' + error);
+              reject(error);
+            });
+        });
+      });
     }
 
     return {
@@ -141,7 +139,7 @@ angular.module('app.services', [])
     });
   })
 
-  .factory('AnuncioFactory', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+  .factory('AnuncioFactory', ['$http', '$q', 'myConfig', '$cordovaFile', function ($http, $q, myConfig, $cordovaFile) {
     var baseUrl = myConfig.url + ':' + myConfig.port;
 
     function getAnuncios() {
@@ -162,32 +160,31 @@ angular.module('app.services', [])
       return q.promise;
     }
 
-    var postAnuncio = function (title, description) {
-      var data = {
-        itemname: title,
-        description: description
-      };
-      var q = $q.defer();
+    // var postAnuncio = function (title, description, images) {
 
-      $http({
-        method: 'POST',
-        url: baseUrl + '/anuncio',
-        data: data,
-        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
-      }).then(function successCallback(response) {
-        console.log("Exito");
-        console.log(response);
-        q.resolve(response);
-      }, function errorCallback(response) {
-        console.log("Puta bida");
-        console.log(response);
-        q.reject();
-      });
-      return q.promise;
-    };
+
+
+    //   var q = $q.defer();
+
+    //   $http({
+    //     method: 'POST',
+    //     url: baseUrl + '/anuncio',
+    //     data: data,
+    //     headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
+    //   }).then(function successCallback(response) {
+    //     console.log("Exito");
+    //     console.log(response);
+    //     q.resolve(response);
+    //   }, function errorCallback(response) {
+    //     console.log("Puta bida");
+    //     console.log(response);
+    //     q.reject();
+    //   });
+    //   return q.promise;
+    // };
 
     return {
-      postAnuncio: postAnuncio,
+      //postAnuncio: postAnuncio,
       getAnuncios: getAnuncios
     }
   }])
@@ -264,29 +261,11 @@ angular.module('app.services', [])
       return q.promise;
     }
 
-    function getUserAnuncios() {
-      var q = $q.defer();
-      $http({
-        method: 'GET',
-        url: baseUrl + '/user',
-        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
-      }).then(function successCallback(response) {
-        //console.log("Exito");
-        //console.log(response);
-        q.resolve(response.data);
-      }, function errorCallback(response) {
-        console.log("Puta bida");
-        console.log(response);
-        q.reject();
-      });
-      return q.promise;
-    }
-
     function getUserPeticiones() {
       var q = $q.defer();
       $http({
         method: 'GET',
-        url: baseUrl + '/peticionesUsuario',
+        url: baseUrl + '/peticionesSelf',
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
       }).then(function successCallback(response) {
         //console.log("Exito");
@@ -304,7 +283,25 @@ angular.module('app.services', [])
       var q = $q.defer();
       $http({
         method: 'GET',
-        url: baseUrl + '/user',
+        url: baseUrl + '/valoracions',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    function getUserFavoritos() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/favs',
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
       }).then(function successCallback(response) {
         //console.log("Exito");
@@ -319,11 +316,14 @@ angular.module('app.services', [])
     }
 
     return {
-      getGeneralInfo: getGeneralInfo
+      getGeneralInfo: getGeneralInfo,
+      getUserPeticiones: getUserPeticiones,
+      getUserValoraciones: getUserValoraciones,
+      getUserFavoritos: getUserFavoritos
     }
   }])
 
-  .factory('HttpCalls', ['$http', '$q', 'myConfig', function ($http, $q, myConfig) {
+  .factory('HttpCalls', ['$http', '$q', 'myConfig', '$cordovaFile', 'FileService', function ($http, $q, myConfig, $cordovaFile, FileService) {
     var baseUrl = myConfig.url + ':' + myConfig.port;
 
     function getAnuncios() {
@@ -345,12 +345,18 @@ angular.module('app.services', [])
       return q.promise;
     }
 
-    var postAnuncio = function (title, description) {
+    var postAnuncio = function (title, description, images) {
+
+      var q = $q.defer();
+
+      // Get data image and prepare to send it
       var data = {
         itemname: title,
-        description: description
+        description: description,
+        image1: images[0],
+        image2: images[1],
+        image3: images[2]
       };
-      var q = $q.defer();
 
       $http({
         method: 'POST',
@@ -358,14 +364,13 @@ angular.module('app.services', [])
         data: data,
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY), 'Content-Type': 'application/json'}
       }).then(function successCallback(response) {
-        console.log("Exito");
-        console.log(response);
+        FileService.removeImages(); // Remove the images after posting the item.
         q.resolve(response);
-      }, function errorCallback(response) {
-        console.log("Puta bida");
-        console.log(response);
+      }, function errorCallback(error) {
+        console.log('POST /anuncio failed: ' + error);
         q.reject();
       });
+
       return q.promise;
     };
 

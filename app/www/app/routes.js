@@ -85,6 +85,7 @@ angular.module('app.routes', [])
     })
       .state('app.chatRooms', {
         url: '/chat-rooms',
+        cache: false,
         views: {
           'menuContent': {
             templateUrl: 'app/chatRooms/chatRooms.html',

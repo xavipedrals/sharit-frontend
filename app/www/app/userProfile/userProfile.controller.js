@@ -35,6 +35,30 @@
           new google.maps.Marker({position: {lat: $scope.userInfo.X, lng: $scope.userInfo.Y}, map: map});
         });
 
+        ProfileFactory.getUserPeticiones().then(function (peticiones) {
+          for (i = 0; i < peticiones.length; i++) {
+            if(typeof peticiones[i].Image1 === 'undefined' || peticiones[i].Image1 === null || peticiones[i].Image1 === ''){
+              peticiones[i].Image1 = 'assets/img/lupa.png';
+            }
+            if(typeof peticiones[i].Name === 'undefined' || peticiones[i].Name === null || peticiones[i].Name === ''){
+              peticiones[i].Name = 'Lupa mágica';
+            }
+          }
+          $scope.userPeticiones = peticiones;
+        });
+        
+        ProfileFactory.getUserValoraciones().then(function (valoraciones) {
+          console.log("valoraciones");
+          console.log(valoraciones);
+          $scope.userValoraciones = valoraciones;
+        });
+
+        ProfileFactory.getUserFavoritos().then(function (favoritos) {
+          console.log("favoritos");
+          console.log(favoritos);
+          $scope.userFavoritos = favoritos;
+        });
+
       });
 
       $scope.goToDetail = function (item) {
@@ -43,8 +67,20 @@
         $state.go('app.productDetail');
       };
 
-      $scope.sayHello = function () {
-        console.log("Hola");
+      $scope.updateAnuncios = function () {
+        console.log("updateAnuncios");
+      }
+
+      $scope.updatePeticiones = function () {
+        console.log("updatePeticiones");
+      }
+
+      $scope.updateValoraciones = function () {
+        console.log("updateValoraciones");
+      }
+
+      $scope.updateFavoritos = function () {
+        console.log("updateFavoritos");
       }
 
 	 }
