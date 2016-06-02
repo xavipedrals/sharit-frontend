@@ -1,6 +1,6 @@
 angular.module('app.controllers')
-.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'ProfileFactory', 'AuthService', '$ionicActionSheet', 'ImageService', 'FileService',
-	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService, $ionicActionSheet, ImageService, FileService) {
+.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'ProfileFactory', 'AuthService', '$ionicActionSheet', 'ImageService', 'FileService', '$cordovaGeolocation',
+	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService, $ionicActionSheet, ImageService, FileService, $cordovaGeolocation) {
 		$translatePartialLoader.addPart('configuration');
 		$translate.refresh();
 		
@@ -53,7 +53,23 @@ angular.module('app.controllers')
       };
 
     $scope.setLocation = function() {
-      // TODO: Set location via GPS.
+      $cordovaGeolocation.getCurrentPosition({
+        timeout: 10000,
+        enableHighAccuracy: false
+      })
+      .then(function (position) {
+        $scope.settings.position.x = position.coords.latitude;
+        $scope.settings.position.y = position.coords.longitude;
+
+        NgMap.getMap().then(function(map) {
+          map.setCenter({ lat: $scope.settings.position.x, lng: $scope.settings.position.y });
+          map.setZoom(10);
+          new google.maps.Marker({ position: { lat: $scope.settings.position.x, lng: $scope.settings.position.y }, map: map });
+        });
+        
+      }, function (error) {
+        // TODO: Show something when failing!
+      })
     };
 
     $scope.logout = function() {
