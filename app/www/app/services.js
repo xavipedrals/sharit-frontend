@@ -37,8 +37,8 @@ angular.module('app.services', [])
     var images;
     var IMAGE_STORAGE_KEY = 'images';
 
-    function getImages(request) {
-      var img = window.localStorage.getItem(IMAGE_STORAGE_KEY + '-' + (request ? 'request' : 'ad'));
+    function getImages(from) {
+      var img = window.localStorage.getItem(IMAGE_STORAGE_KEY + '-' + from);
       if (img) {
         images = JSON.parse(img);
       } else {
@@ -47,13 +47,13 @@ angular.module('app.services', [])
       return images;
     }
 
-    function addImage(img, request) {
+    function addImage(img, from) {
       images.push(img);
-      window.localStorage.setItem(IMAGE_STORAGE_KEY + '-' + (request ? 'request' : 'ad'), JSON.stringify(images));
+      window.localStorage.setItem(IMAGE_STORAGE_KEY + '-' + from, JSON.stringify(images));
     }
 
-    function removeImages(request) {
-      window.localStorage.removeItem(IMAGE_STORAGE_KEY + '-' + (request ? 'request' : 'ad'));
+    function removeImages(from) {
+      window.localStorage.removeItem(IMAGE_STORAGE_KEY + '-' + from);
     }
 
     return {
@@ -97,7 +97,7 @@ angular.module('app.services', [])
       };
     }
 
-    function saveMedia(type, request) {
+    function saveMedia(type, from) {
       return $q(function (resolve, reject) {
         var options = optionsForType(type);
 
@@ -114,7 +114,7 @@ angular.module('app.services', [])
 
           $cordovaFile.readAsDataURL(path, name)
             .then(function(data) {
-              FileService.storeImage(data, request);
+              FileService.storeImage(data, from);
               resolve(data);
             }, function (error) {
               console.log('Error uploading image: ' + error);

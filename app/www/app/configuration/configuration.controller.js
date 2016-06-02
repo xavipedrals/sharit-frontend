@@ -1,6 +1,6 @@
 angular.module('app.controllers')
-.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'ProfileFactory', 'AuthService',
-	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService) {
+.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'ProfileFactory', 'AuthService', '$ionicActionSheet', 'ImageService', 'FileService',
+	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService, $ionicActionSheet, ImageService, FileService) {
 		$translatePartialLoader.addPart('configuration');
 		$translate.refresh();
 		
@@ -27,13 +27,44 @@ angular.module('app.controllers')
         });
     });
 
-    $scope.logout = function() {
-      AuthService.logout();
-      $state.go('login');
+    $scope.changeImage = function() {
+      // TODO: Translate that resources
+      $scope.hideSheet = $ionicActionSheet.show({
+        buttons: [
+          { text: 'Take photo' },
+          { text: 'Photo from library' }
+        ],
+        titleText: 'Add images',
+        cancelText: 'Cancel',
+        buttonClicked: function(index) {
+          addImage(index);
+        }
+      });
     };
+
+    var addImage = function(type) {
+        $scope.hideSheet();
+        FileService.images('settings'); // This call has to be done to create the array that contains the user image.
+                                        // TODO: Fix the problem of having to use this call
+        ImageService.handleMediaDialog(type, 'settings').then(function(data) {
+          $scope.settings.image = data;
+          FileService.removeImages('settings');
+        });
+      };
 
     $scope.setLocation = function() {
       // TODO: Set location via GPS.
+    };
+
+    $scope.logout = function() {
+      AuthService.logout();
+
+      // Remove all the tokens
+      FileService.removeImages('request');
+      FileService.removeImages('product');
+      FileService.removeImages('settings');
+
+      $state.go('login');
     };
 
     $scope.saveChanges = function() {
