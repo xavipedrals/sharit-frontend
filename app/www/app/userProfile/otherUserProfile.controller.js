@@ -1,14 +1,18 @@
- angular.module('app.controllers').controller('UserProfileCtrl',
-   ['$scope', '$rootScope', '$translate',
-     '$translatePartialLoader', '$state',
-     'StubsFactory', 'NgMap', 'ProfileFactory',
+/**
+ * Created by xavi on 02/06/16.
+ */
+angular.module('app.controllers').controller('OtherUserProfileCtrl',
+  ['$scope', '$rootScope', '$translate',
+    '$translatePartialLoader', '$state',
+    'StubsFactory', 'NgMap', 'ProfileFactory',
     function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap, ProfileFactory) {
- 		$translatePartialLoader.addPart('profile');
- 		$translate.refresh();
-    
-      $scope.otherProfile = false;
+      $translatePartialLoader.addPart('profile');
+      $translate.refresh();
+      
+      $scope.otherProfile = true;
+      $scope.actualUserId = $rootScope.actualUserId;
 
-      ProfileFactory.getGeneralInfo().then(function (info) {
+      ProfileFactory.getOtherUserInfo($scope.actualUserId).then(function (info) {
         console.log(info);
         if(info.X == '1' && info.Y == '1'){
           info.X = 41.403841;
@@ -47,7 +51,7 @@
           }
           $scope.userPeticiones = peticiones;
         });
-        
+
         ProfileFactory.getUserValoraciones().then(function (valoraciones) {
           console.log("valoraciones");
           console.log(valoraciones);
@@ -84,6 +88,6 @@
         console.log("updateFavoritos");
       }
 
-	 }
- ]);
+    }
+  ]);
 

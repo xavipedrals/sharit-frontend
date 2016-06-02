@@ -15,13 +15,15 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       	// Get the accessed product
       	ProductService.get($stateParams.itemId, $stateParams.ownerId)
       		.then(function(response) {
+            console.log(response);
             $scope.ownerData = {
+              'id': response.IDuser,
               'name': response.Name + ' ' + response.Surname,
               'position': {
                 'x': response.X,
                 'y': response.Y
               }
-            }
+            };
       			$scope.product = response.It;
       			$scope.productImage = $scope.product.Image1;
 		      	$scope.canAskForProduct = $scope.product.IDuser != $rootScope.currentUser.id;
@@ -81,6 +83,12 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
         }, function errorCallback(response) {
           q.reject();
         });
+      };
+
+      $scope.goToUserProfile = function (id) {
+        console.log("go to user profile "+ id);
+        $rootScope.actualUserId = id;
+        $state.go('app.otherUserProfile');
       }
     }
   ]);

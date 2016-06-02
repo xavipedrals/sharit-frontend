@@ -67,6 +67,16 @@ angular.module('app.routes', [])
           }
         }
       })
+      .state('app.otherUserProfile', {
+        url: '/other-user-profile',
+        cache: false,
+        views: {
+          'menuContent': {
+            templateUrl: 'app/userProfile/userProfile.html',
+            controller: 'OtherUserProfileCtrl'
+          }
+        }
+      })
     .state('app.requestsDashboard', {
       url: '/requests-dashboard',
       cache: false,

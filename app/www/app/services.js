@@ -261,6 +261,27 @@ angular.module('app.services', [])
       return q.promise;
     }
 
+    function getOtherUserInfo(id) {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/user',
+        params: {
+          id: id
+        },
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
     function getUserPeticiones() {
       var q = $q.defer();
       $http({
@@ -317,6 +338,7 @@ angular.module('app.services', [])
 
     return {
       getGeneralInfo: getGeneralInfo,
+      getOtherUserInfo: getOtherUserInfo,
       getUserPeticiones: getUserPeticiones,
       getUserValoraciones: getUserValoraciones,
       getUserFavoritos: getUserFavoritos
