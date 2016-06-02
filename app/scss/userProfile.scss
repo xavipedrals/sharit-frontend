@@ -32,33 +32,33 @@
 	}
 
 	.up_info {
-		margin: 20px 0;
+		margin: 20px 0 10px 0;
 
 		.up_buttons {
 			display: flex;
 			text-align: center;
-			padding: 0 10px 10px 0px;
-			box-shadow: 0 3px 4px -4px rgba(0,0,0,1);
+			// padding: 0 10px 10px 0px;
+			// box-shadow: 0 3px 4px -4px rgba(0,0,0,1);
 
-			.up_button {
-				flex: 1 100%;
-				border-right: 1px solid #ddd;
-
-				&:last-child {
-					border-right: none;
-				}
-
-				.up_button_num {
-					font-size: 22px;
-					color: #aaa;
-				}
-				.up_button_text {
-					font-size: 12px;
-					color: #aaa;
-				}
+			a {
+				padding: 4px 12px 4px 12px;
 			}
 
-			.selected {
+			&:first-child {
+				margin-left: 10px;
+			}
+
+			.up_button_num {
+				font-size: 22px;
+				color: #777;
+				line-height: 22px;
+			}
+			.up_button_text {
+				font-size: 10px;
+				color: #777;
+			}
+
+			.active {
 				.up_button_num {
 					color: #000;
 				}
@@ -73,6 +73,18 @@
 			background-color: #f2f2f2;
 			margin-top: 3px;
 		}
+	}
+
+	.dashboard_item {
+		width: 46%;
+		display: inline-block;
+		margin: 2%;
+		vertical-align: top;
+		height: 200px;
+	}
+
+	.tab-content {
+		padding: 5px;
 	}
 }
 
