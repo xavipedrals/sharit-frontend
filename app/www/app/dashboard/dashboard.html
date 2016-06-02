@@ -1,31 +1,28 @@
 <ion-view title="{{ 'Dashboard_Title' | translate }}">
-    <ion-content overflow-scroll="true" padding="true" class="has-header dashboard">
-        <div class="button_requests_dashboard">
-            <div class="anuncis button_active">Anuncios</div>
-            <div ng-click="changetorequests()" class="peticions">Peticiones</div>
-        </div>
-      <!--<pre>Model: {{selected | json}}</pre>-->
-      <!--<form class="list">-->
-            <!--<label class="item item-input" name="buscador">-->
-                <!--<i class="icon ion-search placeholder-icon"></i>-->
-            <!--</label>-->
-        <!--</form>-->
-      <input type="text" ng-model="selected" uib-typeahead="item for item in itemNames | filter:$viewValue | limitTo:8" placeholder="Cerca el que necessitis">
+  	<ion-content overflow-scroll="true" padding="true" class="has-header dashboard">
+		<div class="button_requests_dashboard">
+		  	<div class="anuncis button_active">Anuncios</div>
+		  	<div ng-click="changetorequests()" class="peticions">Peticiones</div>
+		</div>
 
-      <div class="list card dashboard_item" ng-repeat="item in items | filter:selected" ng-click="goToDetail(item)">
-            <div class="item item-divider">{{ item.ItemName }}</div>
-            <div class="item item-body">
-                <a style="display:inline-block; float: left;" ui-sref="app.productDetail">
-                    <div style="text-align: center">
-<!--                         <img ng-src="{{ item.Image1 }}" width="100%" height="110px">
- -->                        <img ng-src="{{ item.Image1 }}" width="100%" height="110px">                    
-                    </div>
-                </a>
-                <div>
-                    <p style="text-align:center;">{{ item.htmlestrellitas }}</p>
-                </div>
-            </div>
-        </div>
-    </ion-content>
+		<input type="text" ng-model="selected" uib-typeahead="item for item in itemNames | filter:$viewValue | limitTo:8" placeholder="Cerca el que necessitis">
 
+		  	<div class="list card dashboard_item" ng-repeat="item in items | filter:selected">
+	  			<a ui-sref="app.productDetail({ itemId: item.Idd, ownerId: item.IDuser })">
+	  				<div style="height: 100%;">
+						<div class="item item-divider">{{ item.ItemName }}</div>
+						<div class="item item-body">
+						  	<div style="display:inline-block; float: left;" >
+								<div style="text-align: center">
+								  	<img ng-src="{{ item.Image1 }}" width="100%" height="110px">                    
+								</div>
+						  	</div>
+						  	<div>
+								<p style="text-align:center;">{{ item.htmlestrellitas }}</p>
+						  	</div>
+						</div>
+					</div>
+				</a>
+		  	</div>
+  </ion-content>
 </ion-view>

@@ -46,7 +46,10 @@ angular.module('app.routes', [])
         }
       })
       .state('app.productDetail', {
-        url: '/product-detail',
+        url: '/product-detail/:itemId',
+        params: {
+          'ownerId': null
+        },
         views: {
           'menuContent': {
             templateUrl: 'app/productDetail/productDetail.html',
@@ -137,7 +140,21 @@ angular.module('app.routes', [])
             controller: 'AddProductCtrl'
           }
         }
-      });
+      })
+    .state('app.complaints', {
+      url: '/complaints',
+      cache: false,
+      params: {
+        'itemId': null,
+        'ownerId': null
+      },
+      views: {
+        'menuContent': {
+          templateUrl: 'app/complaints/complaints.html',
+          controller: 'ComplaintsCtrl'
+        }
+      }
+    });
     $urlRouterProvider.otherwise('/login');
   }
 ])
