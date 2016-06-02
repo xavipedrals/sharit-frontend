@@ -9956,6 +9956,16 @@ a.button {
     text-align: center;
     font-size: 12px;
     cursor: pointer; }
+  .configuration #geolocation {
+    width: 100%;
+    padding: 7px 0;
+    border: 1px solid #11c1f3;
+    color: #11c1f3;
+    margin: 15px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer; }
   .configuration #save {
     left: 0;
     right: 0;

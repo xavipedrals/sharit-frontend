@@ -27,6 +27,11 @@ angular.module('app.services')
         return !(_.isEmpty(currentUser));
       };
 
+      var logout = function() {
+      	window.localStorage.removeItem(TOKEN_STORAGE_KEY);
+      	return;
+      };
+
       var login = function (email, pass) {
         var q = $q.defer();
         $http.get(baseUrl + '/login', {
@@ -158,6 +163,7 @@ angular.module('app.services')
 
 			return {
 				login: login,
+				logout: logout,
 				googleLogin: googleLogin,
 				twitterLogin: twitterLogin,
 				signup: signup,

@@ -20,6 +20,7 @@ angular.module('app.controllers')
 
       $scope.addMedia = function() {
         if ($scope.images.length < 3) {
+          // TODO: Translate that resources
           $scope.hideSheet = $ionicActionSheet.show({
             buttons: [
               { text: 'Take photo' },
@@ -39,7 +40,7 @@ angular.module('app.controllers')
 
       $scope.addImage = function(type) {
         $scope.hideSheet();
-        ImageService.handleMediaDialog(type, false).then(function(data) {
+        ImageService.handleMediaDialog(type, 'product').then(function(data) {
           //$scope.images.push(data);
         });
       };
