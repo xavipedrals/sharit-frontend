@@ -14,50 +14,10 @@
         <div class="up_extrainfo">
           {{ 'Number_Of_Requested_Products' | translate }}: <b>3</b>
         </div>
-        <!-- <div class="button-bar up_buttons">
-            <a ui-sref="menu.actuals" id="perfil-button1" class="button button-stable button-small button-block">{{ 'Actual_Products' | translate }}</a>
-            <a ui-sref="menu.peticions" id="perfil-button22" class="button button-stable button-small button-block">{{ 'Requested_Products' | translate }}</a>
-            <a ui-sref="menu.valoracions" id="perfil-button2" class="button button-stable button-small button-block">{{ 'Ratings' | translate }}</a>
-        </div> -->
         <div class="up_info">
-            <!--<div class="up_buttons">-->
-                <!--<div class="up_button selected">-->
-                    <!--<div class="up_button_num">-->
-                        <!--8-->
-                    <!--</div>-->
-                    <!--<div class="up_button_text">-->
-                        <!--Anuncis-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="up_button">-->
-                    <!--<div class="up_button_num">-->
-                        <!--3-->
-                    <!--</div>-->
-                    <!--<div class="up_button_text">-->
-                        <!--Peticions-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="up_button">-->
-                    <!--<div class="up_button_num">-->
-                        <!--10-->
-                    <!--</div>-->
-                    <!--<div class="up_button_text">-->
-                        <!--Valoracions-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="up_button">-->
-                    <!--<div class="up_button_num">-->
-                        <!--5-->
-                    <!--</div>-->
-                    <!--<div class="up_button_text">-->
-                        <!--M'agrades-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
           <uib-tabset active="active">
 
-            <uib-tab index="0" select="sayHello()">
+            <uib-tab index="0" select="updateAnuncios()">
               <uib-tab-heading>
                   <div class="up_button_num">
                     {{ anunciosUser.length }}
@@ -84,19 +44,32 @@
             <uib-tab index="1">
               <uib-tab-heading>
                 <div class="up_button_num">
-                  3
+                  {{ userPeticiones.length }}
                 </div>
                 <div class="up_button_text">
                   Peticions
                 </div>
               </uib-tab-heading>
-              Peticions
+              <div ng-repeat="item in userPeticiones">
+                <div class="item item-body">
+                  <b>{{ item.UserName }} {{ item.UserSurname }}</b> {{ 'Needs' | translate }}:
+                  <div class="item_inside">
+                    <div class="item_title">
+                      {{ item.Name }}
+                    </div>
+                    <div class="item_description">
+                      {{ item.Descripcio }}
+                    </div>
+                    <img ng-src="{{ item.Image1 }}">
+                  </div>
+                </div>
+              </div>
             </uib-tab>
 
             <uib-tab index="2">
               <uib-tab-heading>
                 <div class="up_button_num">
-                  10
+                  {{ userValoraciones.length }}
                 </div>
                 <div class="up_button_text">
                   Valoracions
@@ -108,7 +81,7 @@
             <uib-tab index="3">
               <uib-tab-heading>
                 <div class="up_button_num">
-                  5
+                  {{ userFavoritos.length }}
                 </div>
                 <div class="up_button_text">
                   M'agrades

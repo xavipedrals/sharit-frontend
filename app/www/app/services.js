@@ -108,7 +108,7 @@ angular.module('app.services', [])
             realUri = imageUrl.substr(0, imageUrl.indexOf('?'));
           else
             realUri = imageUrl;
-          
+
           var name = realUri.substr(realUri.lastIndexOf('/') + 1);
           var path = realUri.substr(0, realUri.lastIndexOf('/') + 1);
 
@@ -261,29 +261,11 @@ angular.module('app.services', [])
       return q.promise;
     }
 
-    function getUserAnuncios() {
-      var q = $q.defer();
-      $http({
-        method: 'GET',
-        url: baseUrl + '/user',
-        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
-      }).then(function successCallback(response) {
-        //console.log("Exito");
-        //console.log(response);
-        q.resolve(response.data);
-      }, function errorCallback(response) {
-        console.log("Puta bida");
-        console.log(response);
-        q.reject();
-      });
-      return q.promise;
-    }
-
     function getUserPeticiones() {
       var q = $q.defer();
       $http({
         method: 'GET',
-        url: baseUrl + '/peticionesUsuario',
+        url: baseUrl + '/peticionesSelf',
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
       }).then(function successCallback(response) {
         //console.log("Exito");
@@ -301,7 +283,25 @@ angular.module('app.services', [])
       var q = $q.defer();
       $http({
         method: 'GET',
-        url: baseUrl + '/user',
+        url: baseUrl + '/valoracions',
+        headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
+      }).then(function successCallback(response) {
+        //console.log("Exito");
+        //console.log(response);
+        q.resolve(response.data);
+      }, function errorCallback(response) {
+        console.log("Puta bida");
+        console.log(response);
+        q.reject();
+      });
+      return q.promise;
+    }
+
+    function getUserFavoritos() {
+      var q = $q.defer();
+      $http({
+        method: 'GET',
+        url: baseUrl + '/favs',
         headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
       }).then(function successCallback(response) {
         //console.log("Exito");
@@ -316,7 +316,10 @@ angular.module('app.services', [])
     }
 
     return {
-      getGeneralInfo: getGeneralInfo
+      getGeneralInfo: getGeneralInfo,
+      getUserPeticiones: getUserPeticiones,
+      getUserValoraciones: getUserValoraciones,
+      getUserFavoritos: getUserFavoritos
     }
   }])
 
@@ -343,7 +346,7 @@ angular.module('app.services', [])
     }
 
     var postAnuncio = function (title, description, images) {
-      
+
       var q = $q.defer();
 
       // Get data image and prepare to send it
@@ -368,7 +371,7 @@ angular.module('app.services', [])
         q.reject();
       });
 
-      return q.promise;      
+      return q.promise;
     };
 
     var postPeticion = function (title, description) {
