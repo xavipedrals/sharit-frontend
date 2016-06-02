@@ -18,8 +18,8 @@ angular.module('app.services')
 						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}	
 					})
 					.then(function(response) {
-						currentProduct = response.data;
-						resolve(currentProduct);
+						currentProduct = response.data.It;
+						resolve(response.data);
 					}, function(error) {
 						console.log('GET /anuncio failed: ' + error);
 						reject(error);

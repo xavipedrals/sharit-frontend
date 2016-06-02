@@ -6,6 +6,7 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
 
       	$scope.productImage = '';
       	$scope.canAskForProduct = '';
+        $scope.ownerData = {};
 
       	var favoriteImgs = ['assets/img/not_fav.png', 'assets/img/fav.png'];
       	var favoriteImgsIndex = 0;
@@ -14,9 +15,23 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       	// Get the accessed product
       	ProductService.get($stateParams.itemId, $stateParams.ownerId)
       		.then(function(response) {
-      			$scope.product = response;
+            $scope.ownerData = {
+              'name': response.Name + ' ' + response.Surname,
+              'position': {
+                'x': response.X,
+                'y': response.Y
+              }
+            }
+      			$scope.product = response.It;
       			$scope.productImage = $scope.product.Image1;
 		      	$scope.canAskForProduct = $scope.product.IDuser != $rootScope.currentUser.id;
+
+            NgMap.getMap().then(function(map) {
+              map.setCenter({ lat: $scope.ownerData.position.x, lng: $scope.ownerData.position.y });
+              map.setZoom(10);
+              new google.maps.Marker({position: {lat: $scope.ownerData.position.x, lng: $scope.ownerData.position.y }, map: map});
+            });
+
 		      	if (ProductService.isFavourite()) {
 		      		favoriteImgsIndex = 1;
 		      		$scope.favoriteImg = favoriteImgs[favoriteImgsIndex];
@@ -40,12 +55,6 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       $scope.showValoracions = function () {
         $state.go('app.valoracions');
       }
-
-      NgMap.getMap().then(function(map) {
-        map.setCenter({ lat: 41.403841, lng: 2.174340 });
-        map.setZoom(10);
-        new google.maps.Marker({position: {lat: 41.403841, lng: 2.174340}, map: map});
-      });
 
       $scope.startChat = function () {
         //get user data
