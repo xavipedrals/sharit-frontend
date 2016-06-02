@@ -18,7 +18,8 @@
     <div class="up_info">
       <uib-tabset active="active">
 
-        <uib-tab index="0" select="updateAnuncios()">
+
+        <uib-tab index="0" select="updateAnuncios()" class="up_buttons">
           <uib-tab-heading>
             <div class="up_button_num">
               {{ anunciosUser.length ? anunciosUser.length : 0 }}
@@ -44,7 +45,8 @@
           </div>
         </uib-tab>
 
-        <uib-tab index="1">
+
+        <uib-tab index="1" class="up_buttons">
           <uib-tab-heading>
             <div class="up_button_num">
               {{ userPeticiones.length ? userPeticiones.length : 0 }}
@@ -69,7 +71,7 @@
           </div>
         </uib-tab>
 
-        <uib-tab index="2">
+        <uib-tab index="2" class="up_buttons">
           <uib-tab-heading>
             <div class="up_button_num">
               {{ userInfo.Valoracions.length ? userInfo.Valoracions.length : 0 }}
@@ -81,7 +83,7 @@
           Aquest usuari encara no té valoracions
         </uib-tab>
 
-        <uib-tab index="3">
+        <uib-tab index="3" class="up_buttons">
           <uib-tab-heading>
             <div class="up_button_num">
               {{ userFavoritos.length ? userFavoritos.length : 0 }}

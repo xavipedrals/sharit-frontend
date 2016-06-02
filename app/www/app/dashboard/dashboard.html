@@ -5,7 +5,7 @@
 		  	<div ng-click="changetorequests()" class="peticions">Peticiones</div>
 		</div>
 
-		<input type="text" ng-model="selected" uib-typeahead="item for item in itemNames | filter:$viewValue | limitTo:8" placeholder="Cerca el que necessitis">
+		<input class="search_input" type="text" ng-model="selected" uib-typeahead="item for item in itemNames | filter:$viewValue | limitTo:8" placeholder="Cerca el que necessitis">
 
 		  	<div class="list card dashboard_item" ng-repeat="item in items | filter:selected">
 	  			<a ui-sref="app.productDetail({ itemId: item.Idd, ownerId: item.IDuser })">
