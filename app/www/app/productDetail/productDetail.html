@@ -4,17 +4,34 @@
             <img ng-src="{{ favoriteImg }}" ng-click="toggleFavorite()" width="10%" height="auto">
         </div>
         <div ng-if="productImage" style="text-align:;">
-            <ion-slide-box>
-                <ion-slide>
-                    <img ng-src="{{ productImage }}" width="100%" height="auto">
-                </ion-slide>
-                <ion-slide ng-if="product.Image2">
-                    <img ng-src="{{ product.Image2 }}" width="100%" height="auto">
-                </ion-slide>
-                <ion-slide ng-if="product.Image3">
-                    <img ng-src="{{ product.Image3 }}" width="100%" height="auto">
-                </ion-slide>
-            </ion-slide-box>
+            <!--<ion-slide-box>-->
+                <!--<ion-slide>-->
+                    <!--<img ng-src="{{ productImage }}" width="100%" height="auto">-->
+                <!--</ion-slide>-->
+                <!--<ion-slide ng-if="product.Image2">-->
+                    <!--<img ng-src="{{ product.Image2 }}" width="100%" height="auto">-->
+                <!--</ion-slide>-->
+                <!--<ion-slide ng-if="product.Image3">-->
+                    <!--<img ng-src="{{ product.Image3 }}" width="100%" height="auto">-->
+                <!--</ion-slide>-->
+            <!--</ion-slide-box>-->
+          <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+            <!--<uib-slide index="0">-->
+              <!--<img ng-src="{{ productImage }}" style="margin:auto;">-->
+            <!--</uib-slide>-->
+            <!--<uib-slide index="1" ng-if="product.Image2">-->
+              <!--<img ng-src="{{ product.Image2 }}" style="margin:auto;">-->
+            <!--</uib-slide>-->
+            <!--<uib-slide index="2" ng-if="product.Image3">-->
+              <!--<img ng-src="{{ product.Image3 }}" style="margin:auto;">-->
+            <!--</uib-slide>-->
+
+            <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+              <img ng-src="{{slide.image}}" width="80%" height="auto" style="margin:auto;">
+            </uib-slide>
+
+          </uib-carousel>
+
         </div>
         <form class="list"></form>
         <div>

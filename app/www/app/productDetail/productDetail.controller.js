@@ -4,6 +4,10 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       	$translatePartialLoader.addPart('productDetail');
       	$translate.refresh();
 
+      $scope.myInterval = 2500;
+      $scope.noWrapSlides = false;
+      $scope.active = 0;
+
       	$scope.productImage = '';
       	$scope.canAskForProduct = '';
         $scope.ownerData = {};
@@ -25,6 +29,20 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
               }
             };
       			$scope.product = response.It;
+            $scope.slides = [
+              {
+                image: $scope.product.Image1,
+                id: 0
+              },
+              {
+                image: $scope.product.Image2,
+                id: 1
+              },
+              {
+                image: $scope.product.Image3,
+                id: 2
+              }
+            ];
       			$scope.productImage = $scope.product.Image1;
 		      	$scope.canAskForProduct = $scope.product.IDuser != $rootScope.currentUser.id;
 
