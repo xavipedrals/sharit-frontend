@@ -27,7 +27,8 @@
                     Anuncis
                   </div>
               </uib-tab-heading>
-              <div class="list card dashboard_item" ng-repeat="item in anunciosUser" ng-click="goToDetail(item)">
+              <div class="list card dashboard_item" ng-repeat="item in anunciosUser">
+                <a ui-sref="app.productDetail({ itemId: item.Idd, ownerId: item.IDuser })">
                 <div class="item item-divider">{{ item.ItemName }}</div>
                 <div class="item item-body">
                   <a style="display:inline-block; float: left;" ui-sref="app.productDetail">
@@ -39,6 +40,7 @@
                     <p style="text-align:center;">{{ item.htmlestrellitas }}</p>
                   </div>
                 </div>
+                  </a>
               </div>
             </uib-tab>
 
