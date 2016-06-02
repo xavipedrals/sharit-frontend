@@ -1,25 +1,43 @@
 angular.module('app.controllers')
-.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'StubsFactory', 'ProfileFactory',
-	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, StubsFactory, ProfileFactory) {
+.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'ProfileFactory', 'AuthService',
+	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService) {
 		$translatePartialLoader.addPart('configuration');
 		$translate.refresh();
-		$scope.$state = $state;
+		
+    $scope.settings = {};
 
 		ProfileFactory.getGeneralInfo().then(function (info) {
-        console.log(info);
-        if(info.X == '1' && info.Y == '1'){
-          info.X = 41.403841;
-          info.Y = 2.174340;
+
+        $scope.settings = {
+          'name': info.Name,
+          'surname': info.Surname,
+          'position': {
+            'x': info.X,
+            'y': info.Y
+          },
+          'lang': info.Idioma,
+          'image': (info.Image == '' ? 'assets/img/boy.png' : info.Image),
+          'radius': info.Radi
         }
 
-        $scope.userInfo = info;
-
         NgMap.getMap().then(function(map) {
-          map.setCenter({ lat: $scope.userInfo.X, lng: $scope.userInfo.Y });
+          map.setCenter({ lat: $scope.settings.position.x, lng: $scope.settings.position.y });
           map.setZoom(10);
-          new google.maps.Marker({position: {lat: $scope.userInfo.X, lng: $scope.userInfo.Y}, map: map});
+          new google.maps.Marker({ position: { lat: $scope.settings.position.x, lng: $scope.settings.position.y }, map: map });
         });
+    });
 
-      });
-	}
-	]);
+    $scope.logout = function() {
+      AuthService.logout();
+      $state.go('login');
+    };
+
+    $scope.setLocation = function() {
+      // TODO: Set location via GPS.
+    };
+
+    $scope.saveChanges = function() {
+      // TODO: Update the user.
+    };
+  }
+]);
