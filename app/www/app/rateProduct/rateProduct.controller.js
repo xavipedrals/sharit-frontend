@@ -12,6 +12,7 @@ angular.module('app.controllers')
 
       $scope.rate = function () {
         console.log("Num estrelles " );
+        $scope.input.stars = parseInt($scope.input.stars);
         console.log($scope.input);
         if ($rootScope.currentUser.id == $rootScope.currentRoom.userId2) {
           var q = $q.defer();

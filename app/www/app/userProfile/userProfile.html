@@ -80,23 +80,14 @@
               Valoracions
             </div>
           </uib-tab-heading>
-          <div class="review">
+          <div class="review" ng-repeat="item in userValoraciones">
             <div class="namesurnamestars">
               <div class="name">
-                Daniel G.
+                {{ item.Name }} {{ item.Surname }}
               </div>
-              <div class="estrelles">⭐⭐⭐⭐</div>
+              <div class="estrelles">{{ item.htmlestrellitas }}</div>
             </div>
-            <div class="revtext">Reviewwwwwww</div>
-          </div>
-          <div class="review">
-            <div class="namesurnamestars">
-              <div class="name">
-                Daniel G.
-              </div>
-              <div class="estrelles">⭐⭐⭐⭐</div>
-            </div>
-            <div class="revtext">Reviewwwwwww</div>
+            <div class="revtext">{{ item.Valoracio }}</div>
           </div>
         </uib-tab>
 
