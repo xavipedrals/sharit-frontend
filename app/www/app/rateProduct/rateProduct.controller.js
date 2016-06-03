@@ -6,11 +6,13 @@ angular.module('app.controllers')
       $scope.$state = $state;
 
       $scope.input = {
-        stars : 0
-    };
+        stars : 0,
+        comment: ""
+      };
 
       $scope.rate = function () {
-        console.log("Num estrelles " + $scope.input.stars);
+        console.log("Num estrelles " );
+        console.log($scope.input);
         if ($rootScope.currentUser.id == $rootScope.currentRoom.userId2) {
           var q = $q.defer();
           $http({
@@ -23,8 +25,8 @@ angular.module('app.controllers')
               'iditem' :$rootScope.currentRoom.itemId,
               'name': $rootScope.currentRoom.userName1,
               'surname': $rootScope.currentRoom.userSurname1,
-              'stars': 4,
-              'valoracio': 'Un autentic inutil'
+              'stars': $scope.input.stars,
+              'valoracio': $scope.input.comment
             },
             headers: {'token': window.localStorage.getItem('token')}
           }).then(function successCallback(response) {
@@ -72,8 +74,8 @@ angular.module('app.controllers')
               'iditem' :$rootScope.currentRoom.itemId,
               'name': $rootScope.currentRoom.userName2,
               'surname': $rootScope.currentRoom.userSurname2,
-              'stars': 4,
-              'valoracio': 'Un autentic inutil'
+              'stars': $scope.input.stars,
+              'valoracio': $scope.input.comment
             },
             headers: {'token': window.localStorage.getItem('token')}
           }).then(function successCallback(response) {
