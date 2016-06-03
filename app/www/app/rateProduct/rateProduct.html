@@ -1,10 +1,12 @@
 <!--<ion-view title="{{ 'Menu_Settings' | translate }}">-->
 <ion-view title="Valorar producte">
-    <ion-content overflow-scroll="true" class="has-header rateProduct">
+    <ion-content overflow-scroll="true" padding="true" class="has-header rateProduct">
         <!-- RATE -->
 
         <div class="img_stars">
           <img src="http://placehold.it/100x100" alt="">
+        </div>
+
           <!-- STARS -->
           <div class="stars">
 
@@ -22,13 +24,12 @@
 
           </div>
         </div>
-        <textarea name="" placeholder="hellooooo"></textarea>
+        <textarea name="" placeholder="Què t'ha semblat el producte? i el tracte amb ell/a?"></textarea>
 
         <!-- SAVE -->
-        <div id="save">
+        <div id="save" ng-click="rate()">
           Desar
         </div>
-      <button class="button" ng-click="rate()"></button>
 
     </ion-content>
 </ion-view>
