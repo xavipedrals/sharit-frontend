@@ -23,8 +23,8 @@ angular.module('app.controllers')
               'user': $rootScope.currentRoom.userId1,
               'roomid': $rootScope.currentRoom.id,
               'iditem' :$rootScope.currentRoom.itemId,
-              'name': $rootScope.currentRoom.userName2,
-              'surname': $rootScope.currentRoom.userSurname2,
+              'name': $rootScope.currentRoom.userName1,
+              'surname': $rootScope.currentRoom.userSurname1,
               'stars': $scope.input.stars,
               'valoracio': $scope.input.comment
             },
@@ -72,8 +72,8 @@ angular.module('app.controllers')
               'user': $rootScope.currentRoom.userId2,
               'roomid': $rootScope.currentRoom.id,
               'iditem' :$rootScope.currentRoom.itemId,
-              'name': $rootScope.currentRoom.userName1,
-              'surname': $rootScope.currentRoom.userSurname1,
+              'name': $rootScope.currentRoom.userName2,
+              'surname': $rootScope.currentRoom.userSurname2,
               'stars': $scope.input.stars,
               'valoracio': $scope.input.comment
             },
