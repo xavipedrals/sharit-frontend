@@ -33,7 +33,6 @@
         $scope.anunciosUser = info.ItemsUser;
 
         NgMap.getMap().then(function(map) {
-          debugger;
           map.setCenter({ lat: $scope.userInfo.X, lng: $scope.userInfo.Y });
           map.setZoom(10);
           new google.maps.Marker({position: {lat: $scope.userInfo.X, lng: $scope.userInfo.Y}, map: map});

@@ -4,7 +4,6 @@ angular.module('app.services')
 			var baseUrl = myConfig.url + ':' + myConfig.port;
 
 			var create = function(itemId, userId) {
-				debugger;
 				return new Promise(function(resolve, reject) {
 					$http({
 						method: 'POST',
@@ -14,10 +13,9 @@ angular.module('app.services')
 							'IDuser': userId
 						},
 						// TODO: Capture every request and add the token automatically
-						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}	
+						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
 					})
 					.then(function(response) {
-						debugger;
 						resolve();
 					}, function(error) {
 						console.log('POST /complain failed: ' + error);
