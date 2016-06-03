@@ -22,8 +22,8 @@ angular.module('app', [
   'ui.bootstrap'
 ])
 .constant('myConfig', {
-  //'url': 'http://52.34.79.154',
-  'url': 'http://localhost',
+  'url': 'http://52.34.79.154',
+  //'url': 'http://localhost',
   'port': '8080',
   'TOKEN_STORAGE_KEY': 'token'
 })
