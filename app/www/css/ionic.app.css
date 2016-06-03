@@ -10032,7 +10032,7 @@ a.button {
   margin: 10px 0 20px 0; }
 
 .rateProduct .stars {
-  margin: 0 7em;
+  margin: 0 0 0 7em;
   display: inline-block; }
   .rateProduct .stars .star-cb-group {
     /* remove inline-block whitespace */
