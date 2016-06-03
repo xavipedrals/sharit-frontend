@@ -80,8 +80,6 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       $scope.startChat = function () {
         //creo una nova transaccio
         var q = $q.defer();
-        console.log('PRODUCTE');
-        console.log(JSON.stringify($scope.actualProduct,1,1));
         $http({
           method: 'POST',
           url: myConfig.url + ':' + myConfig.port + '/transaccion',

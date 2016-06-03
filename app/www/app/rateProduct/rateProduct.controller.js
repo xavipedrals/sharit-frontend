@@ -20,7 +20,7 @@ angular.module('app.controllers')
             url: myConfig.url + ':' + myConfig.port + '/valorarUser',
             data: {
               'idpet': $rootScope.currentRoom.idTrans,
-              'user': $rootScope.currentRoom.userId2,
+              'user': $rootScope.currentRoom.userId1,
               'roomid': $rootScope.currentRoom.id,
               'iditem' :$rootScope.currentRoom.itemId,
               'name': $rootScope.currentRoom.userName2,
@@ -69,7 +69,7 @@ angular.module('app.controllers')
             url: myConfig.url + ':' + myConfig.port + '/valorarItem',
             data: {
               'idpet': $rootScope.currentRoom.idTrans,
-              'user': $rootScope.currentRoom.userId1,
+              'user': $rootScope.currentRoom.userId2,
               'roomid': $rootScope.currentRoom.id,
               'iditem' :$rootScope.currentRoom.itemId,
               'name': $rootScope.currentRoom.userName1,
