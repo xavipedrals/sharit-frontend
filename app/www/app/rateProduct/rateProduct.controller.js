@@ -5,8 +5,12 @@ angular.module('app.controllers')
       $translate.refresh();
       $scope.$state = $state;
 
-      $scope.rate = function () {
+      $scope.input = {
+        stars : 0
+    };
 
+      $scope.rate = function () {
+        console.log("Num estrelles " + $scope.input.stars);
         if ($rootScope.currentUser.id == $rootScope.currentRoom.userId2) {
           var q = $q.defer();
           $http({
