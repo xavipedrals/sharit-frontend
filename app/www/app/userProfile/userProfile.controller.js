@@ -55,6 +55,18 @@
           console.log("valoraciones");
           console.log(valoraciones);
           $scope.userValoraciones = valoraciones;
+
+          for (var j in $scope.userValoraciones) {
+            var item = $scope.userValoraciones[j];
+
+            $htmlstars = '';
+
+            for (var i = 0; i < item.Stars; i++) {
+              $htmlstars += '⭐';
+            }
+
+            $scope.userValoraciones[j].htmlestrellitas = $htmlstars;
+          }
         });
 
         ProfileFactory.getUserFavoritos().then(function (favoritos) {
