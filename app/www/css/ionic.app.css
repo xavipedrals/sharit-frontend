@@ -10154,3 +10154,23 @@ a.button {
 
 .user_profile .tab-content {
   padding: 5px; }
+
+.user_profile .review {
+  border: 1px solid #ddd;
+  margin: .5em;
+  padding: .7em 1em;
+  border-radius: 5px;
+  margin-bottom: 7px; }
+  .user_profile .review .namesurnamestars {
+    display: flex;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd; }
+    .user_profile .review .namesurnamestars .name {
+      text-align: left;
+      font-weight: bold; }
+    .user_profile .review .namesurnamestars .estrelles {
+      text-align: right;
+      flex-grow: 1; }
+  .user_profile .review .revtext {
+    margin-top: 5px;
+    font-size: 1.2em; }
