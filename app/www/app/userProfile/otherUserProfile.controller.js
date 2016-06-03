@@ -8,7 +8,7 @@ angular.module('app.controllers').controller('OtherUserProfileCtrl',
     function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap, ProfileFactory) {
       $translatePartialLoader.addPart('profile');
       $translate.refresh();
-      
+
       $scope.otherProfile = true;
       $scope.actualUserId = $rootScope.actualUserId;
 
@@ -41,12 +41,14 @@ angular.module('app.controllers').controller('OtherUserProfileCtrl',
         });
 
         ProfileFactory.getUserPeticiones().then(function (peticiones) {
-          for (i = 0; i < peticiones.length; i++) {
-            if(typeof peticiones[i].Image1 === 'undefined' || peticiones[i].Image1 === null || peticiones[i].Image1 === ''){
-              peticiones[i].Image1 = 'assets/img/lupa.png';
-            }
-            if(typeof peticiones[i].Name === 'undefined' || peticiones[i].Name === null || peticiones[i].Name === ''){
-              peticiones[i].Name = 'Lupa mágica';
+          if(peticiones != null) {
+            for (i = 0; i < peticiones.length; i++) {
+              if (typeof peticiones[i].Image1 === 'undefined' || peticiones[i].Image1 === null || peticiones[i].Image1 === '') {
+                peticiones[i].Image1 = 'assets/img/lupa.png';
+              }
+              if (typeof peticiones[i].Name === 'undefined' || peticiones[i].Name === null || peticiones[i].Name === '') {
+                peticiones[i].Name = 'Lupa mágica';
+              }
             }
           }
           $scope.userPeticiones = peticiones;
@@ -55,7 +57,19 @@ angular.module('app.controllers').controller('OtherUserProfileCtrl',
         ProfileFactory.getUserValoraciones().then(function (valoraciones) {
           console.log("valoraciones");
           console.log(valoraciones);
-          $scope.userValoraciones = valoraciones;
+          $scope.userValoraciones = $scope.userInfo.Valoracions;
+
+          for (var j in $scope.userValoraciones) {
+            var item = $scope.userValoraciones[j];
+
+            $htmlstars = '';
+
+            for (var i = 0; i < item.Stars; i++) {
+              $htmlstars += '⭐';
+            }
+
+            $scope.userValoraciones[j].htmlestrellitas = $htmlstars;
+          }
         });
 
         ProfileFactory.getUserFavoritos().then(function (favoritos) {
