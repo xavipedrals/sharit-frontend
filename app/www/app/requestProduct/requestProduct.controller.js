@@ -37,7 +37,7 @@ angular.module('app.controllers')
 
       $scope.addImage = function (type) {
         $scope.hideSheet();
-        ImageService.handleMediaDialog(type, true).then(function () {
+        ImageService.handleMediaDialog(type, 'request').then(function () {
           //$scope.$apply();
         });
       };

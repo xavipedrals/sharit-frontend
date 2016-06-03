@@ -9854,19 +9854,28 @@ a.button {
     background-color: #387ef5;
     color: #fff; }
 
-.dashboard .dashboard_item {
-  width: 46%;
-  display: inline-block;
-  margin: 2%;
-  vertical-align: top;
-  height: 200px; }
+.dashboard {
+  /* SEARCH */ }
+  .dashboard .dashboard_item {
+    width: 46%;
+    display: inline-block;
+    margin: 2%;
+    vertical-align: top; }
+  .dashboard .search_input {
+    border: 1px solid #DDD;
+    width: 100%;
+    padding: 0px 8px;
+    margin-bottom: 15px;
+    border-radius: 5px; }
+  .dashboard .list:last-child.card {
+    margin-bottom: 20px; }
 
 .button_requests_dashboard {
   width: 100%;
   background-color: #eee;
   border: 1px solid #ccc;
   border-radius: 2px;
-  margin-bottom: 1em;
+  margin-bottom: 10px;
   display: flex; }
   .button_requests_dashboard .anuncis {
     flex: 1;
@@ -9882,25 +9891,34 @@ a.button {
     background-color: #387ef5;
     color: #fff; }
 
-.peticions .item {
-  margin: .7em 0;
-  border-radius: 5px;
-  padding: .5em; }
-  .peticions .item .item_inside {
-    margin-top: .5em;
+.peticions_content {
+  margin-bottom: 10px;
+  /* SEARCH */ }
+  .peticions_content .item {
+    margin: .7em 0;
     border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #eee;
-    text-align: center;
-    padding: .7em .5em; }
-    .peticions .item .item_inside .item_title {
-      font-weight: bold; }
-    .peticions .item .item_inside .item_description {
-      font-size: .8em; }
-    .peticions .item .item_inside .item_image {
-      max-width: 100%;
-      max-height: 100%;
-      margin-top: .7em; }
+    padding: .5em; }
+    .peticions_content .item .item_inside {
+      margin-top: .5em;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      background-color: #eee;
+      text-align: center;
+      padding: .7em .5em; }
+      .peticions_content .item .item_inside .item_title {
+        font-weight: bold; }
+      .peticions_content .item .item_inside .item_description {
+        font-size: .8em; }
+      .peticions_content .item .item_inside .item_image {
+        max-width: 100%;
+        max-height: 100%;
+        margin-top: .7em; }
+  .peticions_content .search_input {
+    border: 1px solid #DDD;
+    width: 100%;
+    padding: 0px 8px;
+    margin-bottom: 15px;
+    border-radius: 5px; }
 
 .configuration {
   padding: 20px; }
@@ -9966,6 +9984,16 @@ a.button {
     padding: 7px 0;
     border: 1px solid #ef473a;
     color: #ef473a;
+    margin: 15px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer; }
+  .configuration #geolocation {
+    width: 100%;
+    padding: 7px 0;
+    border: 1px solid #11c1f3;
+    color: #11c1f3;
     margin: 15px 0;
     border-radius: 5px;
     text-align: center;
@@ -10086,28 +10114,36 @@ a.button {
   color: #777; }
 
 .user_profile .up_info {
-  margin: 20px 0; }
+  margin: 20px 0 10px 0; }
   .user_profile .up_info .up_buttons {
     display: flex;
-    text-align: center;
-    padding: 0 10px 10px 0px;
-    box-shadow: 0 3px 4px -4px black; }
-    .user_profile .up_info .up_buttons .up_button {
-      flex: 1 100%;
-      border-right: 1px solid #ddd; }
-      .user_profile .up_info .up_buttons .up_button:last-child {
-        border-right: none; }
-      .user_profile .up_info .up_buttons .up_button .up_button_num {
-        font-size: 22px;
-        color: #aaa; }
-      .user_profile .up_info .up_buttons .up_button .up_button_text {
-        font-size: 12px;
-        color: #aaa; }
-    .user_profile .up_info .up_buttons .selected .up_button_num {
+    text-align: center; }
+    .user_profile .up_info .up_buttons a {
+      padding: 4px 12px 4px 12px; }
+    .user_profile .up_info .up_buttons:first-child {
+      margin-left: 10px; }
+    .user_profile .up_info .up_buttons .up_button_num {
+      font-size: 22px;
+      color: #777;
+      line-height: 22px; }
+    .user_profile .up_info .up_buttons .up_button_text {
+      font-size: 10px;
+      color: #777; }
+    .user_profile .up_info .up_buttons .active .up_button_num {
       color: #000; }
-    .user_profile .up_info .up_buttons .selected .up_button_text {
+    .user_profile .up_info .up_buttons .active .up_button_text {
       color: #000; }
   .user_profile .up_info .up_button_container {
     padding: 20px;
     background-color: #f2f2f2;
     margin-top: 3px; }
+
+.user_profile .dashboard_item {
+  width: 46%;
+  display: inline-block;
+  margin: 2%;
+  vertical-align: top;
+  height: 200px; }
+
+.user_profile .tab-content {
+  padding: 5px; }
