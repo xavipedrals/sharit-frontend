@@ -9920,6 +9920,12 @@ a.button {
     margin-bottom: 15px;
     border-radius: 5px; }
 
+ion-slides {
+  height: 45% !important; }
+
+.swiper-slide {
+  text-align: center; }
+
 .configuration {
   padding: 20px; }
   .configuration .title {

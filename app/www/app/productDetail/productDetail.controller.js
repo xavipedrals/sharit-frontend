@@ -1,12 +1,39 @@
-angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', '$stateParams', 'StubsFactory', 'NgMap', '$q', '$http', 'myConfig', 'ProductService',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, $stateParams, StubsFactory, NgMap, $q, $http, myConfig, ProductService) {
+angular.module('app.controllers').controller('ProductDetailCtrl',
+  ['$scope', '$rootScope', '$translate', '$translatePartialLoader',
+    '$state', '$stateParams', 'StubsFactory', 'NgMap',
+    '$q', '$http', 'myConfig', 'ProductService',
+    '$ionicSlideBoxDelegate',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, $stateParams, StubsFactory, NgMap, $q, $http, myConfig, ProductService, $ionicSlideBoxDelegate) {
       	// TODO: Remove this i18n methods from controller
       	$translatePartialLoader.addPart('productDetail');
       	$translate.refresh();
 
-      $scope.myInterval = 2500;
-      $scope.noWrapSlides = false;
-      $scope.active = 0;
+      // $scope.myInterval = 2500;
+      // $scope.noWrapSlides = false;
+      // $scope.active = 0;
+
+      // $scope.slider = null;
+
+      $scope.options = {
+        loop: false,
+        effect: 'fade',
+        speed: 300,
+      }
+
+      // $scope.$on("$ionicSlides.sliderInitialized", function(event, data){
+      //   // data.slider is the instance of Swiper
+      //   $scope.slider = data.slider;
+      // });
+      //
+      // $scope.$on("$ionicSlides.slideChangeStart", function(event, data){
+      //   console.log('Slide change is beginning');
+      // });
+      //
+      // $scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
+      //   // note: the indexes are 0-based
+      //   $scope.activeIndex = data.activeIndex;
+      //   $scope.previousIndex = data.previousIndex;
+      // });
 
       	$scope.productImage = '';
       	$scope.canAskForProduct = '';

@@ -6,7 +6,7 @@
 		vertical-align: top;
 		// height: 200px;
 	}
-	
+
 	/* SEARCH */
 	.search_input {
 		border: 1px solid #DDD;
@@ -48,7 +48,7 @@
 }
 
 .peticions_content {
-	
+
 	margin-bottom: 10px;
 
 	.item {
@@ -86,4 +86,11 @@
 		margin-bottom: 15px;
 		border-radius: 5px;
 	}
+}
+
+ion-slides{
+  height: 50% !important;
+}
+.swiper-slide{
+  text-align: center;
 }
