@@ -9,6 +9,7 @@
       $scope.otherProfile = false;
 
       ProfileFactory.getGeneralInfo().then(function (info) {
+        console.log(info);
         if(info.X == '1' && info.Y == '1'){
           info.X = 41.403841;
           info.Y = 2.174340;
@@ -18,7 +19,14 @@
         }
         if(info.Stars == '0') info.Stars = 4;
         $scope.userInfo = info;
+        
+        NgMap.getMap().then(function (map) {
+          map.setCenter({lat: $scope.userInfo.X, lng: $scope.userInfo.Y });
+          map.setZoom(10);
+          new google.maps.Marker({position: {lat: $scope.userInfo.X, lng: $scope.userInfo.Y}, map: map});
+        });
 
+        //ANUNCIOS
         if(info.ItemsUser != null){
           for (i = 0; i < info.ItemsUser.length; i++) {
             if (typeof info.ItemsUser[i].Image1 === 'undefined' || info.ItemsUser[i].Image1 === null || info.ItemsUser[i].Image1 === '') {
@@ -31,11 +39,19 @@
         }
         $scope.anunciosUser = info.ItemsUser;
 
-        NgMap.getMap().then(function(map) {
-          map.setCenter({ lat: $scope.userInfo.X, lng: $scope.userInfo.Y });
-          map.setZoom(10);
-          new google.maps.Marker({position: {lat: $scope.userInfo.X, lng: $scope.userInfo.Y}, map: map});
-        });
+        //VALORACIONES
+        $scope.userValoraciones = $scope.userInfo.Valoracions;
+        for (var j in $scope.userValoraciones) {
+          var item = $scope.userValoraciones[j];
+
+          $htmlstars = '';
+
+          for (var i = 0; i < item.Stars; i++) {
+            $htmlstars += '⭐';
+          }
+
+          $scope.userValoraciones[j].htmlestrellitas = $htmlstars;
+        }
 
         ProfileFactory.getUserPeticiones().then(function (peticiones) {
           if(peticiones != null) {
@@ -49,21 +65,6 @@
             }
           }
           $scope.userPeticiones = peticiones;
-        });
-
-        ProfileFactory.getUserValoraciones().then(function (valoraciones) {
-          $scope.userValoraciones = $scope.userInfo.Valoracions;
-          for (var j in $scope.userValoraciones) {
-            var item = $scope.userValoraciones[j];
-
-            $htmlstars = '';
-
-            for (var i = 0; i < item.Stars; i++) {
-              $htmlstars += '⭐';
-            }
-
-            $scope.userValoraciones[j].htmlestrellitas = $htmlstars;
-          }
         });
 
         ProfileFactory.getUserFavoritos().then(function (favoritos) {

@@ -9,11 +9,14 @@
     <div class="up_name">
       {{ userInfo.Name }} {{ userInfo.Surname }}
     </div>
+    <!--<div class="up_extrainfo">-->
+      <!--{{ 'Number_Of_Lent_Products' | translate }}: <b>10</b>-->
+    <!--</div>-->
+    <!--<div class="up_extrainfo">-->
+      <!--{{ 'Number_Of_Requested_Products' | translate }}: <b>3</b>-->
+    <!--</div>-->
     <div class="up_extrainfo">
-      {{ 'Number_Of_Lent_Products' | translate }}: <b>10</b>
-    </div>
-    <div class="up_extrainfo">
-      {{ 'Number_Of_Requested_Products' | translate }}: <b>3</b>
+      {{ 'Number_Of_Transacctions' | translate }}: <b>{{ userInfo.Transaccions.length ? userInfo.Transaccions.length : 0 }}</b>
     </div>
     <div class="up_info">
       <uib-tabset active="active">
