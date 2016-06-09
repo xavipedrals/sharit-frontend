@@ -3,30 +3,6 @@
         <div style="text-align:right;">
             <img ng-src="{{ favoriteImg }}" ng-click="toggleFavorite()" width="10%" height="auto">
         </div>
-        <div ng-if="productImage" style="text-align:;">
-            <!--<ion-slide-box>-->
-                <!--<ion-slide>-->
-                    <!--<img ng-src="{{ productImage }}" width="100%" height="auto">-->
-                <!--</ion-slide>-->
-                <!--<ion-slide ng-if="product.Image2">-->
-                    <!--<img ng-src="{{ product.Image2 }}" width="100%" height="auto">-->
-                <!--</ion-slide>-->
-                <!--<ion-slide ng-if="product.Image3">-->
-                    <!--<img ng-src="{{ product.Image3 }}" width="100%" height="auto">-->
-                <!--</ion-slide>-->
-            <!--</ion-slide-box>-->
-
-
-
-          <!--<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">-->
-
-            <!--<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">-->
-              <!--<img ng-src="{{slide.image}}" width="80%" height="auto" style="margin:auto;">-->
-            <!--</uib-slide>-->
-
-          <!--</uib-carousel>-->
-
-        </div>
 
       <ion-slides options="options">
         <ion-slide-page ng-repeat="slide in slides">
@@ -34,8 +10,7 @@
         </ion-slide-page>
       </ion-slides>
 
-
-
+      <h3 style="text-align: center">{{ product.ItemName }}</h3>
 
         <form class="list"></form>
         <div>
@@ -46,23 +21,12 @@
             <p>{{ product.Description }}</p>
         </div>
         <a id="martellDeFusta-button7" ng-if="canAskForProduct" class="button button-calm button-block " ng-click="startChat()">Ho necessito! </a>
-        <!-- <div>
-            <p style="text-align:center; color: #777; font-size: 14px;">
-                <b>3</b>&nbsp;sharits
-            </p>
-        </div> -->
         <div>
             <p style="text-align:center; color: #777; font-size: 14px;">
                 Últim sharit:
                 <b>{{ product.LastSharit }}</b>
             </p>
         </div>
-        <!-- <a ui-sref="menu.valoracions" id="martellDeFusta-button3" class="button button-balanced button-small button-block" ng-click="showValoracions()">Valoracions (6)</a> -->
-        <!-- <div>
-            <p>
-              <iframe id="myIF" width="300" height="300" align="middle" frameborder="0" style="border:0" allowfullscreen=""></iframe>
-            </p>
-        </div> -->
         <ng-map></ng-map>
         <a id="martellDeFusta-button5" class="button button-light button-block" ng-click="goToUserProfile(ownerData.id)">{{ ownerData.name }}</a>
         <div>
