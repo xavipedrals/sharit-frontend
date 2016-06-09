@@ -86,22 +86,6 @@ angular.module('app.controllers').controller('OtherUserProfileCtrl',
         $state.go('app.productDetail');
       };
 
-      $scope.updateAnuncios = function () {
-        console.log("updateAnuncios");
-      }
-
-      $scope.updatePeticiones = function () {
-        console.log("updatePeticiones");
-      }
-
-      $scope.updateValoraciones = function () {
-        console.log("updateValoraciones");
-      }
-
-      $scope.updateFavoritos = function () {
-        console.log("updateFavoritos");
-      }
-
     }
   ]);
 
