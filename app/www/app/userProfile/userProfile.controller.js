@@ -9,8 +9,6 @@
       $scope.otherProfile = false;
 
       ProfileFactory.getGeneralInfo().then(function (info) {
-        console.log("jkdfklafhaklsdjfhljkasdfhlajkhdfl");
-        console.log(info);
         if(info.X == '1' && info.Y == '1'){
           info.X = 41.403841;
           info.Y = 2.174340;
@@ -42,8 +40,8 @@
         ProfileFactory.getUserPeticiones().then(function (peticiones) {
           if(peticiones != null) {
             for (i = 0; i < peticiones.length; i++) {
-              if (typeof peticiones[i].Image1 === 'undefined' || peticiones[i].Image1 === null || peticiones[i].Image1 === '') {
-                peticiones[i].Image1 = 'assets/img/lupa.png';
+              if (typeof peticiones[i].Image === 'undefined' || peticiones[i].Image === null || peticiones[i].Image === '') {
+                peticiones[i].Image = 'assets/img/lupa.png';
               }
               if (typeof peticiones[i].Name === 'undefined' || peticiones[i].Name === null || peticiones[i].Name === '') {
                 peticiones[i].Name = 'Lupa mágica';
@@ -54,11 +52,7 @@
         });
 
         ProfileFactory.getUserValoraciones().then(function (valoraciones) {
-          console.log("valoraciones");
-          console.log(valoraciones);
           $scope.userValoraciones = $scope.userInfo.Valoracions;
-          console.log($scope.userValoraciones);
-
           for (var j in $scope.userValoraciones) {
             var item = $scope.userValoraciones[j];
 
@@ -73,8 +67,6 @@
         });
 
         ProfileFactory.getUserFavoritos().then(function (favoritos) {
-          console.log("favoritos");
-          console.log(favoritos);
           for (i = 0; i < favoritos.length; i++) {
             if (typeof favoritos[i].Image1 === 'undefined' || favoritos[i].Image1 === null || favoritos[i].Image1 === '') {
               favoritos[i].Image1 = 'assets/img/box.png';
@@ -89,7 +81,6 @@
       });
 
       $scope.goToDetail = function (item) {
-        // console.log($index);
         $rootScope.actualProduct = item;
         $state.go('app.productDetail');
       };
