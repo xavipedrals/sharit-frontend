@@ -126,6 +126,7 @@ angular.module('app.routes', [])
         })
     .state('app.configuration', {
           url: '/configuration',
+          cache: false,
           views: {
             'menuContent': {
               templateUrl: 'app/configuration/configuration.html',
