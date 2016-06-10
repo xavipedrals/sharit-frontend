@@ -139,11 +139,5 @@ angular.module('app.controllers').controller('ProductDetailCtrl',
           q.reject();
         });
       };
-
-      $scope.goToUserProfile = function (id) {
-        console.log("go to user profile " + id);
-        $rootScope.actualUserId = id;
-        $state.go('app.otherUserProfile');
-      }
     }
   ]);

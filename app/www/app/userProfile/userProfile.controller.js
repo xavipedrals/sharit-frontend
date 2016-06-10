@@ -1,15 +1,25 @@
  angular.module('app.controllers').controller('UserProfileCtrl',
    ['$scope', '$rootScope', '$translate',
-     '$translatePartialLoader', '$state',
+     '$translatePartialLoader', '$state', '$stateParams',
      'StubsFactory', 'NgMap', 'ProfileFactory',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap, ProfileFactory) {
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, $stateParams, StubsFactory, NgMap, ProfileFactory) {
  		$translatePartialLoader.addPart('profile');
  		$translate.refresh();
+
+      debugger;
 
       $scope.otherProfile = false;
       $scope.showPrivateTabs = true;
 
-      ProfileFactory.getGeneralInfo().then(function (info) {
+      if ($stateParams.id == '') {
+        $scope.actualUserId = $rootScope.currentUser.id;
+      } else {
+        $scope.actualUserId = $stateParams.id;
+        $scope.showPrivateTabs = false;
+        $scope.otherProfile = true;
+      }
+      
+      ProfileFactory.getOtherUserInfo($scope.actualUserId).then(function (info) {
         console.log(info);
         if(info.X == '1' && info.Y == '1'){
           info.X = 41.403841;

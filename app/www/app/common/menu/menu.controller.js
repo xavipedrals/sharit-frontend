@@ -3,5 +3,7 @@ angular.module('app.controllers')
 		function($translate, $translatePartialLoader) {
 			$translatePartialLoader.addPart('menu');
 				$translate.refresh();
+
+			
 		}
 	]);
