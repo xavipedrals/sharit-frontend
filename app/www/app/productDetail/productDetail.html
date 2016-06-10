@@ -12,11 +12,6 @@
 
       <h3 style="text-align: center">{{ product.ItemName }}</h3>
 
-        <form class="list"></form>
-        <div>
-            <p style="text-align:center;">⭐⭐⭐⭐⭐</p>
-            <p></p>
-        </div>
         <div>
             <p>{{ product.Description }}</p>
         </div>
@@ -28,7 +23,7 @@
             </p>
         </div>
         <ng-map></ng-map>
-        <a id="martellDeFusta-button5" class="button button-light button-block" ng-click="goToUserProfile(ownerData.id)">{{ ownerData.name }}</a>
+        <a id="martellDeFusta-button5" class="button button-light button-block" ui-sref="app.userProfile({ id: ownerData.id })">{{ ownerData.name }}</a>
         <div>
             <p style="text-align:center;">⭐⭐⭐⭐⭐</p>
             <p></p>

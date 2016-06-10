@@ -1,14 +1,25 @@
  angular.module('app.controllers').controller('UserProfileCtrl',
    ['$scope', '$rootScope', '$translate',
-     '$translatePartialLoader', '$state',
+     '$translatePartialLoader', '$state', '$stateParams',
      'StubsFactory', 'NgMap', 'ProfileFactory',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap, ProfileFactory) {
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, $stateParams, StubsFactory, NgMap, ProfileFactory) {
  		$translatePartialLoader.addPart('profile');
  		$translate.refresh();
 
-      $scope.otherProfile = false;
+      debugger;
 
-      ProfileFactory.getGeneralInfo().then(function (info) {
+      $scope.otherProfile = false;
+      $scope.showPrivateTabs = true;
+
+      if ($stateParams.id == '') {
+        $scope.actualUserId = $rootScope.currentUser.id;
+      } else {
+        $scope.actualUserId = $stateParams.id;
+        $scope.showPrivateTabs = false;
+        $scope.otherProfile = true;
+      }
+      
+      ProfileFactory.getOtherUserInfo($scope.actualUserId).then(function (info) {
         console.log(info);
         if(info.X == '1' && info.Y == '1'){
           info.X = 41.403841;
@@ -17,7 +28,14 @@
         if(typeof info.Image === 'undefined' || info.Image === null || info.Image === ''){
           info.Image = 'assets/img/boy.png';
         }
-        if(info.Stars == '0') info.Stars = 4;
+        if (info.Stars == '0') info.Stars = 1;
+        //star calculation
+        $htmlstars = '';
+        for (var a = 0; a < info.Stars; a++) {
+          $htmlstars += '⭐';
+        }
+        info.htmlStars = $htmlstars;
+        
         $scope.userInfo = info;
         
         NgMap.getMap().then(function (map) {
@@ -41,6 +59,7 @@
 
         //VALORACIONES
         $scope.userValoraciones = $scope.userInfo.Valoracions;
+        //Stars calculation
         for (var j in $scope.userValoraciones) {
           var item = $scope.userValoraciones[j];
 

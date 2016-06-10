@@ -8,12 +8,6 @@ angular.module('app.controllers').controller('ProductDetailCtrl',
       $translatePartialLoader.addPart('productDetail');
       $translate.refresh();
 
-      // $scope.myInterval = 2500;
-      // $scope.noWrapSlides = false;
-      // $scope.active = 0;
-
-      // $scope.slider = null;
-
       $scope.options = {
         loop: false,
         effect: 'fade',
@@ -145,11 +139,5 @@ angular.module('app.controllers').controller('ProductDetailCtrl',
           q.reject();
         });
       };
-
-      $scope.goToUserProfile = function (id) {
-        console.log("go to user profile " + id);
-        $rootScope.actualUserId = id;
-        $state.go('app.otherUserProfile');
-      }
     }
   ]);
