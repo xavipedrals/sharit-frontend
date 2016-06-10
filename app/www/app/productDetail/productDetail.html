@@ -19,7 +19,7 @@
         <div>
             <p style="text-align:center; color: #777; font-size: 14px;">
                 Últim sharit:
-                <b>{{ product.LastSharit }}</b>
+                <b>{{ product.LastSharit | date:'longDate' }}</b>
             </p>
         </div>
         <ng-map></ng-map>
