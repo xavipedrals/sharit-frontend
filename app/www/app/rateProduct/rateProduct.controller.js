@@ -1,6 +1,6 @@
 angular.module('app.controllers')
-  .controller('RateProductCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'StubsFactory', 'ProfileFactory', '$q', '$http', 'myConfig',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, StubsFactory, ProfileFactory, $q, $http, myConfig) {
+  .controller('RateProductCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'StubsFactory', 'ProfileFactory', '$q', '$http', 'myConfig', '$ionicHistory',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, StubsFactory, ProfileFactory, $q, $http, myConfig, $ionicHistory) {
       $translatePartialLoader.addPart('rateProduct');
       $translate.refresh();
       $scope.$state = $state;
@@ -10,10 +10,18 @@ angular.module('app.controllers')
         comment: ""
       };
 
+      ProfileFactory.getOtherUserInfo($rootScope.currentRoom.userId1).then(function (info) {
+        console.log(info);
+
+        if(typeof info.Image === 'undefined' || info.Image === null || info.Image === ''){
+          info.Image = 'assets/img/boy.png';
+        }
+
+        $scope.userImage = info.Image;
+      });
+
       $scope.rate = function () {
-        console.log("Num estrelles " );
         $scope.input.stars = parseInt($scope.input.stars);
-        console.log($scope.input);
         if ($rootScope.currentUser.id == $rootScope.currentRoom.userId2) {
           var q = $q.defer();
           $http({
@@ -33,6 +41,7 @@ angular.module('app.controllers')
           }).then(function successCallback(response) {
             console.log(JSON.stringify(response,1,1));
             console.log('User Valorat');
+            $ionicHistory.nextViewOptions({disableBack: true});
             $state.go('app.dashboard');
             q.resolve(response);
           }, function errorCallback(response) {
@@ -82,6 +91,7 @@ angular.module('app.controllers')
           }).then(function successCallback(response) {
             console.log(JSON.stringify(response,1,1));
             console.log('Item Valorat');
+            $ionicHistory.nextViewOptions({disableBack: true});
             $state.go('app.dashboard');
             q.resolve(response);
           }, function errorCallback(response) {

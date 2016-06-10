@@ -3,7 +3,7 @@ angular.module('app.controllers')
 	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService, $ionicActionSheet, ImageService, FileService, $cordovaGeolocation, ConfigurationService) {
 		$translatePartialLoader.addPart('configuration');
 		$translate.refresh();
-		
+
     $scope.settings = {};
     var user = {};
 
@@ -66,7 +66,7 @@ angular.module('app.controllers')
           map.setCenter({ lat: $scope.settings.position.x, lng: $scope.settings.position.y });
           map.setZoom(10);
           new google.maps.Marker({ position: { lat: $scope.settings.position.x, lng: $scope.settings.position.y }, map: map });
-        });        
+        });
       }, function (error) {
         // TODO: Show something when failing!
       })

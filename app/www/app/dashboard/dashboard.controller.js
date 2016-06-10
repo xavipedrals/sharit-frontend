@@ -4,8 +4,8 @@ angular.module('app.controllers')
     '$translatePartialLoader',
     '$state', 'StubsFactory',
     '$ionicHistory', 'AnuncioFactory',
-    '$q', '$http', 'myConfig',
-    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $ionicHistory, AnuncioFactory, $q, $http, myConfig) {
+    '$q', '$http', 'myConfig', '$ionicHistory',
+    function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, $ionicHistory, AnuncioFactory, $q, $http, myConfig, $ionicHistory) {
       $translatePartialLoader.addPart('dashboard');
       $translate.refresh();
 
@@ -36,7 +36,9 @@ angular.module('app.controllers')
         url: myConfig.url + ':' + myConfig.port + '/user',
         headers: {'token': window.localStorage.getItem('token')}
       }).then(function successCallback(response) {
-        //console.log(JSON.stringify(response.data));
+        console.log('Soc aqui');
+        console.log(JSON.stringify(response.data));
+
         $rootScope.currentUser = new Object();
         $rootScope.currentUser.id = response.data.IDuser;
         $rootScope.currentUser.name = response.data.Name;

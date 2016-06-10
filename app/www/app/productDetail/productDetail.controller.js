@@ -118,18 +118,22 @@ angular.module('app.controllers').controller('ProductDetailCtrl',
               'UserID1': $rootScope.currentUser.id,
               'UserID2': $stateParams.ownerId,
               'ItemID': $stateParams.itemId,
-              'idtrans': response.data.IDTrans /*barbaraTrans*/
+              'idtrans': response.data.IDTrans
             }
           }).then(function successCallback(response2) {
+            console.log('alohaaa');
             console.log(JSON.stringify(response2.data));
+
             $rootScope.currentRoom = new Object();
+
+
             $rootScope.currentRoom.roomId = response2.data.RoomId;
             $rootScope.currentRoom.userId1 = response2.data.UserID1;
             $rootScope.currentRoom.userName1 = response2.data.NameU1;
             $rootScope.currentRoom.userId2 = response2.data.UserID2;
             $rootScope.currentRoom.userName2 = response2.data.NameU2;
             $rootScope.currentRoom.messages = new Array();
-            $state.go('app.chat');
+            $state.go('app.chatRooms');
             r.resolve(response2);
           }, function errorCallback(response2) {
             r.reject();
