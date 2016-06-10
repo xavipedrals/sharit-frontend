@@ -1,5 +1,5 @@
 <ion-view title="{{ 'Chat_Title' | translate }}" >
-  <ion-content overflow-scroll="true" padding="true" class="has-header">
+  <ion-content overflow-scroll="true" padding="true" class="has-header chatRooms">
     <div ng-repeat="room in rooms track by $index">
       <div class="item item-body">
         <table>
@@ -8,7 +8,7 @@
               <span ng-if="room.UserID1 != currentUser.id"> {{room.NameU1}} {{room.SurnameU1}}</span>
               <span ng-if="room.UserID2 != currentUser.id"> {{room.NameU2}} {{room.SurnameU2}}</span>
               <br>
-              <span>{{room.NameItem}}</span>
+              <span class="title">{{room.NameItem}}</span>
             </td>
             <td width="30%" height="30px">
               <a class="button button-royal" style="width: 100px" ng-click="goToRate(room)" ng-hide="((currentUser.id == room.UserID1) && room.Rated1) ||
