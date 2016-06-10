@@ -12,7 +12,7 @@
 			border-radius: 60px;
 			border: 5px solid #fff;
 			z-index: 20;
-      background: whitesmoke;
+			background: whitesmoke;
 		}
 	}
 
@@ -96,6 +96,7 @@
 		padding: .7em 1em;
 		border-radius: 5px;
 		margin-bottom: 7px;
+		background-color: #f2f2f2;
 
 		.namesurnamestars {
 			display: flex;
@@ -117,6 +118,24 @@
 		}
 	}
 
-
+	.reqquests {
+		border-radius: 5px;
+		margin: 5px;
+		background-color: #f2f2f2;
+		text-align: center;
+		
+		.item_inside {
+			border-top: 1px solid #ddd;
+			margin-top: 5px;
+			padding-top: 10px;
+		}
+		.item_title {
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		.item_description {
+			margin-bottom: 10px;
+		}
+	}
 }
 

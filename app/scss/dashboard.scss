@@ -62,18 +62,20 @@
 			border: 1px solid #ddd;
 			background-color: #eee;
 			text-align: center;
-			padding: .7em .5em;
+			padding: .7em .5em 0 .5em;
 
 			.item_title {
 				font-weight: bold;
+				margin-bottom: 3px;
+				text-transform: uppercase;
 			}
 			.item_description {
 				font-size: .8em;
+				margin-bottom: 10px;
 			}
 			.item_image {
 				max-width: 100%;
 				max-height: 100%;
-				margin-top: .7em;
 			}
 		}
 	}

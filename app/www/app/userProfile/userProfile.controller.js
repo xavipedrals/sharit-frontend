@@ -6,8 +6,6 @@
  		$translatePartialLoader.addPart('profile');
  		$translate.refresh();
 
-      debugger;
-
       $scope.otherProfile = false;
       $scope.showPrivateTabs = true;
 
@@ -18,7 +16,7 @@
         $scope.showPrivateTabs = false;
         $scope.otherProfile = true;
       }
-      
+
       ProfileFactory.getOtherUserInfo($scope.actualUserId).then(function (info) {
         console.log(info);
         if(info.X == '1' && info.Y == '1'){
@@ -35,9 +33,9 @@
           $htmlstars += '⭐';
         }
         info.htmlStars = $htmlstars;
-        
+
         $scope.userInfo = info;
-        
+
         NgMap.getMap().then(function (map) {
           map.setCenter({lat: $scope.userInfo.X, lng: $scope.userInfo.Y });
           map.setZoom(10);
