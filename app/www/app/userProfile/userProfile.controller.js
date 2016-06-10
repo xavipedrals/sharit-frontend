@@ -17,7 +17,14 @@
         if(typeof info.Image === 'undefined' || info.Image === null || info.Image === ''){
           info.Image = 'assets/img/boy.png';
         }
-        if(info.Stars == '0') info.Stars = 4;
+        if (info.Stars == '0') info.Stars = 1;
+        //star calculation
+        $htmlstars = '';
+        for (var a = 0; a < info.Stars; a++) {
+          $htmlstars += '⭐';
+        }
+        info.htmlStars = $htmlstars;
+        
         $scope.userInfo = info;
         
         NgMap.getMap().then(function (map) {
@@ -41,6 +48,7 @@
 
         //VALORACIONES
         $scope.userValoraciones = $scope.userInfo.Valoracions;
+        //Stars calculation
         for (var j in $scope.userValoraciones) {
           var item = $scope.userValoraciones[j];
 

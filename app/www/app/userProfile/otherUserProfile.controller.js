@@ -21,7 +21,13 @@ angular.module('app.controllers').controller('OtherUserProfileCtrl',
         if(typeof info.Image === 'undefined' || info.Image === null || info.Image === ''){
           info.Image = 'assets/img/boy.png';
         }
-        if(info.Stars == '0') info.Stars = 4;
+        if(info.Stars == '0') info.Stars = 1;
+        //star calculation
+        $htmlstars = '';
+        for (var a = 0; a < info.Stars; a++) {
+          $htmlstars += '⭐';
+        }
+        info.htmlStars = $htmlstars;
         $scope.userInfo = info;
 
         for (i = 0; i < info.ItemsUser.length; i++) {
