@@ -36,8 +36,8 @@ angular.module('app.controllers')
         url: myConfig.url + ':' + myConfig.port + '/user',
         headers: {'token': window.localStorage.getItem('token')}
       }).then(function successCallback(response) {
-        console.log('Soc aqui');
-        console.log(JSON.stringify(response.data));
+        //console.log('Soc aqui');
+        //console.log(JSON.stringify(response.data));
 
         $rootScope.currentUser = new Object();
         $rootScope.currentUser.id = response.data.IDuser;
@@ -69,7 +69,7 @@ angular.module('app.controllers')
         $rootScope.actualProduct = item;
         $rootScope.actualProduct.id = item.Idd;
         $rootScope.actualProduct.lenderUserId = item.IDuser;
-        console.log(item);
+        //console.log(item);
         $state.go('app.productDetail');
       }
 
