@@ -7,6 +7,7 @@
  		$translate.refresh();
 
       $scope.otherProfile = false;
+      $scope.showPrivateTabs = true;
 
       ProfileFactory.getGeneralInfo().then(function (info) {
         console.log(info);

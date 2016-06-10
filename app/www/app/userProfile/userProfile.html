@@ -45,7 +45,7 @@
             </a>
           </div>
         </uib-tab>
-        <uib-tab index="1" class="up_buttons">
+        <uib-tab index="1" class="up_buttons" ng-if="showPrivateTabs">
           <uib-tab-heading>
             <div class="up_button_num">
               {{ userPeticiones.length ? userPeticiones.length : 0 }}
@@ -90,7 +90,7 @@
           </div>
         </uib-tab>
 
-        <uib-tab index="3" class="up_buttons">
+        <uib-tab index="3" class="up_buttons" ng-if="showPrivateTabs">
           <uib-tab-heading>
             <div class="up_button_num">
               {{ userFavoritos.length ? userFavoritos.length : 0 }}

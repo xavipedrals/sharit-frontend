@@ -10,6 +10,7 @@ angular.module('app.controllers').controller('OtherUserProfileCtrl',
       $translate.refresh();
 
       $scope.otherProfile = true;
+      $scope.showPrivateTabs = false;
       $scope.actualUserId = $rootScope.actualUserId;
 
       ProfileFactory.getOtherUserInfo($scope.actualUserId).then(function (info) {
