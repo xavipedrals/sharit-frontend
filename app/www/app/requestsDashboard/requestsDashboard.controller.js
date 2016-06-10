@@ -51,6 +51,10 @@ angular.module('app.controllers')
         });
       };
 
+      $scope.$on('LANG_CHANGED', function(event) {
+          $translate.use(event.language);
+        });
+      
       var _selected;
 
       $scope.selected = "";

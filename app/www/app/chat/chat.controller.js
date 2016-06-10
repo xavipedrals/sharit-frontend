@@ -12,6 +12,10 @@ angular.module('app.controllers')
       $translatePartialLoader.addPart('chats');
       $translate.refresh();
 
+      $scope.$on('LANG_CHANGED', function(event) {
+            $translate.use(event.language);
+        });
+      
       $scope.$state = $state;
 
       var self = this;

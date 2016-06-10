@@ -9,6 +9,10 @@ angular.module('app.controllers')
       $translatePartialLoader.addPart('dashboard');
       $translate.refresh();
 
+      $scope.$on('LANG_CHANGED', function(event) {
+        $translate.use(event.language);
+      });
+      
       $scope.changetorequests = function () {
         $ionicHistory.nextViewOptions({disableBack: true});
         $state.go('app.requestsDashboard');

@@ -1,30 +1,38 @@
 angular.module('app.services')
-	.factory('AuthService', ['$http', '$cookies', 'myConfig', '$cordovaOauth', '$timeout', '$q',
+	.factory('AuthService', ['$http', '$cookies', 'myConfig', '$cordovaOauth', '$timeout', '$q', 
 		function($http, $cookies, myConfig, $cordovaOauth, $timeout, $q) {
 			// $timeout dependency injected because of the inexistence of an API
 			var _ = window._;
       var TOKEN_STORAGE_KEY = 'token';
-			var currentUser = getCurrentUser();
+		//var currentUser = getCurrentUser();
 
-			var baseUrl = myConfig.url + ':' + myConfig.port + '/user';
-			// REMOVE IN REPOSITORY!
-			var GOOGLE_CLIENTID = '36015451376-g3u3npojfn225ff2v85eln4224agimm9.apps.googleusercontent.com';
+		var baseUrl = myConfig.url + ':' + myConfig.port + '/user';
+		// REMOVE IN REPOSITORY!
+		var GOOGLE_CLIENTID = '36015451376-g3u3npojfn225ff2v85eln4224agimm9.apps.googleusercontent.com';
 
-			var TWITTER_KEY = 'a0yDQUBqAMPbUbl3NGnS0f5y4';
-			var TWITTER_SECRET = 'its a secret';
+		var TWITTER_KEY = 'a0yDQUBqAMPbUbl3NGnS0f5y4';
+		var TWITTER_SECRET = 'its a secret';
 
-			function getCurrentUser() {
-        var token = window.localStorage.getItem(TOKEN_STORAGE_KEY);
-        var user = {};
-				if (typeof token !== 'undefined' && !(token === null)) {
-					var encoded = token.split('.')[1];
-					user = JSON.parse(window.atob(encoded));
-				}
-				return user;
-			}
+		function getCurrentUser() {
+			return new Promise(function(resolve, reject) {
+				$http({
+			        method: 'GET',
+			        url: myConfig.url + ':' + myConfig.port + '/user',
+			        headers: {'token': window.localStorage.getItem(TOKEN_STORAGE_KEY)}
+		      	})
+		      	.then(function (response) {
+		      		resolve(response.data);
+		      	}, function(error) {
+		      		console.log('GET /user failed: ' + error);
+		      		reject(error);
+		      	});
+			});
+		}
 
       var isAuthenticated = function() {
-        return !(_.isEmpty(currentUser));
+      	var token = window.localStorage.getItem(TOKEN_STORAGE_KEY);
+        if (typeof token !== 'undefined' && !(token === null)) return true;
+        return false;
       };
 
       var logout = function() {
@@ -41,7 +49,7 @@ angular.module('app.services')
           }
         }).then(function successCallback(response) {
           window.localStorage.setItem(TOKEN_STORAGE_KEY, response.data.Token);
-          currentUser = getCurrentUser();
+          //currentUser = response.data;
           //getCurrentUserData();
           q.resolve(response);
         }, function errorCallback(response) {
@@ -49,7 +57,6 @@ angular.module('app.services')
           console.log(response);
           q.reject();
         });
-        console.log('currentuserlogin2: ' + currentUser.userid);
 
         return q.promise;
       };
@@ -60,7 +67,7 @@ angular.module('app.services')
 						.then(function(result) {
 							// TODO: Send the token to the server.
 							$cookies.put('auth_token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM');
-							currentUser = getCurrentUser();
+							//currentUser = getCurrentUser();
 							resolve();
 						}, function(error) {
 							console.log(error);
@@ -76,7 +83,7 @@ angular.module('app.services')
 						.then(function(result) {
 							// TODO: Send the token to the server.
 							$cookies.put('auth_token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM');
-							currentUser = getCurrentUser();
+							//currentUser = getCurrentUser();
 							resolve();
 						}, function(error) {
 							console.log(error);
@@ -92,7 +99,7 @@ angular.module('app.services')
 						.then(function(result) {
 							// TODO: Send the token to the server.
 							$cookies.put('auth_token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZveG11cmVzIn0.qJ1xy6fWTrmzIuG6bRMdGKdpcLhQFjWVmrpFe3B09gM');
-							currentUser = getCurrentUser();
+							//currentUser = getCurrentUser();
 							resolve();
 						}, function(error) {
 							console.log(error);
@@ -168,7 +175,7 @@ angular.module('app.services')
 				twitterLogin: twitterLogin,
 				signup: signup,
 				isAuthenticated: isAuthenticated,
-				getCurrentUser: function () { return currentUser; }
+				getCurrentUser: getCurrentUser
 			}
 		}
 	]);

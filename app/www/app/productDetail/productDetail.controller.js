@@ -8,6 +8,11 @@ angular.module('app.controllers').controller('ProductDetailCtrl', ['$scope', '$r
       $scope.noWrapSlides = false;
       $scope.active = 0;
 
+        $scope.$on('LANG_CHANGED', function(event) {
+          $translate.use(event.language);
+        });
+        
+
       	$scope.productImage = '';
       	$scope.canAskForProduct = '';
         $scope.ownerData = {};

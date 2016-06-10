@@ -3,10 +3,14 @@
      '$translatePartialLoader', '$state',
      'StubsFactory', 'NgMap', 'ProfileFactory',
     function($scope, $rootScope, $translate, $translatePartialLoader, $state, StubsFactory, NgMap, ProfileFactory) {
- 		$translatePartialLoader.addPart('profile');
- 		$translate.refresh();
+ 			$translatePartialLoader.addPart('profile');
+ 		  $translate.refresh();
 
       $scope.otherProfile = false;
+
+      $scope.$on('LANG_CHANGED', function(event) {
+        $translate.use(event.language);
+      });
 
       ProfileFactory.getGeneralInfo().then(function (info) {
         console.log("jkdfklafhaklsdjfhljkasdfhlajkhdfl");

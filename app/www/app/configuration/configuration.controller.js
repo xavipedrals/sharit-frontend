@@ -1,6 +1,6 @@
 angular.module('app.controllers')
-.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'ProfileFactory', 'AuthService', '$ionicActionSheet', 'ImageService', 'FileService', '$cordovaGeolocation', 'ConfigurationService',
-	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService, $ionicActionSheet, ImageService, FileService, $cordovaGeolocation, ConfigurationService) {
+.controller('ConfigurationCtrl', ['$scope', '$rootScope', '$translate', '$translatePartialLoader', '$state', 'NgMap', 'ProfileFactory', 'AuthService', '$ionicActionSheet', 'ImageService', 'FileService', '$cordovaGeolocation', 'ConfigurationService', 'TranslateService',
+	function($scope, $rootScope, $translate, $translatePartialLoader, $state, NgMap, ProfileFactory, AuthService, $ionicActionSheet, ImageService, FileService, $cordovaGeolocation, ConfigurationService, TranslateService) {
 		$translatePartialLoader.addPart('configuration');
 		$translate.refresh();
 		
@@ -95,11 +95,15 @@ angular.module('app.controllers')
 
       ConfigurationService.update(user)
         .then(function(response) {
+          TranslateService.set(response.Idioma);
           $translate.use(response.Idioma);
-          $translate.refresh();
         }, function(error) {
           // TODO: Show something when failing!
         })
     };
+
+    $scope.$on('LANG_CHANGED', function(event) {
+      $translate.use(event.language);
+    });
   }
 ]);

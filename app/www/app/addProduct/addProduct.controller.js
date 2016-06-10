@@ -15,6 +15,10 @@ angular.module('app.controllers')
       $translatePartialLoader.addPart('addProduct');
       $translate.refresh();
 
+      $scope.$on('LANG_CHANGED', function(event) {
+            $translate.use(event.language);
+          });
+
       $scope.product = {}; // TODO: Cache the product values
       $scope.images = FileService.images(false);
 

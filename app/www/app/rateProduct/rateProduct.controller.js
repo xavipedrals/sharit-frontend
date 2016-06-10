@@ -10,6 +10,21 @@ angular.module('app.controllers')
         comment: ""
       };
 
+    $scope.$on('LANG_CHANGED', function(event) {
+          $translate.use(event.language);
+        });
+    
+    ProfileFactory.getGeneralInfo().then(function (info) {
+        console.log(info);
+        if(info.X == '1' && info.Y == '1'){
+          info.X = 41.403841;
+          info.Y = 2.174340;
+        }
+
+        $scope.userInfo = info;
+      });
+
+
       $scope.rate = function () {
         console.log("Num estrelles " );
         $scope.input.stars = parseInt($scope.input.stars);

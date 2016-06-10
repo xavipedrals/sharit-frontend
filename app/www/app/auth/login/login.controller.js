@@ -1,15 +1,15 @@
 angular.module('app.controllers')
-	.controller('LoginCtrl', ['$scope', '$state', 'AuthService',
-		function($scope, $state, AuthService) {
-			if (AuthService.isAuthenticated())
+	.controller('LoginCtrl', ['$scope', '$state', 'AuthService', '$translate',
+		function($scope, $state, AuthService, $translate) {
+			if (AuthService.isAuthenticated()) {
 				$state.go('app.dashboard');
+			}
 
       $scope.input = {};
 			$scope.login = function() {
 				var promise = AuthService.login($scope.input.email, $scope.input.pass);
 				promise
 					.then(function(response) {
-						//$translate.use(response.data.Idioma);
 						$state.go('app.dashboard');
             console.log('Auth success!');
 					})

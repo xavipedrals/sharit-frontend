@@ -13,7 +13,7 @@ angular.module('app.services')
 						headers: {'token': window.localStorage.getItem(myConfig.TOKEN_STORAGE_KEY)}
 					})
 					.then(function(response) {
-						resolve(response);
+						resolve(response.data);
 					}, function(error) {
 						console.log('PUT /user failed: ' + error);
 						reject(error);
