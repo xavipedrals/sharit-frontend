@@ -102,13 +102,15 @@ angular.module('app.services')
 				return promise;
 			};
 
-			var signup = function(name, surname, email, password) {
+			var signup = function(name, surname, email, password, position) {
         console.log(baseUrl);
         var data = {
           name: name,
           surname: surname,
           email: email,
-          pass: password
+          pass: password,
+          X: position.coords.latitude,
+          Y: position.coords.longitude
         };
         console.log(data);
 				//var promise = new Promise(function(resolve) {
