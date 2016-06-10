@@ -28,7 +28,9 @@ Si vols provar aquesta app segueix els següents passos:
 	<code>$ ionic serve --lab</code>
 
 ####NOTES: 
-Ionic està fet sobre la versió de Node 4 (Node 5 no funciona de moment amb Ionic). Totes les comandes aquí explicades s'ha de fer des dins la carpeta app/. 
+Ionic està fet sobre la versió de Node 4 (Node 5 no funciona de moment amb Ionic). Totes les comandes aquí explicades s'ha de fer des dins la carpeta app/.
+
+A causa del server gratuït que utilitzem pot ser que la app en general vagi lenta. Tingueu paciència siusplau.
 
 ####PROBLEMES HABITUALS:
 Si falla tot o el projecte no arrenca (quan representa que hauria de funcionar) borra les següents carpetes:
