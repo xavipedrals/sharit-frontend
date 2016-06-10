@@ -3,5 +3,6 @@
   "Number_Of_Requested_Products" : "Nº de productes que he deixat",
   "Actual_Products" : "Productes que deixo",
   "Requested_Products" : "Productes que demano",
-  "Ratings" : "Valoracions"
+  "Ratings" : "Valoracions",
+  "Number_Of_Transacctions": "Nombre de transaccions"
 }

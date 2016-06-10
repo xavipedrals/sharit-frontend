@@ -3,5 +3,6 @@
   "Number_Of_Requested_Products" : "# of requests",
   "Actual_Products" : "Lending products",
   "Requested_Products" : "Requests",
-  "Ratings" : "Ratings"
+  "Ratings" : "Ratings",
+  "Number_Of_Transacctions" : "Number of transactions"
 }

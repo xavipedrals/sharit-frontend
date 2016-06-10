@@ -3,5 +3,6 @@
   "Number_Of_Requested_Products" : "Nº de productos que he prestado",
   "Actual_Products" : "Productos que presto",
   "Requested_Products" : "Productos que pido",
-  "Ratings" : "Valoraciones"
+  "Ratings" : "Valoraciones",
+  "Number_Of_Transacctions" : "Número de transacciones"
 }
