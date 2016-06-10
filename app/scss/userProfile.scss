@@ -34,6 +34,17 @@
 	.up_info {
 		margin: 20px 0 10px 0;
 
+    .nav-tabs{
+      display: flex;
+      margin: 0 10px;
+      .nav-item{
+        flex: 1;
+        .nav-link{
+          width: 100%;
+        }
+      }
+    }
+
 		.up_buttons {
 			display: flex;
 			text-align: center;
@@ -41,12 +52,13 @@
 			// box-shadow: 0 3px 4px -4px rgba(0,0,0,1);
 
 			a {
-				padding: 4px 12px 4px 12px;
+				padding: 6px 12px 6px 12px;
+        border-radius: 10px 10px 0 0 !important;
 			}
 
-			&:first-child {
-				margin-left: 10px;
-			}
+			//&:first-child {
+			//	margin-left: 10px;
+			//}
 
 			.up_button_num {
 				font-size: 22px;
@@ -102,7 +114,7 @@
 			display: flex;
 			padding-bottom: 5px;
 			border-bottom: 1px solid #ddd;
-			
+
 			.name {
 				text-align: left;
 				font-weight: bold;
@@ -123,7 +135,7 @@
 		margin: 5px;
 		background-color: #f2f2f2;
 		text-align: center;
-		
+
 		.item_inside {
 			border-top: 1px solid #ddd;
 			margin-top: 5px;
