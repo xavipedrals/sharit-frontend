@@ -41,4 +41,5 @@ Si falla tot o el projecte no arrenca (quan representa que hauria de funcionar) 
 	app/www/lib
 	
 Després torna a executar les comandes que hi ha a dalt com si fos el primer cop que obres la app.
+
 				
