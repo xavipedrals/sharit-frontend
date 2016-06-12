@@ -44,25 +44,16 @@ Then run the commands above again like you have just downloaded the repo.
 
 ####SCREENSHOTS:
 
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140047.png)
-
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140059.png)
-
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140356.png)
-
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140116.png)
-
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140126.png)
-
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140208.png)
-
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140223.png)
-
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140234.png)
-
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140311.png)
-
-![](https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140326.png)
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140047.png" width="49%">
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140059.png" width="49%">
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140356.png" width="49%">
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140116.png" width="49%">
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140126.png" width="49%">
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140208.png" width="49%">
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140223.png" width="49%">
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140234.png" width="49%">
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140311.png" width="49%">
+<img src="https://raw.githubusercontent.com/xavipedrals/sharit-frontend/master/app/www/assets/screenshots/Screenshot_20160612-140326.png" width="49%">
 
 
 				
