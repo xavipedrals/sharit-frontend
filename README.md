@@ -5,7 +5,7 @@ Sharit is an app to share object between people that lives nearby. You can post 
 ####TECHNOLOGY:
 This app is biult in <a href="http://ionicframework.com/">Ionic</a> technology:
 
-<div style="text-align:center"><img src="https://www.clarity-ventures.com/Portals/0/images/article/ionic_tips/ionic_logo.png" width="50%" margin="auto"></div>
+<p align="center"><img src="https://www.clarity-ventures.com/Portals/0/images/article/ionic_tips/ionic_logo.png" width="50%" margin="auto"></p>
 
 This app uses a server as a backend, which you can find at this repo. The server was built in <a href="https://golang.org/">Go</a>:
 
@@ -13,7 +13,7 @@ This app uses a server as a backend, which you can find at this repo. The server
 
 We use a chat that was built using <a href="http://socket.io/">Socket.io</a>:
 
-<div style="text-align:center"><img src="http://programacion.net/files/article/20160322050343_socket-io.png" width="45%" margin="auto"></div>
+<p align="center"><img src="http://programacion.net/files/article/20160322050343_socket-io.png" width="45%" margin="auto"></p>
 
 ####HOW TO RUN THE APP:
 If you want to run this app follow the following steps:
