@@ -9,7 +9,7 @@ This app is biult in <a href="http://ionicframework.com/">Ionic</a> technology:
 
 This app uses a server as a backend, which you can find at this repo. The server was built in <a href="https://golang.org/">Go</a>:
 
-<div style="text-align:center"><img src="http://www.unixstickers.com/image/cache/data/stickers/golang/golang.sh-600x600.png" width="30%" margin="auto"></div>
+<p align="center"><img src="http://www.unixstickers.com/image/cache/data/stickers/golang/golang.sh-600x600.png" width="30%" margin="auto"></p>
 
 We use a chat that was built using <a href="http://socket.io/">Socket.io</a>:
 
